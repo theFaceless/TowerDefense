@@ -96,11 +96,10 @@ package entities.towers
 			//WIP TARGET MODES 0: FIRST 1: LAST(Not working yet) 2: CLOSEST (Works on targetting but stays locked on);
 			var searchMap: Map = Map.map;
 
-			
 			//Als de modus op 0 (First) staat
 			if(mode == 0) {
-				//Alle enemies afgaan en de eerste enemy in range zoeken.
-				for (var i: int = 0; i < searchMap.enemyList.length && !lockedOn; i++) {
+				//Alle enemies afgaan en de laatste enemy in range zoeken.
+				for (i = searchMap.enemyList.length - 1; !lockedOn &&  i >= 0; i--) {
 					//Als we hem gevonden hebben --> Locked op true zetten en de lockedEnemy koppelen.
 					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
 						this.lockedOn = true;
@@ -112,12 +111,12 @@ package entities.towers
 
 			//Als de modus op 1 (Last) staat
 			else if(mode == 1) {
-				//Alle enemies afgaan en de laatste enemy in range zoeken.
-				for (i = searchMap.enemyList.length - 1; !lockedOn &&  i >= 0; i--) {
+				//Alle enemies afgaan en de eerste enemy in range zoeken.
+				for (var i: int = 0; i < searchMap.enemyList.length && !lockedOn; i++) {
 					//Als we hem gevonden hebben --> Locked op true zetten en de lockedEnemy koppelen.
 					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
-						this.lockedOn = true;
-						this.lockedEnemy = searchMap.enemyList[i];
+						shoot(searchMap.enemyList[i].x, searchMap.enemyList[i].y, searchMap.enemyList[i].speed, searchMap.enemyList[i].angle);
+						break;
 					}
 
 				}
@@ -160,35 +159,35 @@ package entities.towers
 			}
 			// als de mode op 3 staat(minste hp).
 			else if (mode == 3) {
-			//Vars
-			var weakest: EnemyTemplate;
-			var leasthealth : Number;
-			//End vars
+				//Vars
+				var weakest: EnemyTemplate;
+				var leasthealth : Number;
+				//End vars
 
 
-			//Alle enemies afgaan en controleren wie de minste health heeft van de toren en die selecteren
-			for (i = 0; i < searchMap.enemyList.length; i++) {
-				//Als de huidigge enemy in health van de toren ligt gaan kijken naar zijn health.
-				if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
-					//Initialiseren van closests
-					if (weakest == null){
-						weakest = searchMap.enemyList[i];
-						leasthealth = searchMap.enemyList[i].health;
+				//Alle enemies afgaan en controleren wie de minste health heeft van de toren en die selecteren
+				for (i = 0; i < searchMap.enemyList.length; i++) {
+					//Als de huidigge enemy in health van de toren ligt gaan kijken naar zijn health.
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
+						//Initialiseren van closests
+						if (weakest == null){
+							weakest = searchMap.enemyList[i];
+							leasthealth = searchMap.enemyList[i].health;
+						}
+
+						//Anders de health van de huidige toren in range vergelijken met de laatste gevonden health.
+						//Als het lager is --> selecteren
+						if (searchMap.enemyList[i].health < leasthealth) {
+							weakest = searchMap.enemyList[i];
+							leasthealth = searchMap.enemyList[i].health;
+						}
+						 
 					}
-
-					//Anders de health van de huidige toren in range vergelijken met de laatste gevonden health.
-					//Als het lager is --> selecteren
-					if (searchMap.enemyList[i].health < leasthealth) {
-						weakest = searchMap.enemyList[i];
-						leasthealth = searchMap.enemyList[i].health;
-					}
-					 
 				}
-			}
 
 				//Na de loop niet locken --> moet maar 1 keer schieten.
 				if ( weakest != null){
-				shoot(weakest.x, weakest.y, weakest.speed, weakest.angle);
+					shoot(weakest.x, weakest.y, weakest.speed, weakest.angle);
 
 				// weakest resetten.
 				weakest = null;
@@ -224,7 +223,7 @@ package entities.towers
 
 				//Na de loop niet locken --> moet maar 1 keer schieten.
 				if ( weakest != null){
-				shoot(strongest.x, strongest.y, strongest.speed, strongest.angle);
+					shoot(strongest.x, strongest.y, strongest.speed, strongest.angle);
 
 				//strongest resetten.
 				strongest = null;
