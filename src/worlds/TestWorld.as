@@ -3,6 +3,7 @@ package worlds
 	import entities.castle.BasicCastle;
 	import entities.GroundTile;
 	import entities.map.Map;
+	import entities.mapmenu.LevelSelectMap;
 	import entities.spawners.BasicSpawner;
 	import entities.testenemy.FirstEnemy;
 	import entities.towers.BasicTower;
@@ -18,20 +19,22 @@ package worlds
 	 */
 	public class TestWorld extends World 
 	{
-		public var map:Map = new Map();
+		public var map:Map;
 		//public var tower: BasicTower = new BasicTower;
 		public var testenemy: BasicSpawner;
 		public var testcastly: BasicCastle;
 		
+		private var level : Class;
 		
 		public var done:Boolean = false;
-		public function TestWorld() 
+		public function TestWorld(level : Class) 
 		{
-			
+			this.level = level;
 		}
 		
 		override public function begin():void 
 		{
+			map = new Map(level);
 			add(map);		
 			//add(tower);
 

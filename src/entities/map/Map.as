@@ -2,6 +2,7 @@ package entities.map
 {
 	import entities.castle.BasicCastle;
 	import entities.GroundTile;
+	import entities.mapmenu.LevelSelectMap;
 	import entities.spawners.BasicSpawner;
 	import entities.testenemy.EnemyTemplate;
 	import entities.towers.BasicTower;
@@ -26,9 +27,14 @@ package entities.map
 		//a list of all the enemies, update once every frame
 		public var enemyList : Vector.<EnemyTemplate>;
 		
-		public function Map()
+		//the level that will be loaded
+		private var level : Class;
+		
+		public function Map(level : Class)
 		{
 			map = this;
+			this.level = level;
+			
 		}
 		
 		override public function added():void 
@@ -59,7 +65,7 @@ package entities.map
 		 */
 		public function initializeMap():void
 		{
-			parseMap(Assets.LEVEL_OBSTACLECOURSE);
+			parseMap(level);
 		}
 		
 		public function parseMap(map : Class):void

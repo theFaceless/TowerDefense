@@ -36,11 +36,16 @@ package
 		[Embed(source = "assets/MenuSmallBg.png")] public static const GUISMALLBACKGROUND : Class;
 		[Embed(source = "assets/CustomCursor.png")] public static const CUSTOMCURSOR : Class;
 		[Embed(source = "assets/addTowerOverlay.png")] public static const GUIADDTOWEROVERLAY : Class;
+		
 		//GUI BUTTON GRAPHICS
 		[Embed(source = "assets/MenuButtonToggleDebug.png")] public static const GUISMALLBUTTONTOGGLEDEBUG: Class;
 		[Embed(source = "assets/MenuButtonToggleDebugPressed.png")] public static const GUISMALLBUTTONTOGGLEDEBUG_PRESSED: Class;
 		[Embed(source = "assets/MenuButtonAddTower.png")] public static const GUISMALLBUTTONADDTOWER: Class;
 		[Embed(source = "assets/MenuButtonAddTowerPressed.png")] public static const GUISMALLBUTTONADDTOWER_PRESSED: Class;
+		
+		//MAP GRAPHICS
+		[Embed(source = "assets/map.png")] public static const MAP : Class;
+		[Embed(source = "assets/vlag.png")] public static const VLAG : Class;
 		
 		//----------the sounds----------
 		
