@@ -29,7 +29,11 @@ GET YOUR HANDS OF MY WORK BITCH
 
 Tell us what your working on!!
 
-
+Axel Faes
+	maak stop function for enemies
+	make spawners chose own target (done, but still need to erase part of constructor)
+	fix the changeTarget (get list of all castles)
+	
 
 ================
 
