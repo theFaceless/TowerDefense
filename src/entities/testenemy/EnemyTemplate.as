@@ -151,6 +151,13 @@ package entities.testenemy
 			}
 		}
 		
+		public function isDead(): Boolean {
+			if (this.health <= 0)
+				return true;
+			else
+				return false;
+		}
+		
 		/**
 		 * select the facing direction
 		 */

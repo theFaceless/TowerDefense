@@ -30,9 +30,11 @@ package entities.towers
 		//De fire cooldown
 		public var cooldown: int = 0;
 		//De damage van de projectitelen
-		public var damage: Number = 20;
+		public var damage: Number = 50;
 		public var aspd: Number = 1;
 		public var image : Image;
+		private var lockedOn: Boolean = false;
+		private var lockedEnemy: EnemyTemplate;
 		
 		//Constructor
 		public function BasicTower(map : Map, x : int, y : int, height : int ) 
@@ -76,21 +78,61 @@ package entities.towers
 			//De cooldown van de toren verlagen als hij hoger dan 0 is
 			if(this.cooldown > 0)
 				this.cooldown -= aspd * FP.elapsed;
-				
-				
-			var enemyList : Array = [];
+			
 
-			// Then, we populate the array with all existing Enemy objects!
-			FP.world.getClass(EnemyTemplate, enemyList);
-
-			// Finally, we can loop through the array and call each Enemy's die() function.
-			for each (var enemy:EnemyTemplate in enemyList) {
-				if (FP.distance(this.x, this.y, enemy.x, enemy.y) < this.range)
-					shoot(enemy.x, enemy.y, enemy.speed, enemy.angle);
+			
+			if (lockedOn == true) {
+				shoot(lockedEnemy.x, lockedEnemy.y, lockedEnemy.speed, lockedEnemy.angle);
+				if (FP.distance(this.x, this.y, lockedEnemy.x, lockedEnemy.y) >= this.range || lockedEnemy.isDead())
+					this.lockedOn = false;
 			}
+			else
+				searchNewTarget(0);
 		}
 			
-		
+		private function searchNewTarget(mode : int): void {
+			//WIP TARGET MODES 0: FIRST 1: LAST(Not working yet) 2: CLOSEST (Works on targetting but stays locked on);
+			var searchMap: Map = Map.map;
+			if(mode == 0) {
+				for (var i: int = 0; i < Map.map.enemyList.length && !lockedOn; i++) {
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.range) {
+						this.lockedOn = true;
+						 
+						this.lockedEnemy = searchMap.enemyList[i];
+						trace("New target: " + i + " Cords:(" + this.lockedEnemy.x + "," + this.lockedEnemy.y + ")");
+					}
+				}
+			}
+			else if(mode == 1) {
+				for (var i: int = searchMap.enemyList.length - 1; !lockedOn &&  i >= 0; i--) {
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.range) {
+						this.lockedOn = true;
+						 
+						this.lockedEnemy = searchMap.enemyList[i];
+						trace("New target: " + i + " Cords:(" + this.lockedEnemy.x + "," + this.lockedEnemy.y + ")");
+					}
+				}
+			}
+			else if (mode == 2) {
+				var closest: EnemyTemplate;
+				var closestDistance : Number;
+				for (var i: int = searchMap.enemyList.length - 1; i >= 0; i--) {
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.range) {
+						if (!this.lockedOn){
+							closest = searchMap.enemyList[i];
+							closestDistance = FP.distance(this.x, this.y, closest.x, closest.y);
+							this.lockedOn = true;
+							continue;
+						}
+						if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < closestDistance)
+							closest = searchMap.enemyList[i];
+						 
+					}
+				}
+				this.lockedEnemy = closest;
+			}
+			
+		}
 				
 		private function shoot(x : int, y : int, objectSpeed : int, objectAngle : Number):void 
 		{	
