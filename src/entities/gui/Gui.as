@@ -27,7 +27,7 @@ package entities.gui
 		public static function init():void
 		{
 			
-			initWithMap(new Map());
+			//initWithMap(new Map());
 			
 		}
 		

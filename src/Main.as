@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
+	import worlds.LevelMapWorld;
 	import worlds.TestWorld;
 	
 	/**
@@ -19,7 +20,8 @@ package
 		override public function init():void 
 		{
 			super.init();
-			FP.world = new TestWorld;
+			FP.world = new LevelMapWorld();
+			//FP.world = new TestWorld;
 		}
 	}
 	
