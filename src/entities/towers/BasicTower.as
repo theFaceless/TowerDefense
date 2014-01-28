@@ -30,7 +30,7 @@ package entities.towers
 		//De fire cooldown
 		public var cooldown: int = 0;
 		//De damage van de projectitelen
-		public var damage: Number = 50;
+		public var damage: Number = 10;
 		public var aspd: Number = 1;
 		public var image : Image;
 		private var lockedOn: Boolean = false;
@@ -87,7 +87,7 @@ package entities.towers
 					this.lockedOn = false;
 			}
 			else
-				searchNewTarget(0);
+				searchNewTarget(2);
 		}
 			
 		private function searchNewTarget(mode : int): void {
@@ -116,21 +116,25 @@ package entities.towers
 			else if (mode == 2) {
 				var closest: EnemyTemplate;
 				var closestDistance : Number;
-				for (var i: int = searchMap.enemyList.length - 1; i >= 0; i--) {
+				for (i= 0; i < searchMap.enemyList.length; i++) {
 					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.range) {
-						if (!this.lockedOn){
+						if (closest == null){
 							closest = searchMap.enemyList[i];
 							closestDistance = FP.distance(this.x, this.y, closest.x, closest.y);
-							this.lockedOn = true;
-							continue;
 						}
-						if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < closestDistance)
+						if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < closestDistance) {
 							closest = searchMap.enemyList[i];
+							closestDistance = FP.distance(this.x, this.y, closest.x, closest.y);
+						}
 						 
+					
 					}
 				}
-				this.lockedEnemy = closest;
+				shoot(closest.x, closest.y, closest.speed, closest.angle);
+				closest = null;
 			}
+			
+			
 			
 		}
 				
