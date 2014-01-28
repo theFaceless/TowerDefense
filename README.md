@@ -9,6 +9,8 @@ Our first game, a tower defense game
 
 ToDo
 ========
+-Improve GUI: Make the GUI look nice, and add some place on the gui for buttons and text and shizzles.
+
 -Money system: Money needed to buy buildings
 		Money can be earned through killing enemys or special buildings (like a generator)
 
@@ -36,6 +38,10 @@ Axel Faes:
 -make spawners chose own target (done, but still need to erase part of constructor)
 
 -fix the changeTarget (get list of all castles)
+
+Olivier de Schaetzen:
+
+-Mooimaak GUI
 	
 
 ================
