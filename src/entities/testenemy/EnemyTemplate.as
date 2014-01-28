@@ -25,7 +25,7 @@ package entities.testenemy
 	{
 		public var image : Image;
 		public var speed : int;
-		protected var health : Number = 100;
+		public var health : Number = 100;
 		private var facing : int = 6;
 		public var angle : Number = 180 * FP.RAD;
 		
