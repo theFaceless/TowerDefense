@@ -38,7 +38,7 @@ package entities.gui
 			layer = References.GUILAYER;
 			setHitbox( -(References.TILESIZE / 2), -(References.TILESIZE / 2), References.TILESIZE, References.TILESIZE);
 			
-			rangeIndicator = Image.createCircle((new BasicTower(Gui.map, 0,0,0)).range, 0xDDDDDD, 0.2);
+			rangeIndicator = Image.createCircle((new BasicTower(Gui.map, 0,0,0)).towerRange, 0xDDDDDD, 0.2);
 			rangeIndicator.centerOrigin();
 			
 			addGraphic(image);

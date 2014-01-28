@@ -25,15 +25,15 @@ package entities.towers
 	{
 		public var image : Image;
 		//Range van de toren
-		public var range: int = 200;
+		public var towerRange: int = 200;
 		//De snelheid van de bal die wordt afgevuurd
-		public var ballspeed: int = 500;
+		public var ballSpeed: int = 500;
 		//De fire cooldown
-		public var cooldown: int = 0;
+		public var towerCD: int = 0;
 		//De damage van de projectitelen
-		public var damage: Number = 10;
+		public var towerDamage: Number = 10;
 		//De attack speed van de toren --> cooldown verlaagt rapper
-		public var aspd: Number = 1;
+		public var towerASPD: Number = 1;
 		//Voor de toren op een target te locken
 		private var lockedOn: Boolean = false;
 		//De gelockde toren
@@ -42,15 +42,13 @@ package entities.towers
 		private var targetMode: int = 2;
 		
 		//Constructor
-		public function BasicTower(map : Map, x : int, y : int, height : int ) 
-		{
+		public function BasicTower(map : Map, x : int, y : int, height : int ) {
 			super(map, x, y , height);
 			this.placeable = false;
 			this.passable = false;
 		}
 		
-		override public function added():void 
-		{
+		override public function added():void {
 			//De image van de toren inladen
 			super.added();
 			image = new Image(Assets.BASICTOWER);
@@ -62,22 +60,28 @@ package entities.towers
 
 		}
 		
-		override public function update():void 
-		{
-		
+		override public function update():void {
+			//Vars
+			
+			//End vars
+			
+			
 			//Test Purposes
 			
 			//End test purposes
 			
+			
+			
 			//De cooldown van de toren verlagen als hij hoger dan 0 is
-			if(this.cooldown > 0)
-				this.cooldown -= this.aspd * FP.elapsed;
+			if(this.towerCD > 0)
+				this.towerCD -= this.towerASPD * FP.elapsed;
 			
 
+				
 			//Als hij nog gelocked is --> schieten op het gelocked target.
 			if (lockedOn == true) {
 				shoot(lockedEnemy.x, lockedEnemy.y, lockedEnemy.speed, lockedEnemy.angle);
-				if (FP.distance(this.x, this.y, lockedEnemy.x, lockedEnemy.y) >= this.range || lockedEnemy.isDead())
+				if (FP.distance(this.x, this.y, lockedEnemy.x, lockedEnemy.y) >= this.towerRange || lockedEnemy.isDead())
 					this.lockedOn = false;
 			}
 			//Anders een nieuwe target zoeken.
@@ -85,17 +89,20 @@ package entities.towers
 				searchNewTarget(this.targetMode);
 		}
 			
+		
+		
 		//Functie die een nieuwe target zoekt.
 		private function searchNewTarget(mode : int): void {
 			//WIP TARGET MODES 0: FIRST 1: LAST(Not working yet) 2: CLOSEST (Works on targetting but stays locked on);
 			var searchMap: Map = Map.map;
 
+			
 			//Als de modus op 0 (First) staat
 			if(mode == 0) {
 				//Alle enemies afgaan en de eerste enemy in range zoeken.
 				for (var i: int = 0; i < searchMap.enemyList.length && !lockedOn; i++) {
 					//Als we hem gevonden hebben --> Locked op true zetten en de lockedEnemy koppelen.
-					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.range) {
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
 						this.lockedOn = true;
 						this.lockedEnemy = searchMap.enemyList[i];
 					}
@@ -108,7 +115,7 @@ package entities.towers
 				//Alle enemies afgaan en de laatste enemy in range zoeken.
 				for (i = searchMap.enemyList.length - 1; !lockedOn &&  i >= 0; i--) {
 					//Als we hem gevonden hebben --> Locked op true zetten en de lockedEnemy koppelen.
-					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.range) {
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
 						this.lockedOn = true;
 						this.lockedEnemy = searchMap.enemyList[i];
 					}
@@ -127,7 +134,7 @@ package entities.towers
 				//Alle enemies afgaan en controleren wie de dichtste afstand heeft van de toren en die selecteren
 				for (i = 0; i < searchMap.enemyList.length; i++) {
 					//Als de huidigge enemy in range van de toren ligt gaan kijken naar zijn distance.
-					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.range) {
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
 						//Initialiseren van closests
 						if (closest == null){
 							closest = searchMap.enemyList[i];
@@ -145,14 +152,17 @@ package entities.towers
 				}
 
 				//Na de loop niet locken --> moet maar 1 keer schieten.
-				shoot(closest.x, closest.y, closest.speed, closest.angle);
-
-				//Closest resetten.
-				closest = null;
+				if(closest != null) {
+					shoot(closest.x, closest.y, closest.speed, closest.angle);
+					//Closest resetten.
+					closest = null;
+				}
 			}	
 		}
 				
 
+		
+		
 		//Een functie die 1 kogel schiet gebasseerd op de positie, snelheid en de hoek van een enemy.
 		private function shoot(x : int, y : int, objectSpeed : int, objectAngle : Number):void {	
 			//Vars
@@ -167,12 +177,12 @@ package entities.towers
 			//De afstand berekenen tussen tower en enemy
 			distance = FP.distance(this.x, this.y, x, y);
 			//De tijd berekenen hoe lang de bal er over zal doen
-			time = distance / ballspeed;
+			time = distance / ballSpeed;
 			
 			
 			
 			//De verwachte x en y waarden verhogen a.d.h.v. enemyHoek * enemySpeed * de tijd die de bal er over moet doen
-			for (i = 0; i < 50; i++) {
+			for (i = 0; i < precision; i++) {
 				//newx en newy resetten en we gebruiken newx en newy zodat we de orginele positie kunnen behouden
 				newx = x;
 				newy = y;
@@ -185,7 +195,7 @@ package entities.towers
 				//De distance van deze plaats berekenen
 				distance = FP.distance(this.x, this.y, newx, newy);
 				//Hier weer de tijd van berekenen
-				time = distance / ballspeed;
+				time = distance / ballSpeed;
 				//Des te vaker we dit doen des te nauwkeuriger
 			}
 			
@@ -205,10 +215,10 @@ package entities.towers
 
 			//Schiet gedeelte
 			//Als de toren van zijn cooldown af is mag hij schieten
-			if (this.cooldown <= 0) {
-				world.add(new BasicBall((image.scaledWidth / 2), this.x, this.y, image.angle, ballspeed, this.damage, this.groundHeight + 1));
+			if (this.towerCD <= 0) {
+				world.add(new BasicBall((image.scaledWidth / 2), this.x, this.y, image.angle, ballSpeed, this.towerDamage, this.groundHeight + 1));
 				//Cooldown resetten
-				this.cooldown = 60;
+				this.towerCD = 60;
 			}
 		}
 	}

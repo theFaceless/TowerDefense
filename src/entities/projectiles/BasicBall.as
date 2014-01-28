@@ -4,6 +4,7 @@ package entities.projectiles
 	import entities.testenemy.EnemyTemplate;
 	import flash.automation.KeyboardAutomationAction;
 	import flash.display.InteractiveObject;
+	import flash.display.PixelSnapping;
 	import flash.events.DRMCustomProperties;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -11,6 +12,7 @@ package entities.projectiles
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Mask;
 	import entities.gui.Gui;
+	import net.flashpunk.masks.Pixelmask;
 	import net.flashpunk.World;
 	
 	/**
@@ -19,73 +21,96 @@ package entities.projectiles
 	 */
 	public class BasicBall extends Entity 
 	{
-		public var damage: Number;
+		//Image var
 		public var image: Image;
-		public var speed: Number;
-		public var angle: Number;
+		//De damage van de ball
+		public var ballDamage: Number;
+		//De snelheid van de ball
+		public var ballSpeed: Number;
+		//De hoek van de ball
+		public var ballAngle: Number;
+		//De hoogte van de ball
 		public var ballHeight: int;
+
+
+
 		
-		public function BasicBall(width: Number, x : int, y : int, angle : Number, speed: Number, damage: Number, givenHeight: int)
-		{
+		public function BasicBall(width: Number, x : int, y : int, angle : Number, speed: Number, damage: Number, givenHeight: int) {
 			this.layer = References.PROJECTILELAYER;
 			//De speed updaten naar de gewenste speed (Nodig voor update functie)
-			this.speed = speed;
+			this.ballSpeed = speed;
 			//Doorgegeven angle is in graden, deze omvormen naar radialen en opslagen als globale variabele (Nodig voor update functie)
-			this.angle = angle *= FP.RAD;
+			this.ballAngle = angle *= FP.RAD;
 			//Doorgegeven damage toevoegen;
-			this.damage = damage;
+			this.ballDamage = damage;
 			//Doorgeven Height
 			this.ballHeight = givenHeight;
 	
 			//Berekende start positie a.d.h.v. berekende lengte van de 'loop' FUCKING GONIOMETRIE
-			this.x = x + (width * (Math.cos(this.angle)));
-			this.y = y + (width * (Math.sin(this.angle)));
+			this.x = x + (width * (Math.cos(this.ballAngle)));
+			this.y = y + (width * (Math.sin(this.ballAngle)));
 		}
 		
-		override public function added():void 
-		{
+
+
+		override public function added():void {
 			//Image koppellen aan toren
 			image = new Image(Assets.BASICBALL);
 			this.graphic = image;
 			//Center van image --> center van entity
 			image.centerOrigin();
+			mask = new Pixelmask(Assets.BASICBALL , this.image.width / 2, this.image.height / 2);
 		}
 		
-		override public function update():void 
-		{
+
+
+		override public function update():void {
+			//Vars
+			var i: int;
+			var hitEnemy: EnemyTemplate;
+
+			//Omdat de ball constant moet bewegen moet hij met elke update via zijn hoek bewegen, goniometrische formule.
+			this.x += (this.ballSpeed * (Math.cos(this.ballAngle))) * FP.elapsed;
+			this.y += (this.ballSpeed * (Math.sin(this.ballAngle))) * FP.elapsed;
 			
-			this.x += (this.speed * (Math.cos(this.angle))) * FP.elapsed;
-			this.y += (this.speed * (Math.sin(this.angle))) * FP.elapsed;
-			
-			var map: Map = Gui.map;
-			map = FP.world.getInstance("map");
-			if (this.x < 0 || this.x > (map.mapWidth * References.TILESIZE) || this.y < 0 || this.y > (map.mapHeight * References.TILESIZE))
+
+			//Als hij buiten de map is --> sterven
+			if (this.x < 0 || this.x > (Map.map.mapWidth * References.TILESIZE) || this.y < 0 || this.y > (Map.map.mapHeight * References.TILESIZE))
 			{
 				die();
 			}
-	
-			var enemyList : Array = [];
-
-			// Then, we populate the array with all existing Enemy objects!
-			FP.world.getClass(EnemyTemplate, enemyList);
 			
-			for each (var enemy:EnemyTemplate in enemyList) {
-				if (FP.distance(this.x, this.y, enemy.x, enemy.y) < enemy.image.scaledWidth/2) {
-					hit(enemy);
+			//Alle enemies afgaan
+			for (i = 0; i < Map.map.enemyList.length; i++) {
+				//Als de distance tot een enemy kleiner is als zijn straal dan heeft hij deze geraakt --> hitEnemy kopellen en uit de loop gaan
+				if (FP.distance(Map.map.enemyList[i].x, Map.map.enemyList[i].y, this.x, this.y) < Map.map.enemyList[i].image.scaledWidth / 2) {
+					hitEnemy = Map.map.enemyList[i];
+					break;
 				}
 			}
-
 			
-			if (map.getGroundTile((x / References.TILESIZE), (y / References.TILESIZE))==null || map.getGroundTile((x / References.TILESIZE), (y / References.TILESIZE)).groundHeight > ballHeight)
+			
+			//Als we een enemy geraakt hebben de hit functie oproepen
+			if (hitEnemy != null)
+				hit(hitEnemy);
+			
+
+			//Als de groundtile niet bestaat --> out of map --> sterven, anders kijken of hij hoger is dan de grond, zo nee --> sterven		
+			if (Map.map.getGroundTile((this.x / References.TILESIZE), (this.y / References.TILESIZE))== null || Map.map.getGroundTile((this.x / References.TILESIZE), (this.y / References.TILESIZE)).groundHeight > ballHeight)
 				die();
+
 		}
 		
+
+		//Een functie die de ball laat verdwijnen
 		private function die(): void {
 			FP.world.remove(this);
 		}
 		
+
+		//Een functie die wordt uitgevoerd bij een enemy hit
 		private function hit(enemy:EnemyTemplate): void {
-			enemy.takeDamage(this.damage);
+			enemy.takeDamage(this.ballDamage);
 			die();
 		}
 		

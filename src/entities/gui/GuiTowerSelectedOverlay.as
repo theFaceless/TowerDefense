@@ -56,7 +56,7 @@ package entities.gui
 			if (image.visible) {
 				
 				if (!wasVisible) {
-					rangeCircle = Image.createCircle(BasicTower(Gui.map.getGroundTile(tileX, tileY)).range, 0xDDDDDD, 0.2);
+					rangeCircle = Image.createCircle(BasicTower(Gui.map.getGroundTile(tileX, tileY)).towerRange, 0xDDDDDD, 0.2);
 					rangeCircle.centerOrigin();
 					addGraphic(rangeCircle);
 				}
