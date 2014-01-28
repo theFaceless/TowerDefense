@@ -195,6 +195,65 @@ package entities.map
 			}
 		}
 		
+		
+		/***********************************************************************/
+		/******************CHECK WHERE TOWERS CAN BE PLACED*********************/
+		/***********************************************************************/
+		
+		private var enemyQueue: Vector.<EnemyTemplate> = new Vector.<EnemyTemplate>();
+		private var spawnerQueue: Vector.<BasicSpawner> = new Vector.<BasicSpawner>();
+		private var tileQueue: Vector.<GroundTile> = new Vector.<GroundTile>();
+		
+		/**
+		 * method for placing a new tower on the map
+		 * @author Wout Coenen
+		 */
+		public function placeTower(tileX: int, tileY: int) {
+			
+			addTower(tileX, tileY);
+			guiTowerSelectedOverlay.doNotSelectNextFrame();
+			
+			tileQueue = map.mapData.concat();
+			/*FP.world.getClass(BasicSpawner, spawnerQueue);
+			FP.world.getClass(EnemyTemplate, enemyQueue);*/
+			
+		}
+		
+		/**
+		 * checks the next few items in the queue
+		 * @author Wout Coenen
+		 */
+		public function checkPathNext() {
+			
+			while (FP.elapsed < 50 && (enemyQueue.length > 0 || spawnerQueue.length > 0 || tileQueue.length > 0)) {
+				
+				if ((enemyQueue.length == 0 && spawnerQueue.length == 0) || !tileQueue[tileQueue.length - 1].placeable || !tileQueue[tileQueue.length - 1].passable) {
+					
+					//nothing to check anymore for this element
+					tileQueue.pop();
+					
+					//while the tiles are not placeable or not passable, no need to check
+					while (tileQueue.length > 0 && (!tileQueue[tileQueue.length - 1].passable || !tileQueue[tileQueue.length - 1].placeable))
+						tileQueue.pop();
+					
+					//fill up the queues
+					if (tileQueue.length > 0) {
+						FP.world.getClass(BasicSpawner, spawnerQueue);
+						FP.world.getClass(EnemyTemplate, enemyQueue);
+					}
+					
+				}
+				else if (spawnerQueue.length > 0) {
+					//handle elements in the spawnerqueue
+				}
+				else {
+					//handle elements in the enemyqueue
+				}
+				
+			}
+			
+		}
+		
 	}
 
 }

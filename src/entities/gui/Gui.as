@@ -19,7 +19,7 @@ package entities.gui
 		private static var useCustomCursor: Boolean = false;
 		public static var map: Map;
 		private static var debugEnabled: Boolean;
-		private static var guiTowerSelectedOverlay:GuiTowerSelectedOverlay = new GuiTowerSelectedOverlay();
+		public static var guiTowerSelectedOverlay:GuiTowerSelectedOverlay = new GuiTowerSelectedOverlay();
 		
 		/**
 		 * Call this method to initialize the GUI
