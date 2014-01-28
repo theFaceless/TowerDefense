@@ -17,10 +17,6 @@ package entities.testenemy
 	import entities.castle.BasicCastle;
 	import entities.spawners.BasicSpawner;
 	
-	//maak stop function
-	//make spawners chose own target
-	//fix the changeTarget (get list of all castles)
-	
 	/**
 	 * Basic template for any enemy
 	 * @author Axel Faes

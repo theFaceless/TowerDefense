@@ -10,7 +10,7 @@ Our first game, a tower defense game
 ToDo
 ========
 -Money system: Money needed to buy buildings
-		Money can be earned through killing enemys or special buildings (like a generator)
+		Money can be earned through killing enemies or special buildings (like a generator)
 
 -powersystem: area wich includes power for towers. Towers can be build in these areas. At the beginnings these areas
               will be spawn around the castles and can be enlarged with special towers.
@@ -21,7 +21,7 @@ ToDo
 
 -target system tower: enemy most/least hp
 
--upgrades(towers,enemys, castles)
+-upgrades(towers,enemies, castles)
 
 =========
 
