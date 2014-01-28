@@ -14,6 +14,10 @@ package entities.testenemy
 	
 	import entities.GroundTile;
 	
+	import entities.castle.BasicCastle;
+	import entities.spawners.BasicSpawner;
+	
+	//loop over spawners
 	/**
 	 * Basic template for any enemy
 	 * @author Axel Faes
@@ -37,6 +41,8 @@ package entities.testenemy
 		private var endloc:Vector.<int>;
 		
 		private var tileMoved:Number = 0;
+		
+		protected var damage:int = 20;
 		
 		public function EnemyTemplate(sp:int, img:Class, map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int, p:Path) {
 			set_speed(sp);
@@ -104,13 +110,78 @@ package entities.testenemy
 				tileMoved += (dx + dy);
 			}
 			else {
-				attack();
+				if (attack())
+					changeTarget()
 			}
 			inTileRange();
 		}
 		
-		private function attack():void {
+		public function changeTarget():void {
+			var enemyList : Array = [];
+			// Then, we populate the array with all existing Enemy objects!
+			FP.world.getClass(BasicCastle, enemyList);
+			// Finally, we can loop through the array and call each Enemy's die() function.
+			var closest:BasicCastle = enemyList[0];
+			var changed:Boolean = false;
+			var dis:int = 0;
 			
+			if (closest) {
+				dis = Math.abs(this.xmap-closest.gridX) + Math.abs(this.ymap-closest.gridY)
+			}
+			
+			for each (var enemy:BasicCastle in enemyList) {
+				if (!enemy.destroyed ) {
+					if (dis >= Math.abs(this.xmap-enemy.gridX) + Math.abs(this.ymap-enemy.gridY)) 
+						changed = true;
+				}
+			}
+			
+			if (changed) {
+				setEndLoc(closest.gridX, closest.gridY);
+				updatePath();
+			}
+		}
+		
+		private function attack():void {
+			var enemyList : Array = [];
+			// Then, we populate the array with all existing Enemy objects!
+			FP.world.getClass(BasicCastle, enemyList);
+			// Finally, we can loop through the array and call each Enemy's die() function.
+			for each (var enemy:BasicCastle in enemyList) {
+				if (enemy.contains(this.xmap, this.ymap)) {
+					enemy.takeDamage(this.damage);
+					break;
+				}
+			}
+			
+			this.health = -1;
+			
+			if (enemy.destroyed) {
+				FP.world.getClass(EnemyTemplate, enemyList);
+				// Finally, we can loop through the array and call each Enemy's die() function.
+				for each (var enemy2:EnemyTemplate in enemyList) {
+					if (!enemy2.isDead() && enemy2.hasEndLoc(this.xmap, this.ymap)) {
+						enemy2.changeTarget();
+					}
+				}
+				
+				FP.world.getClass(BasicSpawner, enemyList);
+				// Finally, we can loop through the array and call each Enemy's die() function.
+				for each (var enemy3:BasicSpawner in enemyList) {
+					if (enemy3.hasEndLoc(this.xmap, this.ymap)) {
+						enemy3.changeTarget();
+					}
+				}
+			}
+			
+			FP.world.remove(this);
+		}
+		
+		/**
+		 * checks if endposition is the given x and y
+		 */
+		public function hasEndLoc(x:int, y:int):Boolean {
+			return (x == endloc[0] && y == endloc[1]);
 		}
 		
 		/**
@@ -151,7 +222,7 @@ package entities.testenemy
 			}
 		}
 		
-		public function isDead(): Boolean {
+		public function isDead(): Boolean {			
 			if (this.health <= 0)
 				return true;
 			else

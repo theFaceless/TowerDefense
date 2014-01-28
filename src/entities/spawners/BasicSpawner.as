@@ -17,6 +17,8 @@ package entities.spawners
 
 	import entities.GroundTile;
 		
+	import entities.castle.BasicCastle;
+		
 	/**
 	 * ...
 	 * @author Axel Faes
@@ -44,6 +46,14 @@ package entities.spawners
 			placeable = false;
 		}
 		
+		/**
+		 * checks if endposition is the given x and y
+		 */
+		public function hasEndLoc(x:int, y:int):Boolean {
+			return (x == xEnd && y == yEnd);
+		}
+		
+		
 		override public function added():void {
 			super.added();
 			this.image = new Image(Assets.SPAWNER);
@@ -69,6 +79,32 @@ package entities.spawners
 				
 				var enemy:EnemyTemplate = new FirstEnemy(map, p, gridX , gridY,xEnd, yEnd);
 				FP.world.add(enemy);
+			}
+		}
+		public function changeTarget():void {
+			var enemyList : Array = [];
+			// Then, we populate the array with all existing Enemy objects!
+			FP.world.getClass(BasicCastle, enemyList);
+			// Finally, we can loop through the array and call each Enemy's die() function.
+			var closest:BasicCastle = enemyList[0];
+			var changed:Boolean = false;
+			var dis:int = 0;
+			
+			if (closest) {
+				dis = Math.abs(this.gridX-closest.gridX) + Math.abs(this.gridY-closest.gridY)
+			}
+			
+			for each (var enemy:BasicCastle in enemyList) {
+				if (!enemy.destroyed ) {
+					if (dis >= Math.abs(this.gridX-enemy.gridX) + Math.abs(this.gridY-enemy.gridY)) 
+						changed = true;
+				}
+			}
+			
+			if (changed) {
+				xEnd = closest.gridX;
+				yEnd = closest.gridY;
+				updatePath();
 			}
 		}
 		
