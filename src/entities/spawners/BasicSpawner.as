@@ -42,9 +42,11 @@ package entities.spawners
 			this.interval = interval;
 			this.xEnd = xEnd;
 			this.yEnd = yEnd;
+			//changeTarget();
 			passable = false;
 			placeable = false;
 		}
+		
 		
 		/**
 		 * checks if endposition is the given x and y
@@ -82,7 +84,7 @@ package entities.spawners
 			}
 		}
 		public function changeTarget():void {
-			var enemyList : Array = [];
+			var enemyList : Array = new Array();
 			// Then, we populate the array with all existing Enemy objects!
 			FP.world.getClass(BasicCastle, enemyList);
 			// Finally, we can loop through the array and call each Enemy's die() function.
@@ -93,6 +95,8 @@ package entities.spawners
 			if (closest) {
 				dis = Math.abs(this.gridX-closest.gridX) + Math.abs(this.gridY-closest.gridY)
 			}
+			
+			trace(enemyList.length());
 			
 			for each (var enemy:BasicCastle in enemyList) {
 				if (!enemy.destroyed ) {
