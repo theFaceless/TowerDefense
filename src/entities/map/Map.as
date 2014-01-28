@@ -3,6 +3,7 @@ package entities.map
 	import entities.castle.BasicCastle;
 	import entities.GroundTile;
 	import entities.spawners.BasicSpawner;
+	import entities.testenemy.EnemyTemplate;
 	import entities.towers.BasicTower;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -15,13 +16,20 @@ package entities.map
 	 */
 	public class Map extends Entity
 	{
+		public static var map : Map;
 		//this vector contains all the groundtiles	
 		public var mapData : Vector.<GroundTile>;
 		//the width of the map
 		public var mapWidth : int = 0;
 		//the height of the map
 		public var mapHeight : int = 0;
-		//the speed at which the camera scrolls
+		//a list of all the enemies, update once every frame
+		public var enemyList : Vector.<EnemyTemplate>;
+		
+		public function Map()
+		{
+			map = this;
+		}
 		
 		override public function added():void 
 		{
@@ -117,6 +125,9 @@ package entities.map
 		override public function update():void 
 		{
 			super.update();
+			enemyList = new Vector.<EnemyTemplate>();
+			
+			world.getClass(EnemyTemplate, enemyList);
 			
 			//here we move the flashpunk camera
 			
