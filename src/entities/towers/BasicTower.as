@@ -39,7 +39,7 @@ package entities.towers
 		//De gelockde toren
 		private var lockedEnemy: EnemyTemplate;
 		//De schietmodus
-		private var targetMode: int = 3;
+		private var targetMode: int = 0;
 		
 		//Constructor
 		public function BasicTower(map : Map, x : int, y : int, height : int ) {
@@ -195,34 +195,34 @@ package entities.towers
 			}
 			// als de mode op 4 staat(meeste hp).
 			else if (mode == 4) {
-			//Vars
-			var strongest: EnemyTemplate;
-			var mosthealth : Number;
-			//End vars
+				//Vars
+				var strongest: EnemyTemplate;
+				var mosthealth : Number;
+				//End vars
 
 
-			//Alle enemies afgaan en controleren wie de meeste hp heeft van de toren en die selecteren
-			for (i = 0; i < searchMap.enemyList.length; i++) {
-				//Als de huidigge enemy in range van de toren ligt gaan kijken naar zijn distance.
-				if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
-					//Initialiseren van strongest
-					if ( strongest == null){
-						strongest = searchMap.enemyList[i];
-						mosthealth = searchMap.enemyList[i].health;
+				//Alle enemies afgaan en controleren wie de meeste hp heeft van de toren en die selecteren
+				for (i = 0; i < searchMap.enemyList.length; i++) {
+					//Als de huidigge enemy in range van de toren ligt gaan kijken naar zijn distance.
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
+						//Initialiseren van strongest
+						if ( strongest == null){
+							strongest = searchMap.enemyList[i];
+							mosthealth = searchMap.enemyList[i].health;
+						}
+
+						//Anders de health van de huidige toren in range vergelijken met de laatste gevonden health.
+						//Als het hoger is --> selecteren
+						if (searchMap.enemyList[i].health > mosthealth) {
+							strongest = searchMap.enemyList[i];
+							mosthealth = searchMap.enemyList[i].health;
+						}
+						 
 					}
-
-					//Anders de health van de huidige toren in range vergelijken met de laatste gevonden health.
-					//Als het hoger is --> selecteren
-					if (searchMap.enemyList[i].health > mosthealth) {
-						strongest = searchMap.enemyList[i];
-						mosthealth = searchMap.enemyList[i].health;
-					}
-					 
 				}
-			}
 
 				//Na de loop niet locken --> moet maar 1 keer schieten.
-				if ( weakest != null){
+				if (strongest != null){
 					shoot(strongest.x, strongest.y, strongest.speed, strongest.angle);
 
 				//strongest resetten.

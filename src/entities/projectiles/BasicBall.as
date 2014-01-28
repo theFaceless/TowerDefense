@@ -59,7 +59,6 @@ package entities.projectiles
 			this.graphic = image;
 			//Center van image --> center van entity
 			image.centerOrigin();
-			mask = new Pixelmask(Assets.BASICBALL , this.image.width / 2, this.image.height / 2);
 		}
 		
 
@@ -83,7 +82,7 @@ package entities.projectiles
 			//Alle enemies afgaan
 			for (i = 0; i < Map.map.enemyList.length; i++) {
 				//Als de distance tot een enemy kleiner is als zijn straal dan heeft hij deze geraakt --> hitEnemy kopellen en uit de loop gaan
-				if (FP.distance(Map.map.enemyList[i].x, Map.map.enemyList[i].y, this.x, this.y) < Map.map.enemyList[i].image.scaledWidth / 2) {
+				if (FP.distance(Map.map.enemyList[i].x, Map.map.enemyList[i].y, this.x, this.y) < Map.map.enemyList[i].image.scaledWidth / 2.2) {
 					hitEnemy = Map.map.enemyList[i];
 					break;
 				}
