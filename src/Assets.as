@@ -11,6 +11,7 @@ package
 		
 		//TOWER GRAPHICS
 		[Embed(source = "assets/BasicTower30px.png")] public static const BASICTOWER : Class;
+		[Embed(source = "assets/TripleShotTower.png")] public static const TRIPLESHOTTOWER: Class;
 		
 		//PROJECTILE GRAPHICS
 		[Embed(source = "assets/BasicBall.png")] public static const BASICBALL : Class;

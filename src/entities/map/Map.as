@@ -8,6 +8,7 @@ package entities.map
 	import entities.testenemy.EnemyTemplate;
 	import entities.towers.BasicTower;
 	import entities.towers.TowerTemplate;
+	import entities.towers.TripleShotTower;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -190,6 +191,20 @@ package entities.map
 				FP.world.add(tempTower);
 				
 				replaceGroundTile(x, y, tempTower);
+		}
+		
+		public function upgradeTower(oldTower : BasicTower, newTower : BasicTower):void 
+		{	
+			FP.world.add(newTower);
+			setGroundTile(oldTower.gridX, oldTower.gridY, newTower);
+			FP.world.remove(oldTower);
+			
+			
+		}
+		
+		public function replaceTower(tower: BasicTower):void 
+		{
+			
 		}
 		
 		/**
