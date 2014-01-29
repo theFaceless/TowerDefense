@@ -23,7 +23,6 @@ package entities
 		{
 			x = 0;
 			y = 0;
-			refresh();
 		}
 		
 		public function refresh():void
@@ -40,7 +39,13 @@ package entities
 			for each (var t1 : TowerTemplate in towerList) {
 				for each (var t2 : TowerTemplate in towerList) {
 					if (t1 != t2 && t1.isBuidlingInRange(t2)) {
-						Draw.linePlusCustom(image._bitmap.bitmapData, t1.x + FP.camera.x, t1.y + FP.camera.y, t2.x + FP.camera.x, t2.y + FP.camera.y, 0, 1.0, 1);
+						Draw.linePlusCustom(image._bitmap.bitmapData,
+						t1.x + FP.camera.x + (t1.tileWidth-1) * References.TILESIZE/2,
+						t1.y + FP.camera.y + (t1.tileHeight-1) * References.TILESIZE/2,
+						t2.x + FP.camera.x + (t2.tileWidth-1) * References.TILESIZE/2,
+						t2.y + FP.camera.y + (t2.tileHeight-1) * References.TILESIZE/2,
+						0, 1.0, 1);
+						//Draw.linePlusCustom(image._bitmap.bitmapData, t1.x, t1.y, t2.x, t2.y, 0, 1.0, 1);
 					}
 				}
 			}

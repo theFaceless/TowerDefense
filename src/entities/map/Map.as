@@ -47,7 +47,6 @@ package entities.map
 			gridOverlay = new GridOverlay();
 			world.add(gridOverlay);
 			initializeMap();
-			
 			/*
 			//test code for spawner
 			var tile : GroundTile = getGroundTile(4, 4);
