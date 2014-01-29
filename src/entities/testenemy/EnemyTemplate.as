@@ -117,15 +117,13 @@ package entities.testenemy
 		}
 		
 		public function changeTarget():void {
-			var enemyList : Array = new Array();
-			// Then, we populate the array with all existing Enemy objects!
-			FP.world.getClass(BasicCastle, enemyList);
-			// Finally, we can loop through the array and call each Enemy's die() function.
 			var closest:BasicCastle;
 			var changed:Boolean = false;
 			var dis:int = 0;
 
-			for each (var enemy:BasicCastle in enemyList) {
+			var enemy: BasicCastle;
+			for (var i:int = Map.map.castleList.length - 1; i >= 0; i--) {
+				enemy = Map.map.castleList[i];
 				if (!enemy.destroyed ) {
 					if (!changed) {
 						closest = enemy;
@@ -139,41 +137,40 @@ package entities.testenemy
 					}
 				}
 			}
-			
 			if (changed) {
 				setEndLoc(closest.gridX, closest.gridY);
 			}
 		}
 		
 		private function attack():void {
-			var enemyList : Array = [];
-			// Then, we populate the array with all existing Enemy objects!
-			FP.world.getClass(BasicCastle, enemyList);
-			// Finally, we can loop through the array and call each Enemy's die() function.
-			for each (var enemy:BasicCastle in enemyList) {
+			var enemy: BasicCastle;
+			for (var i:int = Map.map.castleList.length - 1; i >= 0; i--) {
+				enemy = Map.map.castleList[i];
 				if (enemy.contains(this.xmap, this.ymap)) {
 					enemy.takeDamage(this.damage);
 					break;
 				}
+				
 			}
 			
 			this.health = -1;
 			
 			if (enemy.destroyed) {
-				enemyList = new Array();
-				FP.world.getClass(EnemyTemplate, enemyList);
-				// Finally, we can loop through the array and call each Enemy's die() function.
-				for each (var enemy2:EnemyTemplate in enemyList) {
+				var enemy2: EnemyTemplate;
+				for (i = Map.map.enemyList.length - 1; i >= 0; i--) {
+					enemy2 = Map.map.enemyList[i];
 					if (!enemy2.isDead() && enemy2.hasEndLoc(this.xmap, this.ymap)) {
 						enemy2.changeTarget();
+						Map.map.addEnemyToQueue(enemy2);
 					}
 				}
-				enemyList = new Array();
-				FP.world.getClass(BasicSpawner, enemyList);
-				// Finally, we can loop through the array and call each Enemy's die() function.
-				for each (var enemy3:BasicSpawner in enemyList) {
+
+				var enemy3: BasicSpawner;
+				for (i = Map.map.spawnerList.length - 1; i >= 0; i--) {
+					enemy3 = Map.map.spawnerList[i];
 					if (enemy3.hasEndLoc(this.xmap, this.ymap)) {
 						enemy3.changeTarget();
+						Map.map.addSpawnerToQueue(enemy3);
 					}
 				}
 			}

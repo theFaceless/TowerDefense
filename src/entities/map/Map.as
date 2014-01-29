@@ -80,6 +80,7 @@ package entities.map
 			world.getClass(EnemyTemplate, enemyList);
 			world.getClass(BasicSpawner, spawnerList);
 			world.getClass(BasicCastle, castleList);
+
 		}
 		
 		public function parseMap(map : Class):void
