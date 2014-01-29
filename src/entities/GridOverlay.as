@@ -2,6 +2,7 @@ package entities
 {
 	import entities.map.Map;
 	import entities.towers.TowerTemplate;
+	import flash.display.BlendMode;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -34,7 +35,6 @@ package entities
 			world.getClass(TowerTemplate, towerList);
 			
 			image = Image.createRect(Map.map.mapWidth * References.TILESIZE, Map.map.mapHeight * References.TILESIZE, 0xFFFFFF, 0.0);
-			
 			trace("x ", FP.camera.x, " y ", FP.camera.y);
 			for each (var t1 : TowerTemplate in towerList) {
 				for each (var t2 : TowerTemplate in towerList) {
@@ -44,12 +44,12 @@ package entities
 						t1.y + FP.camera.y + (t1.tileHeight-1) * References.TILESIZE/2,
 						t2.x + FP.camera.x + (t2.tileWidth-1) * References.TILESIZE/2,
 						t2.y + FP.camera.y + (t2.tileHeight-1) * References.TILESIZE/2,
-						0x333333, 0.6, 1);
+						0x333333, 0.6, 30);
 						//Draw.linePlusCustom(image._bitmap.bitmapData, t1.x, t1.y, t2.x, t2.y, 0, 1.0, 1);
 					}
 				}
 			}
-			
+			image.color = 0xFF3333;
 			this.graphic = image;
 		}
 		
