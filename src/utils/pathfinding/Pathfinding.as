@@ -104,7 +104,7 @@ package utils.pathfinding
 					if (collec.heightDo) {
 						con.cost += collec.height[3 + node.groundHeight];
 					}
-					if (collec.towerTile != 0 && isTower) {
+					if (collec.towerTile >= 0 && isTower) {
 						con.cost += collec.towerTile;
 					}
 					open.push(con);
