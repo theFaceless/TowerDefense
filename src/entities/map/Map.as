@@ -245,18 +245,21 @@ package entities.map
 					break;
 				}
 				
-			}while (FP.elapsed < 0.3);
+			}while (FP.elapsed < 0.01);
 			
 		}
 		
 		public function placeTower(tileX: int, tileY: int): void {
-			for each (var enemy: EnemyTemplate in enemyList) {
-				if (enemy.checkPath(tileX, tileY))
-					addEnemyToQueue(enemy);
-			}
-			for each (var spawner: BasicSpawner in spawnerList) {
-				if (spawner.checkPath(tileX, tileY))
-					addSpawnerToQueue(spawner);
+			if (map.getGroundTile(tileX, tileY).placeable){
+				addTower(tileX, tileY);
+				for each (var enemy: EnemyTemplate in enemyList) {
+					if (enemy.checkPath(tileX, tileY))
+						addEnemyToQueue(enemy);
+				}
+				for each (var spawner: BasicSpawner in spawnerList) {
+					if (spawner.checkPath(tileX, tileY))
+						addSpawnerToQueue(spawner);
+				}
 			}
 		}
 		

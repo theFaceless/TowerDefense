@@ -91,6 +91,9 @@ package entities.gui
 				var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;
 				var tileY: int = (Input.mouseY + FP.camera.y) / References.TILESIZE;
 				
+				Map.map.placeTower(tileX, tileY);
+				
+				/*
 				//when the the tile can be placed on
 				if (Gui.map.getGroundTile(tileX, tileY).placeable) {
 										
@@ -164,7 +167,7 @@ package entities.gui
 							spawner.updatePath();
 						}
 					}
-				}
+				}*/
 			}
 			else if (idString == "ToggleDebug")
 			{
