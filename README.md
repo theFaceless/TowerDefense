@@ -21,8 +21,6 @@ ToDo
 
 -generator: building that gives you extra money over time.
 
--target system tower: enemy most/least hp
-
 -upgrades(towers,enemies, castles)
 
 =========
@@ -31,18 +29,26 @@ GET YOUR HANDS OF MY WORK BITCH
 
 Tell us what your working on!!
 
+Matthijs Kaminski:
+
+-geld systeem
+
 Axel Faes:
-
--maak stop function for enemies
-
--make spawners chose own target (done, but still need to erase part of constructor)
 
 -fix the changeTarget (get list of all castles)
 -do a attack function to towers for the enemy class
 -make the receiving of list faster (from map)
+-pathfinding more flexible
+
+Wout Coenen:
+
+-De gui aanpassen
+-het pad updaten (queue)
 
 Olivier de Schaetzen:
 
+-overlay grid
+-grid systeem (power)
 -Mooimaak GUI
 	
 

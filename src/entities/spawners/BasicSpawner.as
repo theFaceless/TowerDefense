@@ -40,9 +40,9 @@ package entities.spawners
 			super(map, x, y, groundHeight);
 			
 			this.interval = interval;
-			this.xEnd = xEnd;
-			this.yEnd = yEnd;
-			//changeTarget();
+			//this.xEnd = xEnd;
+			//this.yEnd = yEnd;
+			changeTarget();
 			passable = false;
 			placeable = false;
 		}
