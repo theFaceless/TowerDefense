@@ -1,6 +1,7 @@
 package entities.testenemy 
 {
 	import entities.map.Map;
+	import entities.towers.BasicTower;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Entity;
 	import net.flashpunk.Graphic;
@@ -8,6 +9,7 @@ package entities.testenemy
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
+	import utils.pathfinding.Collection;
 	
 	import utils.pathfinding.Path;
 	import utils.Player;
@@ -72,7 +74,8 @@ package entities.testenemy
 		public function calcPath(x:int, y:int):Boolean {
 			var status:Boolean = false;
 			
-			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(this.xmap, this.ymap), map.getGroundTile(x,y));
+			var collec:Collection = new Collection();
+			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(this.xmap, this.ymap), map.getGroundTile(x,y), collec);
 			
 			if (p) {
 				path = p;
@@ -113,7 +116,20 @@ package entities.testenemy
 			else if (moving) {
 				attack();
 			}
+			checkAttackTower();
 			inTileRange();
+		}
+		
+		public function checkAttackTower():void {
+			var tile:GroundTile = map.getGroundTile(this.xmap, this.ymap);
+			if (tile is BasicTower) {
+				if (!(BasicTower (tile)).isDestroyed) {
+					this.health = -1;			
+					FP.world.remove(this);
+					(BasicTower (tile)).isDestroyed = true;
+					tile.passable = true;
+				}
+			}
 		}
 		
 		public function changeTarget():void {

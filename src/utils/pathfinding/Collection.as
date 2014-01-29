@@ -12,11 +12,11 @@ package utils.pathfinding
 		public var elemHeight:Vector.<Boolean> = new Vector.<Boolean>;
 		
 		public var maxHeightDif:int = 1;
-		public var towerTile:int = 0;
-		public var otherPassable:Boolean = true;
+		public var towerTile:int = 9999;
+		public var otherPassable:Boolean = false;
 		
 		public var basic:int = 10;
-		public var random:int = 0;
+		public var random:int = 10;
 		
 		public function Collection() 
 		{

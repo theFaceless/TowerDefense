@@ -1,6 +1,7 @@
 package utils.pathfinding 
 {
 	import entities.GroundTile;
+	import entities.towers.BasicTower;
 	
 	/**
 	 * @author Axel Faes
@@ -90,12 +91,12 @@ package utils.pathfinding
 		public static function makeConnection(current:NodeRecord, node:GroundTile,open:Vector.<Connection>, collec:Collection):void {
 			if (node) {
 				var dis:int = Math.abs(node.groundHeight - current.node.groundHeight);
-				var passab:Boolean = (collec.otherPassable ? node.passable : true);
+				var passab:Boolean = (collec.otherPassable ? true : node.passable);
 				if (passab) {
 					passab = (collec.elemHeightDo) ? collec.elemHeight[3 + node.groundHeight] : true;
 				}
 				if (dis <= collec.maxHeightDif && passab) {
-					var isTower:Boolean = false;
+					var isTower:Boolean = (node is BasicTower && !node.passable);
 					var con:Connection = new Connection();
 					con.fromNode = current;
 					con.toNode = node;
