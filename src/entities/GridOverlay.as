@@ -44,7 +44,7 @@ package entities
 						t1.y + FP.camera.y + (t1.tileHeight-1) * References.TILESIZE/2,
 						t2.x + FP.camera.x + (t2.tileWidth-1) * References.TILESIZE/2,
 						t2.y + FP.camera.y + (t2.tileHeight-1) * References.TILESIZE/2,
-						0, 1.0, 1);
+						0x333333, 0.6, 1);
 						//Draw.linePlusCustom(image._bitmap.bitmapData, t1.x, t1.y, t2.x, t2.y, 0, 1.0, 1);
 					}
 				}

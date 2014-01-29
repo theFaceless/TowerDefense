@@ -4,8 +4,8 @@ package utils
 	 * ...
 	 * @author Crushski
 	 */
-	public class Player 
-	{   public static var money: int;
+	public class Player  {
+		public static var money: int;
 		
 		public function Player() 
 		{

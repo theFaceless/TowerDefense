@@ -10,6 +10,7 @@ package entities.testenemy
 	import net.flashpunk.FP;
 	
 	import utils.pathfinding.Path;
+	import utils.Player;
 	import utils.pathfinding.Pathfinding;
 	import utils.Player;
 	
@@ -221,7 +222,7 @@ package entities.testenemy
 			this.health -= dam;
 			
 			if (this.health <= 0) {
-				utils.Player.addMoney(this.money);
+				Player.addMoney(this.money);
 				FP.world.remove(this);
 			}
 		}
