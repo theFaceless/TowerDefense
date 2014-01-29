@@ -62,6 +62,20 @@ package utils.pathfinding
 		}
 		
 		/**
+		 * get all connections from a specific tile
+		 */ 
+		private static function getCollecConnections(current:NodeRecord, collec:Collection):Vector.<Connection>{
+			var open:Vector.<Connection> = new Vector.<Connection>;
+			
+			makeConnection(current, current.node.getLeftTile(),open, collec);
+			makeConnection(current, current.node.getRightTile(),open, collec);
+			makeConnection(current, current.node.getTopTile(),open,collec);
+			makeConnection(current, current.node.getBottomTile(),open, collec);
+			
+			return open;
+		}
+		
+		/**
 		 * remove an specific element from a vector
 		 */
 		public static function removeElem(open:Vector.<NodeRecord>, current:NodeRecord):void {
@@ -69,6 +83,30 @@ package utils.pathfinding
 				if (open[i] == current) {
 					open.splice(i, 1);
 					break;
+				}
+			}
+		}
+		
+		public static function makeConnection(current:NodeRecord, node:GroundTile,open:Vector.<Connection>, collec:Collection):void {
+			if (node) {
+				var dis:int = Math.abs(node.groundHeight - current.node.groundHeight);
+				var passab:Boolean = (collec.otherPassable ? node.passable : true);
+				if (passab) {
+					passab = (collec.elemHeightDo) ? collec.elemHeight[3 + node.groundHeight] : true;
+				}
+				if (dis <= collec.maxHeightDif && passab) {
+					var isTower:Boolean = false;
+					var con:Connection = new Connection();
+					con.fromNode = current;
+					con.toNode = node;
+					con.cost = collec.basic + collec.random * Math.random();
+					if (collec.heightDo) {
+						con.cost += collec.height[3 + node.groundHeight];
+					}
+					if (collec.towerTile != 0 && isTower) {
+						con.cost += collec.towerTile;
+					}
+					open.push(con);
 				}
 			}
 		}
@@ -104,7 +142,7 @@ package utils.pathfinding
 		/**
 		 * Function to calculate the dijkstra path
 		 */
-		public static function pathDijkstra(begin:GroundTile, end:GroundTile):Path {
+		public static function pathDijkstra(begin:GroundTile, end:GroundTile, collec:Collection=null):Path {
 			var startrecord:NodeRecord;
 			startrecord = new NodeRecord();
 			startrecord.node = begin;
@@ -122,7 +160,13 @@ package utils.pathfinding
 					break;
 				}
 				
-				var connections:Vector.<Connection> = getConnections(current);
+				var connections:Vector.<Connection>;
+				if (collec) {
+					connections = getCollecConnections(current, collec);
+				}
+				else {
+					connections = getConnections(current);
+				}
 				
 				for each(var connection:Connection in connections) {
 					var endNode:GroundTile = connection.toNode;
@@ -264,6 +308,7 @@ package utils.pathfinding
 				return path;
 			}
 		}
+		
 	}
 
 }

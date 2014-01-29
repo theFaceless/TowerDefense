@@ -36,6 +36,8 @@ Matthijs Kaminski:
 Axel Faes:
 
 -do a attack function to towers for the enemy class
+-check if groundtile is tower
+-check if pathfinding flexbible works
 
 Wout Coenen:
 
