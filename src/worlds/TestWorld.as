@@ -6,7 +6,6 @@ package worlds
 	import entities.mapmenu.LevelSelectMap;
 	import entities.spawners.BasicSpawner;
 	import entities.testenemy.FirstEnemy;
-	import entities.towers.BasicTower;
 	import net.flashpunk.World;
 	import utils.pathfinding.Path;
 	import utils.pathfinding.Pathfinding;
@@ -20,7 +19,6 @@ package worlds
 	public class TestWorld extends World 
 	{
 		public var map:Map;
-		//public var tower: BasicTower = new BasicTower;
 		public var testenemy: BasicSpawner;
 		public var testcastly: BasicCastle;
 		
@@ -38,15 +36,12 @@ package worlds
 		{
 			map = new Map(level);
 			add(map);		
-			//add(tower);
 
 			Gui.initWithMap();
 		}
 		
 		override public function update():void {
 			super.update();
-			//if (FP.distance(tower.x, tower.y, testenemy.x, testenemy.y) <= tower.range)
-			//	tower.shoot(testenemy.x, testenemy.y, testenemy.speed, testenemy.angle);
 		}
 		
 	}

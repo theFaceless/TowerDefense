@@ -13,6 +13,8 @@ package entities.towers
 		//Constructor
 		public function BasicTower(map : Map, x : int, y : int, height : int ) {
 			super(map, x, y , height);
+			this.placeable = false;
+			this.passable = false;
 		}
 		
 		override public function added():void {

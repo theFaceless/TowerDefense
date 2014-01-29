@@ -14,6 +14,8 @@ package entities.towers
 		public function TripleShotTower(map:Map, x:int, y:int, height:int) 
 		{
 			super(map, x, y, height);
+			this.placeable = false;
+			this.passable = false;
 		}
 			
 		override public function added():void 

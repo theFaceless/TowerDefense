@@ -1,7 +1,7 @@
 package utils.pathfinding 
 {
 	import entities.GroundTile;
-	import entities.towers.BasicTower;
+	import entities.towers.Tower;
 	
 	/**
 	 * @author Axel Faes
@@ -96,7 +96,7 @@ package utils.pathfinding
 					passab = (collec.elemHeightDo) ? collec.elemHeight[3 + node.groundHeight] : true;
 				}
 				if (dis <= collec.maxHeightDif && passab) {
-					var isTower:Boolean = (node is BasicTower && !node.passable);
+					var isTower:Boolean = (node is Tower && !node.passable);
 					var con:Connection = new Connection();
 					con.fromNode = current;
 					con.toNode = node;

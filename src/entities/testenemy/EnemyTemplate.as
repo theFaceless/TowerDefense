@@ -1,7 +1,7 @@
 package entities.testenemy 
 {
 	import entities.map.Map;
-	import entities.towers.BasicTower;
+	import entities.towers.Tower;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Entity;
 	import net.flashpunk.Graphic;
@@ -122,11 +122,11 @@ package entities.testenemy
 		
 		public function checkAttackTower():void {
 			var tile:GroundTile = map.getGroundTile(this.xmap, this.ymap);
-			if (tile is BasicTower) {
-				if (!(BasicTower (tile)).isDestroyed) {
+			if (tile is Tower) {
+				if (!(Tower (tile)).isDestroyed) {
 					this.health = -1;			
 					FP.world.remove(this);
-					(BasicTower (tile)).isDestroyed = true;
+					(Tower (tile)).isDestroyed = true;
 					tile.passable = true;
 				}
 			}
