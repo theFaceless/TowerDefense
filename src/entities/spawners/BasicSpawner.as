@@ -42,7 +42,6 @@ package entities.spawners
 			super(map, x, y, groundHeight);
 			
 			this.interval = interval;
-			//changeTarget();
 			passable = false;
 			placeable = false;
 		}

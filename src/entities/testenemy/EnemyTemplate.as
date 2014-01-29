@@ -40,6 +40,7 @@ package entities.testenemy
 		private var tileMoved:Number = 0;
 		
 		protected var damage:Number = 20;
+		protected var money:Number = 20;
 		protected var moving:Boolean = true;
 		
 		public function EnemyTemplate(sp:int, img:Class, map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int, p:Path) {
@@ -219,6 +220,7 @@ package entities.testenemy
 			this.health -= dam;
 			
 			if (this.health <= 0) {
+				utils.Player.addMoney(this.money);
 				FP.world.remove(this);
 			}
 		}
