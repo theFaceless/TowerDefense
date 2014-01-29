@@ -32,6 +32,8 @@ package entities.castle
 		public function BasicCastle(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, health : int = 2000) 
 		{
 			super(map, x, y, groundHeight, 2, 2);
+			this.isPowerSource = true;
+			this.isConnectedToPower = true;
 			this.powerRange = 400;
 			this.health = health;
 			placeable = false;

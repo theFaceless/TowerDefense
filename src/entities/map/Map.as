@@ -32,6 +32,8 @@ package entities.map
 		public var spawnerList: Vector.<BasicSpawner> = new Vector.<BasicSpawner>;
 		//a list of all the castles, update once every frame
 		public var castleList: Vector.<BasicCastle> = new Vector.<BasicCastle>;
+		//a list of all the buildings, update once every frame
+		public var buildingList : Vector.<TowerTemplate> = new Vector.<TowerTemplate>;
 		//the overly that shows the grid
 		public var gridOverlay : GridOverlay;
 		
@@ -80,6 +82,7 @@ package entities.map
 			world.getClass(EnemyTemplate, enemyList);
 			world.getClass(BasicSpawner, spawnerList);
 			world.getClass(BasicCastle, castleList);
+			world.getClass(TowerTemplate, buildingList);
 		}
 		
 		public function parseMap(map : Class):void

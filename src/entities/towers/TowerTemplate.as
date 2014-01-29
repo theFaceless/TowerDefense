@@ -13,6 +13,8 @@ package entities.towers
 	{
 		
 		public var powerRange : Number = 200;
+		public var isPowerSource : Boolean = false;
+		public var isConnectedToPower : Boolean = false;
 		
 		public function TowerTemplate(map : Map, x : int, y : int, height : int, tileWidth : int = 1, tileHeight : int = 1 )  
 		{
@@ -23,6 +25,24 @@ package entities.towers
 		{
 			super.added();
 			Map.map.gridOverlay.refresh();
+			//updatePowerConnected();
+			trace(isConnectedToPower);
+		}
+		
+		/**
+		 * refreshes this towers power status
+		 */
+		public function updatePowerConnected():void
+		{
+			for each (var t : TowerTemplate in map.buildingList) {
+				
+				if (isBuidlingInRange(t)) {
+					if (t.isPowerSource || t.isConnectedToPower) {
+						isConnectedToPower = true;
+					}
+				}
+				
+			}
 		}
 		
 		/**
