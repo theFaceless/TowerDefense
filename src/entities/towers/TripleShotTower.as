@@ -1,6 +1,7 @@
 package entities.towers 
 {
-
+	import net.flashpunk.graphics.Image;
+	import entities.projectiles.BasicBall;
 	
 	/**
 	 * ...
