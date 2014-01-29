@@ -40,7 +40,7 @@ package worlds
 			add(map);		
 			//add(tower);
 
-			Gui.initWithMap(this.map);
+			Gui.initWithMap();
 		}
 		
 		override public function update():void {

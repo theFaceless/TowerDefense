@@ -17,44 +17,36 @@ package entities.gui
 		
 		private static var funcP: Function = eventHandler;
 		private static var useCustomCursor: Boolean = false;
-		public static var map: Map;
 		private static var debugEnabled: Boolean;
-		private static var guiTowerSelectedOverlay:GuiTowerSelectedOverlay = new GuiTowerSelectedOverlay();
+		
+		public static var guiTowerSelectedOverlay:GuiTowerSelectedOverlay;
+		public static var guiMinimap: GuiMinimap;
+		public static var guiOverlay: GuiOverlay;
+		
+		public static var customCursor: CustomCursor;
 		
 		/**
-		 * Call this method to initialize the GUI
+		 * Call this method to initiliaze the GUI
 		 */
-		public static function init():void
-		{
-			
-			//initWithMap(new Map());
-			
-		}
-		
-		/**
-		 * Call this method to initiliaze the GUI with a specific map
-		 * @param	mapVar the map to be used
-		 */
-		public static function initWithMap(mapVar: Map): void
-		{
-			//add a var for the map
-			map = mapVar;
-			
-			//we add the minimap
-			FP.world.add(new GuiMinimap());
-			
-			//initilize the cursor
-			if (useCustomCursor)
-			{
-				FP.world.add(new CustomCursor());
-			}
-			
-			FP.world.add(new GuiOverlay(eventHandler, 0, References.GUIBORDERSIZE, References.GUIBUTTONAREAHEIGHT));
-			FP.world.add(guiTowerSelectedOverlay);
+		public static function initWithMap(): void {
 			
 			FP.console.enable();
 			FP.console.visible = false;
 			debugEnabled = false;
+			
+			guiTowerSelectedOverlay = new GuiTowerSelectedOverlay();
+			FP.world.add(guiTowerSelectedOverlay);
+			
+			guiMinimap = new GuiMinimap();
+			FP.world.add(guiMinimap);
+			
+			
+			//initialize the cursor
+			if (useCustomCursor)
+			{
+				customCursor = new CustomCursor();
+				FP.world.add(customCursor);
+			}
 			
 		}
 		
@@ -67,8 +59,7 @@ package entities.gui
 			//DEBUG LINE
 			trace (idString);
 			
-			if (idString == "GuiButtonAddTower")
-			{
+			if (idString == "GuiButtonAddTower") {
 				FP.world.add(new GuiNewTowerOverlay(funcP));
 			}
 			else if (idString == "AddTower") {
@@ -78,84 +69,8 @@ package entities.gui
 				
 				Map.map.placeTower(tileX, tileY);
 				
-				/*
-				//when the the tile can be placed on
-				if (Gui.map.getGroundTile(tileX, tileY).placeable) {
-										
-					var pathsExistFromSpawner:Boolean = true;
-					var pathsExistFromEntity: Boolean = true;
-					var newPathsExistFromSpawner:Boolean = true;
-					var newPathsExistFromEntity: Boolean = true;
-					
-					//save passable flag and set to false
-					var wasPassable: Boolean = Gui.map.getGroundTile(tileX, tileY).passable;
-					Gui.map.getGroundTile(tileX, tileY).passable = false;
-				
-					var enemyList : Array = new Array();
-					FP.world.getClass(EnemyTemplate, enemyList);
-					var spawnerList : Array = new Array();
-					FP.world.getClass(BasicSpawner, spawnerList);
-					var spawner: BasicSpawner;
-					var spawner2 : BasicSpawner;
-					var enemy: EnemyTemplate;
-					var enemy2: EnemyTemplate;
-				 
-					//check all spawners if the paths are still valid
-					for each (spawner in spawnerList) {
-						
-						pathsExistFromSpawner &&= !spawner.checkPath(tileX, tileY);
-					
-						//if a tower doesn't have a valid path, check if there exists a (new) valid path for all towers
-						if (!pathsExistFromSpawner) {
-							for each (spawner2 in spawnerList) {
-								if (spawner2.checkPath(tileX, tileY))
-									newPathsExistFromSpawner &&= spawner2.updatePath();
-								if (!newPathsExistFromSpawner)
-									break;
-							}
-							break;
-						}
-					}
-					
-					if (newPathsExistFromSpawner) {
-						
-						for each (enemy in enemyList) {
-							
-							pathsExistFromEntity &&= !enemy.checkPath(tileX, tileY);
-							
-							if (!pathsExistFromEntity) {
-								for each (enemy2 in enemyList) {
-									if (enemy2.checkPath(tileX, tileY))
-										newPathsExistFromEntity &&= enemy2.updatePath();
-									if (!newPathsExistFromEntity)
-										break;
-								}
-								break;
-							}
-							
-						}
-						
-					}
-				  
-					Gui.map.getGroundTile(tileX, tileY).passable = wasPassable;
-				  
-					if (newPathsExistFromSpawner && newPathsExistFromEntity) {
-						map.addTower(tileX, tileY);
-						guiTowerSelectedOverlay.doNotSelectNextFrame();
-					}
-					else {
-						for each (enemy in enemyList) {
-							enemy.updatePath();
-						}
-						
-						for each (spawner in spawnerList) {
-							spawner.updatePath();
-						}
-					}
-				}*/
 			}
-			else if (idString == "ToggleDebug")
-			{
+			else if (idString == "ToggleDebug") {
 				if (debugEnabled)
 				{
 					debugEnabled = false;
@@ -167,6 +82,10 @@ package entities.gui
 					FP.console.visible = true;
 				}
 		
+			}
+			else if (idString == "MinimapAdded") {
+				guiOverlay = new GuiOverlay(eventHandler, guiMinimap.getSizeX(), References.GUIBORDERSIZE, References.GUIBUTTONAREAHEIGHT);
+				FP.world.add(guiOverlay);
 			}
 			
 		}

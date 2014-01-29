@@ -7,6 +7,7 @@ package entities.gui
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
+	import entities.map.Map;
 	
 	/**
 	 * overlay when a tower is selected
@@ -52,11 +53,11 @@ package entities.gui
 			if (Input.mousePressed)
 				clicked = true;
 			
-			image.visible = Gui.map.getGroundTile(tileX, tileY) is BasicTower;
+			image.visible = Map.map.getGroundTile(tileX, tileY) is BasicTower;
 			if (image.visible) {
 				
 				if (!wasVisible) {
-					rangeCircle = Image.createCircle(BasicTower(Gui.map.getGroundTile(tileX, tileY)).towerRange, 0xDDDDDD, 0.2);
+					rangeCircle = Image.createCircle(BasicTower(Map.map.getGroundTile(tileX, tileY)).towerRange, 0xDDDDDD, 0.2);
 					rangeCircle.centerOrigin();
 					addGraphic(rangeCircle);
 				}

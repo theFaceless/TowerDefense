@@ -16,7 +16,7 @@ package utils.pathfinding
 		public var otherPassable:Boolean = false;
 		
 		public var basic:int = 10;
-		public var random:int = 10;
+		public var random:int = 15;
 		
 		public function Collection() 
 		{

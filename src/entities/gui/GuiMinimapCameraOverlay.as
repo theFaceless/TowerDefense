@@ -3,6 +3,7 @@ package entities.gui
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import entities.map.Map;
 	
 	/**
 	 * ...
@@ -36,17 +37,17 @@ package entities.gui
 			cameraY = FP.camera.y + screenHeight / 2;
 			
 			//width and height of the map (in pixels)
-			mapWidth = Gui.map.mapWidth * References.TILESIZE;
-			mapHeight = Gui.map.mapHeight * References.TILESIZE;
+			mapWidth = Map.map.mapWidth * References.TILESIZE;
+			mapHeight = Map.map.mapHeight * References.TILESIZE;
 			
 			//set the x and y position
-			x = cameraX * Gui.map.mapWidth * mapScale / mapWidth;
+			x = cameraX * Map.map.mapWidth * mapScale / mapWidth;
 			
 			img = Image.createRect(screenWidth / References.TILESIZE * mapScale, screenHeight / References.TILESIZE * mapScale, 0x222222, 0.5);
 			img.scrollX = 0;
 			img.scrollY = 0;
 			img.centerOrigin();
-			layer = References.GUILAYER;
+			layer = References.GUILAYER - 2;
 			graphic = img;
 		}
 		
@@ -54,8 +55,8 @@ package entities.gui
 		{
 			cameraX = FP.camera.x + screenWidth / 2;
 			cameraY = FP.camera.y + screenHeight / 2;
-			x = cameraX * Gui.map.mapWidth * mapScale / mapWidth;
-			y = FP.height - Gui.map.mapHeight * mapScale + cameraY * Gui.map.mapHeight * mapScale / mapHeight;
+			x = cameraX * Map.map.mapWidth * mapScale / mapWidth;
+			y = FP.height - Map.map.mapHeight * mapScale + cameraY * Map.map.mapHeight * mapScale / mapHeight;
 		}
 		
 	}
