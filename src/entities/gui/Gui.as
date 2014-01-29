@@ -17,28 +17,13 @@ package entities.gui
 		
 		private static var funcP: Function = eventHandler;
 		private static var useCustomCursor: Boolean = false;
-		public static var map: Map;
 		private static var debugEnabled: Boolean;
 		private static var guiTowerSelectedOverlay:GuiTowerSelectedOverlay = new GuiTowerSelectedOverlay();
 		
 		/**
-		 * Call this method to initialize the GUI
+		 * Call this method to initiliaze the GUI
 		 */
-		public static function init():void
-		{
-			
-			//initWithMap(new Map());
-			
-		}
-		
-		/**
-		 * Call this method to initiliaze the GUI with a specific map
-		 * @param	mapVar the map to be used
-		 */
-		public static function initWithMap(mapVar: Map): void
-		{
-			//add a var for the map
-			map = mapVar;
+		public static function initWithMap(): void {
 			
 			//we add the minimap
 			FP.world.add(new GuiMinimap());

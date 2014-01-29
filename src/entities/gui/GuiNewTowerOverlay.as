@@ -1,13 +1,12 @@
 package entities.gui 
 {
-	import entities.towers.BasicTower;
-	import flash.events.IMEEvent;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
-	import flash.display.BlendMode;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Key;
+	import entities.map.Map;
+	import entities.towers.BasicTower;
 	
 	/**
 	 * Selector for where to place a new tower
@@ -38,7 +37,7 @@ package entities.gui
 			layer = References.GUILAYER;
 			setHitbox( -(References.TILESIZE / 2), -(References.TILESIZE / 2), References.TILESIZE, References.TILESIZE);
 			
-			rangeIndicator = Image.createCircle((new BasicTower(Gui.map, 0,0,0)).towerRange, 0xDDDDDD, 0.2);
+			rangeIndicator = Image.createCircle((new BasicTower(Map.map, 0,0,0)).towerRange, 0xDDDDDD, 0.2);
 			rangeIndicator.centerOrigin();
 			
 			addGraphic(image);
@@ -51,7 +50,7 @@ package entities.gui
 			y = (Input.mouseY + FP.camera.y) - ((Input.mouseY + FP.camera.y) % References.TILESIZE) + 20;
 			var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;
 			var tileY: int = (Input.mouseY + FP.camera.y) / References.TILESIZE;
-			var isPlaceable: Boolean = Gui.map.getGroundTile(tileX, tileY).placeable;
+			var isPlaceable: Boolean = Map.map.getGroundTile(tileX, tileY).placeable;
 			
 			//change overlay color
 			if (isPlaceable)

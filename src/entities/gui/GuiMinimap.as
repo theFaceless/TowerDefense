@@ -52,12 +52,12 @@ package entities.gui
 		
 		public function makeMap():void
 		{
-			layer = References.GUILAYER;
-			var data : BitmapData = new BitmapData(Gui.map.mapWidth, Gui.map.mapHeight, false, 0xFF000000);
+			layer = References.GUILAYER - 1;
+			var data : BitmapData = new BitmapData(Map.map.mapWidth, Map.map.mapHeight, false, 0xFF000000);
 			var tile : GroundTile;
-			for (var i : int = 0 ; i < Gui.map.mapWidth ; i++) {
-				for (var k : int = 0 ; k < Gui.map.mapHeight ; k++) {
-					tile = Gui.map.getGroundTile(i, k);
+			for (var i : int = 0 ; i < Map.map.mapWidth ; i++) {
+				for (var k : int = 0 ; k < Map.map.mapHeight ; k++) {
+					tile = Map.map.getGroundTile(i, k);
 					data.setPixel(i, k, (3 + tile.groundHeight) * 0x1C1C1C);
 				}
 			}
@@ -65,7 +65,6 @@ package entities.gui
 			image.scale = scaling;
 			image.scrollX = 0;
 			image.scrollY = 0;
-			image.alpha = 0.8;
 			this.graphic = image;
 			x = 0;
 			y = FP.height - image.scaledHeight;
