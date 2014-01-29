@@ -29,6 +29,8 @@ package entities.gui
 			//add overlay for current position
 			FP.world.add(new GuiMinimapCameraOverlay(scaling));
 			
+			Gui.eventHandler("MinimapAdded");
+			
 		}
 		
 		override public function update():void 
@@ -68,6 +70,10 @@ package entities.gui
 			this.graphic = image;
 			x = 0;
 			y = FP.height - image.scaledHeight;
+		}
+		
+		public function getSizeX(): int {
+			return Map.map.mapWidth * scaling;
 		}
 		
 	}
