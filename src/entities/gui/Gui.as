@@ -93,7 +93,7 @@ package entities.gui
 				
 				//when the the tile can be placed on
 				if (Gui.map.getGroundTile(tileX, tileY).placeable) {
-					
+										
 					var pathsExistFromSpawner:Boolean = true;
 					var pathsExistFromEntity: Boolean = true;
 					var newPathsExistFromSpawner:Boolean = true;

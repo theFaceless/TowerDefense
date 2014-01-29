@@ -1,11 +1,13 @@
 package entities.map 
 {
 	import entities.castle.BasicCastle;
+	import entities.GridOverlay;
 	import entities.GroundTile;
 	import entities.mapmenu.LevelSelectMap;
 	import entities.spawners.BasicSpawner;
 	import entities.testenemy.EnemyTemplate;
 	import entities.towers.BasicTower;
+	import entities.towers.TowerTemplate;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -26,6 +28,8 @@ package entities.map
 		public var mapHeight : int = 0;
 		//a list of all the enemies, update once every frame
 		public var enemyList : Vector.<EnemyTemplate>;
+		//the overly that shows the grid
+		public var gridOverlay : GridOverlay;
 		
 		//the level that will be loaded
 		private var level : Class;
@@ -40,6 +44,8 @@ package entities.map
 		override public function added():void 
 		{
 			name = "map";
+			gridOverlay = new GridOverlay();
+			world.add(gridOverlay);
 			initializeMap();
 			
 			/*

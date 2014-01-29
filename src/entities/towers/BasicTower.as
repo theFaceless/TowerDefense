@@ -21,7 +21,7 @@ package entities.towers
 	 * ...
 	 * @author Shadowblink
 	 */
-	public class BasicTower extends GroundTile
+	public class BasicTower extends TowerTemplate
 	{
 		public var image : Image;
 		//Range van de toren

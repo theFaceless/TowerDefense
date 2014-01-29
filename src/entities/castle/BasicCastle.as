@@ -2,6 +2,7 @@ package entities.castle
 {
 	import entities.testenemy.EnemyTemplate;
 	import entities.testenemy.FirstEnemy;
+	import entities.towers.TowerTemplate;
 	import net.flashpunk.Entity;
 	import entities.map.Map;
 	import net.flashpunk.graphics.Image;
@@ -21,7 +22,7 @@ package entities.castle
 	 * ...
 	 * @author Axel Faes
 	 */
-	public class BasicCastle extends GroundTile
+	public class BasicCastle extends TowerTemplate
 	{
 		private var image:Image;
 		
@@ -31,6 +32,7 @@ package entities.castle
 		public function BasicCastle(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, health : int = 2000) 
 		{
 			super(map, x, y, groundHeight, 2, 2);
+			this.powerRange = 400;
 			this.health = health;
 			placeable = false;
 			

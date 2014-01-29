@@ -165,6 +165,26 @@
 		}
 		
 		/**
+		 * Draws a smooth, antialiased line with optional alpha and thickness on custom bitmapdata.
+		 * @param	x1		Starting x position.
+		 * @param	y1		Starting y position.
+		 * @param	x2		Ending x position.
+		 * @param	y2		Ending y position.
+		 * @param	color	Color of the line.
+		 * @param	alpha	Alpha of the line.
+		 * @param	thick	The thickness of the line.
+		 * @param	bitmapdata	The Bitmapdata to draw the line on
+		 */
+		public static function linePlusCustom(bitmapdata : BitmapData, x1:Number, y1:Number, x2:Number, y2:Number, color:uint = 0xFF000000, alpha:Number = 1, thick:Number = 1):void
+		{
+			_graphics.clear();
+			_graphics.lineStyle(thick, color, alpha, false, LineScaleMode.NONE);
+			_graphics.moveTo(x1 - _camera.x, y1 - _camera.y);
+			_graphics.lineTo(x2 - _camera.x, y2 - _camera.y);
+			bitmapdata.draw(FP.sprite, null, null, blend);
+		}
+		
+		/**
 		 * Draws a filled rectangle.
 		 * @param	x			X position of the rectangle.
 		 * @param	y			Y position of the rectangle.

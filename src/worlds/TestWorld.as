@@ -34,6 +34,9 @@ package worlds
 		
 		override public function begin():void 
 		{
+			FP.camera.x = 0;
+			FP.camera.y = 0;
+			
 			map = new Map(level);
 			add(map);		
 			//add(tower);

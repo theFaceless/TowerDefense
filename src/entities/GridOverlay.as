@@ -1,0 +1,56 @@
+package entities 
+{
+	import entities.map.Map;
+	import entities.towers.TowerTemplate;
+	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
+	import net.flashpunk.graphics.Image;
+	import net.flashpunk.utils.Draw;
+	
+	/**
+	 * ...
+	 * @author Olivier de Schaetzen
+	 */
+	public class GridOverlay extends Entity 
+	{
+		public var image : Image;
+		
+		public function GridOverlay() 
+		{
+			
+		}
+		
+		override public function added():void 
+		{
+			refresh();
+		}
+		
+		public function refresh():void
+		{
+			//we fetch all the towers that exist
+			var towerList : Vector.<TowerTemplate>;
+			towerList = new Vector.<TowerTemplate>();
+			
+			world.getClass(TowerTemplate, towerList);
+			
+			image = Image.createRect(Map.map.mapWidth * References.TILESIZE, Map.map.mapHeight * References.TILESIZE, 0xFFFFFF, 0.0);
+			
+			for each (var t1 : TowerTemplate in towerList) {
+				for each (var t2 : TowerTemplate in towerList) {
+					if (t1 != t2 && t1.isBuidlingInRange(t2)) {
+						Draw.linePlusCustom(image._bitmap.bitmapData, t1.x + FP.camera.x, t1.y + FP.camera.y, t2.x + FP.camera.x, t2.y + FP.camera.y, 0, 1.0, 1);
+					}
+				}
+			}
+			
+			this.graphic = image;
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+		}
+		
+	}
+
+}
