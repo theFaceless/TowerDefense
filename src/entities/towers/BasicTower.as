@@ -57,6 +57,7 @@ package entities.towers
 			addGraphic(image);
 			//Het centrum zetten al centrum van de image
 			image.centerOrigin();
+			
 
 		}
 		
@@ -67,7 +68,9 @@ package entities.towers
 			
 			
 			//Test Purposes
-			
+			if (Input.pressed(Key.U)) {
+				towerUpgrade();
+			}
 			//End test purposes
 			
 			
@@ -88,11 +91,17 @@ package entities.towers
 			else
 				searchNewTarget(this.targetMode);
 		}
-			
+		
+		//Upgrade functies barebone
+		protected function towerUpgrade():void 
+		{
+			var tempTower: TripleShotTower = new TripleShotTower(this.map, this.gridX, this.gridY, this.groundHeight);
+			Map.map.upgradeTower(this, tempTower);
+		}
 		
 		
 		//Functie die een nieuwe target zoekt.
-		private function searchNewTarget(mode : int): void {
+		public function searchNewTarget(mode : int): void {
 			//WIP TARGET MODES 0: FIRST 1: LAST(Not working yet) 2: CLOSEST (Works on targetting but stays locked on);
 			var searchMap: Map = Map.map;
 
@@ -265,7 +274,7 @@ package entities.towers
 		
 		
 		//Een functie die 1 kogel schiet gebasseerd op de positie, snelheid en de hoek van een enemy.
-		private function shoot(x : int, y : int, objectSpeed : int, objectAngle : Number):void {	
+		public function shoot(x : int, y : int, objectSpeed : int, objectAngle : Number):void {	
 			//Vars
 			var distance: Number;
 			var time: Number;
