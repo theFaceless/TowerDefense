@@ -26,10 +26,12 @@ package utils
 			else{
 				money -= amount;
 				return true;
+			}
 		}
-		
-		
-		
 	}
-
 }
+		
+		
+		
+	
+

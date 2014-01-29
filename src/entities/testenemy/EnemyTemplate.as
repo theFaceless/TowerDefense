@@ -11,6 +11,7 @@ package entities.testenemy
 	
 	import utils.pathfinding.Path;
 	import utils.pathfinding.Pathfinding;
+	import utils.Player;
 	
 	import entities.GroundTile;
 	
