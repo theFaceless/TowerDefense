@@ -250,7 +250,7 @@ package entities.map
 		
 		public function updateQueues(): void {
 			
-			do {
+			//do {
 				
 				if (spawnerQueue.length > 0) {
 					spawnerQueue[spawnerQueue.length - 1].updatePath();
@@ -261,11 +261,8 @@ package entities.map
 					enemyQueue.pop();
 				
 				}
-				else {
-					break;
-				}
 				
-			}while (FP.elapsed < 0.01);
+			//}while (FP.elapsed < 0.01);
 			
 		}
 		

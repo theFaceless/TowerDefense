@@ -32,17 +32,13 @@ package entities.towers
 		/**
 		 * refreshes this towers power status
 		 */
-		public function updatePowerConnected():void
+		public function updatePowerConnectedRec():void
 		{
-			for each (var t : TowerTemplate in map.buildingList) {
+			isConnectedToPower = true;
+			
+			/*for each (var t : TowerTemplate in map.buildingList) {
 				
-				if (isBuidlingInRange(t)) {
-					if (t.isPowerSource || t.isConnectedToPower) {
-						isConnectedToPower = true;
-					}
-				}
-				
-			}
+			}*/
 		}
 		
 		/**
