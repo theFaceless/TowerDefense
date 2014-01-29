@@ -36,6 +36,7 @@ Matthijs Kaminski:
 Axel Faes:
 
 -spawner doesn't spawn enemy
+-change tower type
 
 Wout Coenen:
 
