@@ -251,11 +251,11 @@ package entities.map
 		
 		public function placeTower(tileX: int, tileY: int): void {
 			for each (var enemy: EnemyTemplate in enemyList) {
-				if (enemy.checkPath(tileX, tileY)
+				if (enemy.checkPath(tileX, tileY))
 					addEnemyToQueue(enemy);
 			}
 			for each (var spawner: BasicSpawner in spawnerList) {
-				if (spawner.checkPath(tileX, tileY)
+				if (spawner.checkPath(tileX, tileY))
 					addSpawnerToQueue(spawner);
 			}
 		}
