@@ -39,7 +39,7 @@ package entities.towers
 		//De gelockde toren
 		private var lockedEnemy: EnemyTemplate;
 		//De schietmodus
-		private var targetMode: int = 0;
+		private var targetMode: int = 1;
 		
 		//Constructor
 		public function BasicTower(map : Map, x : int, y : int, height : int ) {
@@ -97,29 +97,57 @@ package entities.towers
 			var searchMap: Map = Map.map;
 
 			//Als de modus op 0 (First) staat
-			if(mode == 0) {
+			if (mode == 0) {
+				var firstLength: Number;
+				var first: EnemyTemplate;
 				//Alle enemies afgaan en de laatste enemy in range zoeken.
 				for (i = searchMap.enemyList.length - 1; !lockedOn &&  i >= 0; i--) {
 					//Als we hem gevonden hebben --> Locked op true zetten en de lockedEnemy koppelen.
-					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
-						this.lockedOn = true;
-						this.lockedEnemy = searchMap.enemyList[i];
+					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange - 50) {
+						
+						if (first == null) {
+							firstLength = searchMap.enemyList[i].getLength();
+							first = searchMap.enemyList[i];
+						}
+						
+						if (firstLength > searchMap.enemyList[i].getLength()) {
+							firstLength = searchMap.enemyList[i].getLength();
+							first = searchMap.enemyList[i];
+						}
+						
 					}
 
 				}
+				
+				this.lockedEnemy = first;
+				this.lockedOn = true;
 			}
 
 			//Als de modus op 1 (Last) staat
-			else if(mode == 1) {
+			else if (mode == 1) {
+				var last: EnemyTemplate;
+				var lastLength: Number;
 				//Alle enemies afgaan en de eerste enemy in range zoeken.
 				for (var i: int = 0; i < searchMap.enemyList.length && !lockedOn; i++) {
 					//Als we hem gevonden hebben --> Locked op true zetten en de lockedEnemy koppelen.
 					if (FP.distance(this.x, this.y, searchMap.enemyList[i].x, searchMap.enemyList[i].y) < this.towerRange) {
-						shoot(searchMap.enemyList[i].x, searchMap.enemyList[i].y, searchMap.enemyList[i].speed, searchMap.enemyList[i].angle);
-						break;
+						
+						if (last == null) {
+							lastLength = searchMap.enemyList[i].getLength();
+							last = searchMap.enemyList[i];
+						}
+						
+						if (lastLength < searchMap.enemyList[i].getLength()) {
+							lastLength = searchMap.enemyList[i].getLength();
+							last = searchMap.enemyList[i];
+						}
+						
 					}
 
 				}
+				if(last != null)
+					shoot(last.x, last.y, last.speed, last.speed);
+				last = null;
 			}
 
 			//Als de modus op 2 (Closest) staat
