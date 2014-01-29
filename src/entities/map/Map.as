@@ -167,6 +167,8 @@ package entities.map
 				if ( FP.camera.y > mapHeight * References.TILESIZE - 600) FP.camera.y = mapHeight * References.TILESIZE - 600;
 			}
 			
+			updateQueues();
+			
 		}
 		
 		public function addTower(x : int, y : int):void
@@ -216,35 +218,46 @@ package entities.map
 		private var spawnerQueue: Vector.<BasicSpawner> = new Vector.<BasicSpawner>;
 		private var elapsed: Number;
 		
-		public function addEnemyToQueue(enemy: EnemyTemplate) {
-			enemyQueue.push(enemy);
+		public function addEnemyToQueue(enemy: EnemyTemplate): void {
 			enemy.stopEnemy();
+			enemyQueue.push(enemy);
 		}
-		public function addSpawnerToQueue(spawner: BasicSpawner) {
+		public function addSpawnerToQueue(spawner: BasicSpawner): void {
 			spawnerQueue.push(spawner);
 		}
 		
-		public function updateQueues() {
+		public function updateQueues(): void {
 			
 			elapsed = FP.elapsed;
-			elapsed = 0;
 			
 			do {
 				
 				if (spawnerQueue.length > 0) {
-					
+					spawnerQueue[spawnerQueue.length - 1].updatePath();
+					spawnerQueue.pop();
 				}
 				else if (enemyQueue.length > 0) {
-					
+					enemyQueue[enemyQueue.length - 1].updatePath();
+					enemyQueue.pop();
 				
 				}
 				else {
 					break;
 				}
 				
-				elapsed += FP.elapsed;
-			}while (elapsed < 0.3);
+			}while (FP.elapsed < 0.3);
 			
+		}
+		
+		public function placeTower(tileX: int, tileY: int): void {
+			for each (var enemy: EnemyTemplate in enemyList) {
+				if (enemy.checkPath(tileX, tileY)
+					addEnemyToQueue(enemy);
+			}
+			for each (var spawner: BasicSpawner in spawnerList) {
+				if (spawner.checkPath(tileX, tileY)
+					addSpawnerToQueue(spawner);
+			}
 		}
 		
 	}
