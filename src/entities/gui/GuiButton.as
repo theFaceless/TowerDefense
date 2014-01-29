@@ -13,7 +13,7 @@ package entities.gui
 	{
 		
 		protected var identifier: String;
-		protected var eventFunction: Function;
+		protected var callback: Function;
 		protected var sizeX: int;
 		protected var sizeY: int;
 		protected var image : Image;
@@ -23,15 +23,15 @@ package entities.gui
 		
 		/**
 		 * 
-		 * @param	eventFunction The function to be called when the button is clicked
+		 * @param	callback The function to be called when the button is clicked
 		 * @param	posX The X-position where the center of the button has te be
 		 * @param	posY The Y-position where the center of the button has te be
 		 */
-		public function GuiButton(eventFunction: Function, posX: int, posY: int) 
+		public function GuiButton(callback: Function, posX: int, posY: int) 
 		{
 			
 			super();
-			this.eventFunction = eventFunction;
+			this.callback = callback;
 			x = posX;
 			y = posY;
 			this.identifier = "GuiButton";
@@ -46,14 +46,9 @@ package entities.gui
 		override public function update() : void
 		{
 			
-			if (Input.mouseUp)
+			if (Input.mouseReleased && collidePoint(x, y, Input.mouseX, Input.mouseY))
 			{
-				if (collidePoint(x, y, Input.mouseX, Input.mouseY))
-				{
-					eventFunction(idString);
-				}
-				
-				FP.world.remove(this);
+				callback(idString);
 			}
 			else if (!isSelected && collidePoint(x, y, Input.mouseX, Input.mouseY))
 			{

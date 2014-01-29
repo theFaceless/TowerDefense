@@ -11,9 +11,9 @@ package entities.gui
 	public class GuiButtonToggleDebug extends GuiButton
 	{
 		
-		public function GuiButtonToggleDebug(posX: int, posY: int) 
+		public function GuiButtonToggleDebug(callback: Function, posX: int, posY: int) 
 		{
-			super(Gui.eventHandler, posX, posY);
+			super(callback , posX, posY);
 		}
 			
 		/**
