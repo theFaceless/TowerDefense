@@ -38,6 +38,8 @@ Axel Faes:
 -make spawners chose own target (done, but still need to erase part of constructor)
 
 -fix the changeTarget (get list of all castles)
+-do a attack function to towers for the enemy class
+-make the receiving of list faster (from map)
 
 Olivier de Schaetzen:
 
