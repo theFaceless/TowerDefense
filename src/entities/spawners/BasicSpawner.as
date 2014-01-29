@@ -35,13 +35,15 @@ package entities.spawners
 		private var isPath:Boolean;
 		private var path:Path;
 		
+		private var started:Boolean = false;
+		
 		public function BasicSpawner(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, interval:Number = 1, xEnd:int = 20, yEnd:int = 20) 
 		{
 			super(map, x, y, groundHeight);
 			
 			this.interval = interval;
-			this.xEnd = xEnd;
-			this.yEnd = yEnd;
+			//this.xEnd = xEnd;
+			//this.yEnd = yEnd;
 			//changeTarget();
 			passable = false;
 			placeable = false;
@@ -61,10 +63,15 @@ package entities.spawners
 			this.image = new Image(Assets.SPAWNER);
 			image.centerOrigin();
 			addGraphic(image);
-			isPath = updatePath();
 		}
 		
 		override public function update():void {
+			if (!started) {
+				changeTarget();
+				isPath = updatePath();
+				started = true;
+			}
+			
 			this.intervalCounter += FP.elapsed;
 			
 			if (this.intervalCounter >= this.interval) {
@@ -83,23 +90,28 @@ package entities.spawners
 				FP.world.add(enemy);
 			}
 		}
+		
 		public function changeTarget():void {
 			var enemyList : Array = new Array();
 			// Then, we populate the array with all existing Enemy objects!
 			FP.world.getClass(BasicCastle, enemyList);
 			// Finally, we can loop through the array and call each Enemy's die() function.
-			var closest:BasicCastle = enemyList[0];
+			var closest:BasicCastle;
 			var changed:Boolean = false;
 			var dis:int = 0;
-			
-			if (closest) {
-				dis = Math.abs(this.gridX-closest.gridX) + Math.abs(this.gridY-closest.gridY)
-			}
-			
+
 			for each (var enemy:BasicCastle in enemyList) {
 				if (!enemy.destroyed ) {
-					if (dis >= Math.abs(this.gridX-enemy.gridX) + Math.abs(this.gridY-enemy.gridY)) 
+					if (!changed) {
+						closest = enemy;
+						dis = Math.abs(this.gridX - closest.gridX) + Math.abs(this.gridY - closest.gridY)
 						changed = true;
+					}
+					else if (dis >= Math.abs(this.gridX-enemy.gridX) + Math.abs(this.gridY-enemy.gridY)) {
+						changed = true;
+						dis = Math.abs(this.gridX - enemy.gridX) + Math.abs(this.gridY - enemy.gridY);
+						closest = enemy;
+					}
 				}
 			}
 			

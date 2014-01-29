@@ -114,28 +114,31 @@ package entities.testenemy
 		}
 		
 		public function changeTarget():void {
-			var enemyList : Array = [];
+			var enemyList : Array = new Array();
 			// Then, we populate the array with all existing Enemy objects!
 			FP.world.getClass(BasicCastle, enemyList);
 			// Finally, we can loop through the array and call each Enemy's die() function.
-			var closest:BasicCastle = enemyList[0];
+			var closest:BasicCastle;
 			var changed:Boolean = false;
 			var dis:int = 0;
-			
-			if (closest) {
-				dis = Math.abs(this.xmap-closest.gridX) + Math.abs(this.ymap-closest.gridY)
-			}
-			
+
 			for each (var enemy:BasicCastle in enemyList) {
 				if (!enemy.destroyed ) {
-					if (dis >= Math.abs(this.xmap-enemy.gridX) + Math.abs(this.ymap-enemy.gridY)) 
+					if (!changed) {
+						closest = enemy;
+						dis = Math.abs(this.xmap - closest.gridX) + Math.abs(this.ymap - closest.gridY)
 						changed = true;
+					}
+					else if (dis >= Math.abs(this.xmap-enemy.gridX) + Math.abs(this.ymap-enemy.gridY)) {
+						changed = true;
+						dis = Math.abs(this.xmap - enemy.gridX) + Math.abs(this.ymap - enemy.gridY);
+						closest = enemy;
+					}
 				}
 			}
 			
 			if (changed) {
 				setEndLoc(closest.gridX, closest.gridY);
-				updatePath();
 			}
 		}
 		
