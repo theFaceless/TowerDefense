@@ -51,11 +51,6 @@ package entities
 			this.graphic = image;
 		}
 		
-		override public function update():void 
-		{
-			super.update();
-		}
-		
 	}
 
 }
