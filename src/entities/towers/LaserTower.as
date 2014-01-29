@@ -29,6 +29,8 @@ package entities.towers
 			this.ballSpeed = 1000;
 			this.towerDamage = 5;
 			this.ballDurability = 3.
+			this.towerASPD = 60;
+			this.targetMode = 1;
 		}
 		
 		override protected function towerUpgrade():void 

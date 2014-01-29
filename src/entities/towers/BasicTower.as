@@ -39,9 +39,11 @@ package entities.towers
 		//De gelockde toren
 		private var lockedEnemy: EnemyTemplate;
 		//De schietmodus
-		private var targetMode: int = 0;
-		//
+		public var targetMode: int = 0;
+		//Durability van kogel
 		public var ballDurability: int = 1;
+		//Toren destroyed
+		public var isDestroyed : Boolean = false;
 		
 		//Constructor
 		public function BasicTower(map : Map, x : int, y : int, height : int ) {
@@ -85,7 +87,7 @@ package entities.towers
 
 				
 			//Als hij nog gelocked is --> schieten op het gelocked target.
-			if (this.isConnectedToPower) {
+			if (this.isConnectedToPower && !this.isDestroyed) {
 				if (lockedOn == true) {
 					shoot(lockedEnemy.x, lockedEnemy.y, lockedEnemy.speed, lockedEnemy.angle);
 					if (FP.distance(this.x, this.y, lockedEnemy.x, lockedEnemy.y) >= this.towerRange || lockedEnemy.isDead())

@@ -214,9 +214,10 @@ package entities.map
 		
 		public function upgradeTower(oldTower : BasicTower, newTower : BasicTower):void 
 		{	
+			FP.world.remove(oldTower);
 			FP.world.add(newTower);
 			setGroundTile(oldTower.gridX, oldTower.gridY, newTower);
-			FP.world.remove(oldTower);
+			
 			
 			
 		}
