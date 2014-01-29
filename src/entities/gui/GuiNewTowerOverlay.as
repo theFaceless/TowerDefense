@@ -1,12 +1,12 @@
 package entities.gui 
 {
+	import entities.towers.Tower;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Key;
 	import entities.map.Map;
-	import entities.towers.BasicTower;
 	
 	/**
 	 * Selector for where to place a new tower
@@ -37,7 +37,7 @@ package entities.gui
 			layer = References.GUILAYER + 1;
 			setHitbox( -(References.TILESIZE / 2), -(References.TILESIZE / 2), References.TILESIZE, References.TILESIZE);
 			
-			rangeIndicator = Image.createCircle((new BasicTower(Map.map, 0,0,0)).towerRange, 0xDDDDDD, 0.2);
+			rangeIndicator = Image.createCircle((new Tower(Map.map, 0,0,0)).towerRange, 0xDDDDDD, 0.2);
 			rangeIndicator.centerOrigin();
 			
 			addGraphic(image);

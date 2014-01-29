@@ -3,7 +3,6 @@ package entities.gui
 	import entities.map.Map;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
-	import entities.towers.BasicTower;
 	import entities.testenemy.EnemyTemplate;
 	import entities.spawners.BasicSpawner;
 	
