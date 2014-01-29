@@ -11,8 +11,6 @@ package entities.map
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
-	import entities.gui.Gui;
-	
 	/**
 	 * ...
 	 * @author Olivier de Schaetzen
@@ -210,10 +208,10 @@ package entities.map
 		 * method for placing a new tower on the map
 		 * @author Wout Coenen
 		 */
-		public function placeTower(tileX: int, tileY: int): void {
+		public function placeTower(tileX: int, tileY: int) {
 			
 			addTower(tileX, tileY);
-			Gui.guiTowerSelectedOverlay.doNotSelectNextFrame();
+			guiTowerSelectedOverlay.doNotSelectNextFrame();
 			
 			tileQueue = map.mapData.concat();
 			/*FP.world.getClass(BasicSpawner, spawnerQueue);
@@ -225,7 +223,7 @@ package entities.map
 		 * checks the next few items in the queue
 		 * @author Wout Coenen
 		 */
-		public function checkPathNext() : void {
+		public function checkPathNext() {
 			
 			while (FP.elapsed < 50 && (enemyQueue.length > 0 || spawnerQueue.length > 0 || tileQueue.length > 0)) {
 				
