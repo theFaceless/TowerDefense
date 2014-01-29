@@ -25,6 +25,7 @@ package entities.gui
 		{
 			
 			makeMap();
+			setHitbox(Map.map.mapWidth * scaling, Map.map.mapHeight * scaling, 0, 0);
 			
 			//add overlay for current position
 			FP.world.add(new GuiMinimapCameraOverlay(scaling));
@@ -76,6 +77,9 @@ package entities.gui
 			return Map.map.mapWidth * scaling;
 		}
 		
-	}
+		public function getSizeY(): int {
+			return Map.map.mapHeight * scaling;
+		}
 
+	}
 }

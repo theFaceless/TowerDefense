@@ -34,7 +34,7 @@ package entities.gui
 			image.centerOrigin();
 			x = (Input.mouseX + FP.camera.x) % References.TILESIZE + 20;
 			y = (Input.mouseY + FP.camera.y) % References.TILESIZE + 20;
-			layer = References.GUILAYER;
+			layer = References.GUILAYER + 1;
 			setHitbox( -(References.TILESIZE / 2), -(References.TILESIZE / 2), References.TILESIZE, References.TILESIZE);
 			
 			rangeIndicator = Image.createCircle((new BasicTower(Map.map, 0,0,0)).towerRange, 0xDDDDDD, 0.2);
@@ -46,24 +46,33 @@ package entities.gui
     
 		override public function update() : void {
       
-			x = (Input.mouseX + FP.camera.x) - ((Input.mouseX + FP.camera.x) % References.TILESIZE) + 20;
-			y = (Input.mouseY + FP.camera.y) - ((Input.mouseY + FP.camera.y) % References.TILESIZE) + 20;
-			var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;
-			var tileY: int = (Input.mouseY + FP.camera.y) / References.TILESIZE;
-			var isPlaceable: Boolean = Map.map.getGroundTile(tileX, tileY).placeable;
-			
-			//change overlay color
-			if (isPlaceable)
-				image.color = 0x77FF77;
-			else
-				image.color = 0xFF7777;
-			
-			if (Input.mouseReleased) {
-				eventFunction("AddTower");
-			if (!isPlaceable)
-				FP.world.remove(this);
+			if (Gui.mapCanGetInput()) {
+				image.visible = true;
+				rangeIndicator.visible = true;
+				x = (Input.mouseX + FP.camera.x) - ((Input.mouseX + FP.camera.x) % References.TILESIZE) + 20;
+				y = (Input.mouseY + FP.camera.y) - ((Input.mouseY + FP.camera.y) % References.TILESIZE) + 20;
+				var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;
+				var tileY: int = (Input.mouseY + FP.camera.y) / References.TILESIZE;
+				var isPlaceable: Boolean = Map.map.getGroundTile(tileX, tileY).placeable;
+				
+				//change overlay color
+				if (isPlaceable)
+					image.color = 0x77FF77;
+				else
+					image.color = 0xFF7777;
+				
+				if (Input.mouseReleased) {
+					eventFunction("AddTower");
+				if (!isPlaceable)
+					FP.world.remove(this);
+				}
 			}
-			else if (Input.check(Key.ESCAPE))
+			else {
+				image.visible = false;
+				rangeIndicator.visible = false;
+			}
+			
+			if (Input.check(Key.ESCAPE))
 			{
 				FP.world.remove(this);
 			}

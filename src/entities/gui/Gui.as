@@ -90,6 +90,21 @@ package entities.gui
 			
 		}
 		
+		public static function mapCanGetInput(): Boolean {
+			if (Input.mouseX < References.GUIBORDERSIZE)
+				return false;
+			else if (Input.mouseX > FP.width - References.GUIBORDERSIZE)
+				return false;
+			else if (Input.mouseY < References.GUIBORDERSIZE)
+				return false;
+			else if (Input.mouseY > FP.height - 2 * References.GUIBORDERSIZE - References.GUIBUTTONAREAHEIGHT)
+				return false;
+			else if (Input.mouseX < guiMinimap.getSizeX() && Input.mouseY > FP.height - guiMinimap.getSizeY())
+				return false;
+			else
+				return true;
+		}
+		
 	}
 
 }

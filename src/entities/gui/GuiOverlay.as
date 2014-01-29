@@ -3,6 +3,7 @@ package entities.gui
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
+	import net.flashpunk.masks.Pixelmask;
 	
 	/**
 	 * ...
@@ -41,6 +42,7 @@ package entities.gui
 			image.scrollX = 0;
 			image.scrollY = 0;
 			layer = References.GUILAYER;
+			setHitboxTo(new Pixelmask(Assets.GUIOVERLAY));
 			
 			//add buttons here
 			buttonCount = 2;
