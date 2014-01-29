@@ -31,7 +31,7 @@ package entities.towers
 		//De fire cooldown
 		public var towerCD: int = 0;
 		//De damage van de projectitelen
-		public var towerDamage: Number = 10;
+		public var towerDamage: Number = 0.1;
 		//De attack speed van de toren --> cooldown verlaagt rapper
 		public var towerASPD: Number = 1;
 		//Voor de toren op een target te locken
@@ -39,7 +39,7 @@ package entities.towers
 		//De gelockde toren
 		private var lockedEnemy: EnemyTemplate;
 		//De schietmodus
-		private var targetMode: int = 1;
+		private var targetMode: int = 0;
 		
 		//Constructor
 		public function BasicTower(map : Map, x : int, y : int, height : int ) {
@@ -118,9 +118,10 @@ package entities.towers
 					}
 
 				}
-				
-				this.lockedEnemy = first;
-				this.lockedOn = true;
+				if (first != null) {
+					this.lockedEnemy = first;
+					this.lockedOn = true;
+				}
 			}
 
 			//Als de modus op 1 (Last) staat
