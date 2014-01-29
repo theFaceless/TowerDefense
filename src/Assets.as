@@ -12,9 +12,11 @@ package
 		//TOWER GRAPHICS
 		[Embed(source = "assets/BasicTower30px.png")] public static const BASICTOWER : Class;
 		[Embed(source = "assets/TripleShotTower.png")] public static const TRIPLESHOTTOWER: Class;
+		[Embed(source = "assets/LaserTower20x39px.png")] public static const LASERTOWER: Class;
 		
 		//PROJECTILE GRAPHICS
 		[Embed(source = "assets/BasicBall.png")] public static const BASICBALL : Class;
+		[Embed(source = "assets/LaserBolt20px.png")] public static const LASERBOLT : Class;
 		
 		//ENEMEY GRAPHICS
 		[Embed(source = "assets/TestEnemy.png")] public static const TestEnemy : Class;

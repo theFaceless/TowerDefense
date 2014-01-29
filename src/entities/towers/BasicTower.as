@@ -40,6 +40,8 @@ package entities.towers
 		private var lockedEnemy: EnemyTemplate;
 		//De schietmodus
 		private var targetMode: int = 0;
+		//
+		public var ballDurability: int = 1;
 		
 		//Constructor
 		public function BasicTower(map : Map, x : int, y : int, height : int ) {
@@ -98,7 +100,7 @@ package entities.towers
 		//Upgrade functies barebone
 		protected function towerUpgrade():void 
 		{
-			var tempTower: TripleShotTower = new TripleShotTower(this.map, this.gridX, this.gridY, this.groundHeight);
+			var tempTower: LaserTower = new LaserTower(this.map, this.gridX, this.gridY, this.groundHeight);
 			Map.map.upgradeTower(this, tempTower);
 		}
 		
@@ -272,8 +274,6 @@ package entities.towers
 			}
 		
 		}
-				
-
 		
 		
 		//Een functie die 1 kogel schiet gebasseerd op de positie, snelheid en de hoek van een enemy.
@@ -329,10 +329,16 @@ package entities.towers
 			//Schiet gedeelte
 			//Als de toren van zijn cooldown af is mag hij schieten
 			if (this.towerCD <= 0) {
-				world.add(new BasicBall((image.scaledWidth / 2), this.x, this.y, image.angle, ballSpeed, this.towerDamage, this.groundHeight + 1));
+				shootProjectile();
+				
 				//Cooldown resetten
 				this.towerCD = 60;
 			}
+		}
+		
+		public function shootProjectile():void 
+		{
+			world.add(new BasicBall((image.scaledWidth / 2), this.x, this.y, image.angle, ballSpeed, this.towerDamage, this.groundHeight + 1, ballDurability));
 		}
 	}
 

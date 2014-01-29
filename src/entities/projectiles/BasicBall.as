@@ -31,11 +31,13 @@ package entities.projectiles
 		public var ballAngle: Number;
 		//De hoogte van de ball
 		public var ballHeight: int;
+		//De durability van de kogel
+		public var ballDurability: int;
 
 
 
 		
-		public function BasicBall(width: Number, x : int, y : int, angle : Number, speed: Number, damage: Number, givenHeight: int) {
+		public function BasicBall(width: Number, x : int, y : int, angle : Number, speed: Number, damage: Number, givenHeight: int, givenDurability: int) {
 			this.layer = References.PROJECTILELAYER;
 			//De speed updaten naar de gewenste speed (Nodig voor update functie)
 			this.ballSpeed = speed;
@@ -45,6 +47,8 @@ package entities.projectiles
 			this.ballDamage = damage;
 			//Doorgeven Height
 			this.ballHeight = givenHeight;
+			//Doorgeven durability
+			this.ballDurability = givenDurability;
 	
 			//Berekende start positie a.d.h.v. berekende lengte van de 'loop' FUCKING GONIOMETRIE
 			this.x = x + (width * (Math.cos(this.ballAngle)));
@@ -110,7 +114,9 @@ package entities.projectiles
 		//Een functie die wordt uitgevoerd bij een enemy hit
 		private function hit(enemy:EnemyTemplate): void {
 			enemy.takeDamage(this.ballDamage);
-			die();
+			this.ballDurability--;
+			if (this.ballDurability == 0)
+				die();
 		}
 		
 		
