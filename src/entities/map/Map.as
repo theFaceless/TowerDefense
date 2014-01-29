@@ -51,6 +51,7 @@ package entities.map
 			gridOverlay = new GridOverlay();
 			world.add(gridOverlay);
 			initializeMap();
+			
 			/*
 			//test code for spawner
 			var tile : GroundTile = getGroundTile(4, 4);
@@ -75,6 +76,10 @@ package entities.map
 		public function initializeMap():void
 		{
 			parseMap(level);
+			
+			world.getClass(EnemyTemplate, enemyList);
+			world.getClass(BasicSpawner, spawnerList);
+			world.getClass(BasicCastle, castleList);
 		}
 		
 		public function parseMap(map : Class):void
