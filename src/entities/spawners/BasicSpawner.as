@@ -96,8 +96,6 @@ package entities.spawners
 				dis = Math.abs(this.gridX-closest.gridX) + Math.abs(this.gridY-closest.gridY)
 			}
 			
-			trace(enemyList.length());
-			
 			for each (var enemy:BasicCastle in enemyList) {
 				if (!enemy.destroyed ) {
 					if (dis >= Math.abs(this.gridX-enemy.gridX) + Math.abs(this.gridY-enemy.gridY)) 

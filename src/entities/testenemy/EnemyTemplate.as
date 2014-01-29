@@ -41,7 +41,7 @@ package entities.testenemy
 		
 		private var tileMoved:Number = 0;
 		
-		protected var damage:int = 20;
+		protected var damage:Number = 20;
 		
 		public function EnemyTemplate(sp:int, img:Class, map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int, p:Path) {
 			set_speed(sp);
@@ -109,8 +109,7 @@ package entities.testenemy
 				tileMoved += (dx + dy);
 			}
 			else {
-				if (attack())
-					changeTarget()
+				attack();
 			}
 			inTileRange();
 		}
@@ -156,6 +155,7 @@ package entities.testenemy
 			this.health = -1;
 			
 			if (enemy.destroyed) {
+				enemyList = new Array();
 				FP.world.getClass(EnemyTemplate, enemyList);
 				// Finally, we can loop through the array and call each Enemy's die() function.
 				for each (var enemy2:EnemyTemplate in enemyList) {
@@ -163,7 +163,7 @@ package entities.testenemy
 						enemy2.changeTarget();
 					}
 				}
-				
+				enemyList = new Array();
 				FP.world.getClass(BasicSpawner, enemyList);
 				// Finally, we can loop through the array and call each Enemy's die() function.
 				for each (var enemy3:BasicSpawner in enemyList) {
