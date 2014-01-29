@@ -28,6 +28,10 @@ package entities.map
 		public var mapHeight : int = 0;
 		//a list of all the enemies, update once every frame
 		public var enemyList : Vector.<EnemyTemplate>;
+		//a list of all the spawners, update once every frame
+		public var spawnerList: Vector.<BasicSpawner>;
+		//a list of all the castles, update once every frame
+		public var castleList: Vector.<BasicCastle>;
 		//the overly that shows the grid
 		public var gridOverlay : GridOverlay;
 		
@@ -137,8 +141,12 @@ package entities.map
 		{
 			super.update();
 			enemyList = new Vector.<EnemyTemplate>();
+			spawnerList = new Vector.<BasicSpawner>();
+			castleList = new Vector.<BasicCastle>();
 			
 			world.getClass(EnemyTemplate, enemyList);
+			world.getClass(BasicSpawner, spawnerList);
+			world.getClass(BasicCastle, castleList);
 			
 			//here we move the flashpunk camera
 			
@@ -198,6 +206,45 @@ package entities.map
 					mapData[(x + i) + (y +k) * mapWidth] = tile;
 				}
 			}
+		}
+		
+		/***********************************************************************************/
+		/*****************PATH CHECKING CODE (Wout Coenen)**********************************/
+		/***********************************************************************************/
+		
+		private var enemyQueue: Vector.<EnemyTemplate> = new Vector.<EnemyTemplate>;
+		private var spawnerQueue: Vector.<BasicSpawner> = new Vector.<BasicSpawner>;
+		private var elapsed: Number;
+		
+		public function addEnemyToQueue(enemy: EnemyTemplate) {
+			enemyQueue.push(enemy);
+			enemy.stopEnemy();
+		}
+		public function addSpawnerToQueue(spawner: BasicSpawner) {
+			spawnerQueue.push(spawner);
+		}
+		
+		public function updateQueues() {
+			
+			elapsed = FP.elapsed;
+			elapsed = 0;
+			
+			do {
+				
+				if (spawnerQueue.length > 0) {
+					
+				}
+				else if (enemyQueue.length > 0) {
+					
+				
+				}
+				else {
+					break;
+				}
+				
+				elapsed += FP.elapsed;
+			}while (elapsed < 0.3);
+			
 		}
 		
 	}
