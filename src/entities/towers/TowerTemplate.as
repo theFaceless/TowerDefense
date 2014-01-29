@@ -24,9 +24,7 @@ package entities.towers
 		override public function added():void 
 		{
 			super.added();
-			Map.map.gridOverlay.refresh();
-			//updatePowerConnected();
-			trace(isConnectedToPower);
+			Map.map.refreshPowerGrid();
 		}
 		
 		/**
@@ -34,11 +32,14 @@ package entities.towers
 		 */
 		public function updatePowerConnectedRec():void
 		{
+			if (isConnectedToPower == true) return;
 			isConnectedToPower = true;
 			
-			/*for each (var t : TowerTemplate in map.buildingList) {
-				
-			}*/
+			for each (var t : TowerTemplate in map.buildingList) {
+				if (isBuidlingInRange(t)) {
+					t.updatePowerConnectedRec();
+				}
+			}
 		}
 		
 		/**

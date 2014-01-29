@@ -151,10 +151,13 @@ package entities.map
 			enemyList = new Vector.<EnemyTemplate>();
 			spawnerList = new Vector.<BasicSpawner>();
 			castleList = new Vector.<BasicCastle>();
+			buildingList = new Vector.<TowerTemplate>();
 			
 			world.getClass(EnemyTemplate, enemyList);
 			world.getClass(BasicSpawner, spawnerList);
 			world.getClass(BasicCastle, castleList);
+			world.getClass(TowerTemplate, buildingList);
+			
 			
 			//here we move the flashpunk camera
 			
@@ -190,6 +193,22 @@ package entities.map
 				FP.world.add(tempTower);
 				
 				replaceGroundTile(x, y, tempTower);
+		}
+		/**
+		 * refreshes the powergrid of the map and all the towers
+		 */
+		public function refreshPowerGrid():void
+		{
+			world.getClass(TowerTemplate, buildingList);
+			for each (var t : TowerTemplate in buildingList) {
+				t.isConnectedToPower = false;
+			}
+			for each(t in buildingList) {
+				if (t.isPowerSource) {
+					t.updatePowerConnectedRec();
+				}
+			}
+			gridOverlay.refresh();
 		}
 		
 		/**

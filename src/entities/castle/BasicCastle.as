@@ -34,7 +34,7 @@ package entities.castle
 			super(map, x, y, groundHeight, 2, 2);
 			this.isPowerSource = true;
 			this.isConnectedToPower = true;
-			this.powerRange = 400;
+			this.powerRange = 250;
 			this.health = health;
 			placeable = false;
 			
