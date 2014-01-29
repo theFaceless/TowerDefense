@@ -109,7 +109,13 @@ package entities.towers
 		
 		//Functie die een nieuwe target zoekt.
 		public function searchNewTarget(mode : int): void {
-			//WIP TARGET MODES 0: FIRST 1: LAST(Not working yet) 2: CLOSEST (Works on targetting but stays locked on);
+			/*
+			 * Mode 0: First target (Least amount of tiles left)
+			 * Mode 1: Last target (Most amount of tiles left)
+			 * Mode 2: Closest target (Closest FP.distance())
+			 * Mode 3: Least HP / Weakest 
+			 * Mode 4: Most HP / Strongest
+			 */
 			var searchMap: Map = Map.map;
 
 			//Als de modus op 0 (First) staat

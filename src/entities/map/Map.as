@@ -216,14 +216,9 @@ package entities.map
 		{	
 			FP.world.remove(oldTower);
 			FP.world.add(newTower);
-			setGroundTile(oldTower.gridX, oldTower.gridY, newTower);
+			replaceGroundTile(oldTower.gridX, oldTower.gridY, newTower);
 			
 			
-			
-		}
-		
-		public function replaceTower(tower: BasicTower):void 
-		{
 			
 		}
 		
