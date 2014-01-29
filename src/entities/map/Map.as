@@ -27,11 +27,11 @@ package entities.map
 		//the height of the map
 		public var mapHeight : int = 0;
 		//a list of all the enemies, update once every frame
-		public var enemyList : Vector.<EnemyTemplate>;
+		public var enemyList : Vector.<EnemyTemplate> = new Vector.<EnemyTemplate>;
 		//a list of all the spawners, update once every frame
-		public var spawnerList: Vector.<BasicSpawner>;
+		public var spawnerList: Vector.<BasicSpawner> = new Vector.<BasicSpawner>;
 		//a list of all the castles, update once every frame
-		public var castleList: Vector.<BasicCastle>;
+		public var castleList: Vector.<BasicCastle> = new Vector.<BasicCastle>;
 		//the overly that shows the grid
 		public var gridOverlay : GridOverlay;
 		
@@ -216,7 +216,6 @@ package entities.map
 		
 		private var enemyQueue: Vector.<EnemyTemplate> = new Vector.<EnemyTemplate>;
 		private var spawnerQueue: Vector.<BasicSpawner> = new Vector.<BasicSpawner>;
-		private var elapsed: Number;
 		
 		public function addEnemyToQueue(enemy: EnemyTemplate): void {
 			enemy.stopEnemy();
@@ -227,8 +226,6 @@ package entities.map
 		}
 		
 		public function updateQueues(): void {
-			
-			elapsed = FP.elapsed;
 			
 			do {
 				
