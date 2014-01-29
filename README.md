@@ -36,8 +36,6 @@ Matthijs Kaminski:
 Axel Faes:
 
 -do a attack function to towers for the enemy class
--make the receiving of list faster (from map)
--pathfinding more flexible
 
 Wout Coenen:
 
