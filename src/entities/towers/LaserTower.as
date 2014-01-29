@@ -1,5 +1,6 @@
 package entities.towers 
 {
+	import entities.GroundTile;
 	import entities.map.Map;
 	import entities.projectiles.LaserBolt;
 	import net.flashpunk.graphics.Image;
@@ -8,13 +9,11 @@ package entities.towers
 	 * ...
 	 * @author Shadowblink
 	 */
-	public class LaserTower extends BasicTower 
+	public class LaserTower extends Tower
 	{
 		public function LaserTower(map:Map, x:int, y:int, height:int) 
 		{
 			super(map, x, y, height);
-			this.placeable = false;
-			this.passable = false;
 		}
 		
 		override public function added():void 

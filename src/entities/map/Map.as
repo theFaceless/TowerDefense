@@ -7,6 +7,7 @@ package entities.map
 	import entities.spawners.BasicSpawner;
 	import entities.testenemy.EnemyTemplate;
 	import entities.towers.BasicTower;
+	import entities.towers.Tower;
 	import entities.towers.TowerTemplate;
 	import entities.towers.TripleShotTower;
 	import net.flashpunk.Entity;
@@ -212,11 +213,11 @@ package entities.map
 			gridOverlay.refresh();
 		}
 		
-		public function upgradeTower(oldTower : BasicTower, newTower : BasicTower):void 
+		public function upgradeTower(oldTower : Tower, newTower : Tower):void 
 		{	
 			FP.world.remove(oldTower);
 			FP.world.add(newTower);
-			replaceGroundTile(oldTower.gridX, oldTower.gridY, newTower);
+			setGroundTile(oldTower.gridX, oldTower.gridY, newTower);
 			
 			
 			

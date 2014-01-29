@@ -1,39 +1,18 @@
 package entities.towers 
 {
-	import entities.GroundTile;
-	import entities.map.Map;
-	import entities.projectiles.BasicBall;
-	import flash.display.InteractiveObject;
 
-	import entities.testenemy.EnemyTemplate;
-	
-	import flash.ui.Mouse;
-	import net.flashpunk.Entity;
-	import net.flashpunk.FP;
-	import net.flashpunk.Graphic;
-	import net.flashpunk.graphics.Image;
-	import net.flashpunk.Mask;
-	import net.flashpunk.utils.Input; 
-	import net.flashpunk.utils.Key;
-	import worlds.TestWorld;
 	
 	/**
 	 * ...
 	 * @author Shadowblink
 	 */
-	public class TripleShotTower extends BasicTower 
-	{
-		private var angle: Number;
-		private var lockedOn: Boolean = false;
-		//De gelockde toren
-		private var lockedEnemy: EnemyTemplate;
+	public class TripleShotTower extends Tower
 		//De schietmodus
 		private var targetMode: int = 0;
+		
 		public function TripleShotTower(map:Map, x:int, y:int, height:int) 
 		{
 			super(map, x, y, height);
-			this.placeable = false;
-			this.passable = false;
 		}
 			
 		override public function added():void 
