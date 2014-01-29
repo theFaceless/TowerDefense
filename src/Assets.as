@@ -39,6 +39,7 @@ package
 		[Embed(source = "assets/MenuSmallBg.png")] public static const GUISMALLBACKGROUND : Class;
 		[Embed(source = "assets/CustomCursor.png")] public static const CUSTOMCURSOR : Class;
 		[Embed(source = "assets/addTowerOverlay.png")] public static const GUIADDTOWEROVERLAY : Class;
+		[Embed(source = "assets/guiOverlay.png")] public static const GUIOVERLAY: Class;
 		
 		//GUI BUTTON GRAPHICS
 		[Embed(source = "assets/MenuButtonToggleDebug.png")] public static const GUISMALLBUTTONTOGGLEDEBUG: Class;

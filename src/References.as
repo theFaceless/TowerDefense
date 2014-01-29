@@ -18,6 +18,9 @@ package
 		
 		public static const SCROLLSPEED: int = 350;
 		
+		public static const GUIBORDERSIZE: int = 7;
+		public static const GUIBUTTONAREAHEIGHT: int = 48;
+		
 	}
 
 }
