@@ -1,6 +1,6 @@
 package entities.gui 
 {
-	import entities.towers.BasicTower;
+	import entities.towers.Tower;
 	import flash.display.GraphicsSolidFill;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -56,11 +56,11 @@ package entities.gui
 				if (Input.mousePressed)
 					clicked = true;
 				
-				image.visible = Map.map.getGroundTile(tileX, tileY) is BasicTower;
+				image.visible = Map.map.getGroundTile(tileX, tileY) is Tower;
 				if (image.visible) {
 					
 					if (!wasVisible) {
-						rangeCircle = Image.createCircle(BasicTower(Map.map.getGroundTile(tileX, tileY)).towerRange, 0xDDDDDD, 0.2);
+						rangeCircle = Image.createCircle(Tower(Map.map.getGroundTile(tileX, tileY)).towerRange, 0xDDDDDD, 0.2);
 						rangeCircle.centerOrigin();
 						addGraphic(rangeCircle);
 					}
