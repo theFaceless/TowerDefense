@@ -11,6 +11,7 @@ package entities.spawners
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
+	import utils.pathfinding.Collection;
 	
 	import utils.pathfinding.Path;
 	import utils.pathfinding.Pathfinding;
@@ -131,7 +132,8 @@ package entities.spawners
 		public function updatePath():Boolean {
 			var status:Boolean = false;
 			
-			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(this.gridX, this.gridY), map.getGroundTile(xEnd,yEnd));
+			var collec:Collection = new Collection();
+			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(this.gridX, this.gridY), map.getGroundTile(xEnd,yEnd), collec);
 			
 			if (p) {
 				path = p;
