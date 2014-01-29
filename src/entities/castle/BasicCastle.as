@@ -52,7 +52,6 @@ package entities.castle
 		
 		public function takeDamage(dam:int):void {
 			this.health -= dam;
-
 			if (health <= 0) {
 				destroyed = true;
 			}

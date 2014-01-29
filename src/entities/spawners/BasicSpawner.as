@@ -89,14 +89,14 @@ package entities.spawners
 		}
 		
 		public function changeTarget():void {
-			//var enemyList : Array = new Array();
+			var enemyList : Array = new Array();
 			// Then, we populate the array with all existing Enemy objects!
-			//FP.world.getClass(BasicCastle, enemyList);
+			FP.world.getClass(BasicCastle, enemyList);
 			// Finally, we can loop through the array and call each Enemy's die() function.
 			var closest:BasicCastle;
 			var changed:Boolean = false;
 			var dis:int = 0;
-			/*
+			
 			for each (var enemy:BasicCastle in enemyList) {
 				if (!enemy.destroyed ) {
 					if (!changed) {
@@ -111,30 +111,10 @@ package entities.spawners
 					}
 				}
 			}
-			*/
-			var searchMap: Map = Map.map;
-			var enemy: BasicCastle;
-			for (var i:int = searchMap.castleList.length - 1; i >= 0; i--) {
-				enemy = searchMap.castleList[i];
-				if (!enemy.destroyed ) {
-					if (!changed) {
-						closest = enemy;
-						dis = Math.abs(this.gridX - closest.gridX) + Math.abs(this.gridY - closest.gridY)
-						changed = true;
-					}
-					else if (dis >= Math.abs(this.gridX-enemy.gridX) + Math.abs(this.gridY-enemy.gridY)) {
-						changed = true;
-						dis = Math.abs(this.gridX - enemy.gridX) + Math.abs(this.gridY - enemy.gridY);
-						closest = enemy;
-					}
-				}
-
-			}
 			
 			if (changed) {
 				xEnd = closest.gridX;
 				yEnd = closest.gridY;
-				updatePath();
 			}
 		}
 		
