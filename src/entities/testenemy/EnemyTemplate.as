@@ -36,12 +36,11 @@ package entities.testenemy
 		
 		private var path:Path;
 		
-		private var bool:Boolean = true;
 		private var endloc:Vector.<int>;
-		
 		private var tileMoved:Number = 0;
 		
 		protected var damage:Number = 20;
+		protected var moving:Boolean = true;
 		
 		public function EnemyTemplate(sp:int, img:Class, map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int, p:Path) {
 			set_speed(sp);
@@ -101,14 +100,14 @@ package entities.testenemy
 		 */
 		protected function move():void {
 			setFacing();
-			if (facing != 5) {
+			if (facing != 5 && moving) {
 				var dx:Number = (this.speed * (Math.cos(this.angle))) * FP.elapsed;
 				var dy:Number = (this.speed * (Math.sin(this.angle))) * FP.elapsed;
 				this.x += dx;
 				this.y += dy;
 				tileMoved += (dx + dy);
 			}
-			else {
+			else if (moving) {
 				attack();
 			}
 			inTileRange();
@@ -320,6 +319,7 @@ package entities.testenemy
 		 * update the path
 		 */
 		public function updatePath():Boolean {
+			moving = true;
 			return calcPath(endloc[0], endloc[1]);
 		}
 		
@@ -341,6 +341,10 @@ package entities.testenemy
 		public function set_imgSize(nb:Number):void {
 			this.image.scaledWidth = nb * width;
 			this.image.scaledHeight = nb * height;
+		}
+		
+		public function stopEnemy():void {
+			moving = false;
 		}
 	}
 
