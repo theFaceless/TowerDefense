@@ -37,13 +37,11 @@ package entities.spawners
 		
 		private var started:Boolean = false;
 		
-		public function BasicSpawner(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, interval:Number = 1, xEnd:int = 20, yEnd:int = 20) 
+		public function BasicSpawner(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, interval:Number = 1) 
 		{
 			super(map, x, y, groundHeight);
 			
 			this.interval = interval;
-			//this.xEnd = xEnd;
-			//this.yEnd = yEnd;
 			//changeTarget();
 			passable = false;
 			placeable = false;

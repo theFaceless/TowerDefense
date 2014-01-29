@@ -17,11 +17,12 @@ package entities
 		
 		public function GridOverlay() 
 		{
-			
 		}
 		
 		override public function added():void 
 		{
+			x = 0;
+			y = 0;
 			refresh();
 		}
 		
@@ -35,6 +36,7 @@ package entities
 			
 			image = Image.createRect(Map.map.mapWidth * References.TILESIZE, Map.map.mapHeight * References.TILESIZE, 0xFFFFFF, 0.0);
 			
+			trace("x ", FP.camera.x, " y ", FP.camera.y);
 			for each (var t1 : TowerTemplate in towerList) {
 				for each (var t2 : TowerTemplate in towerList) {
 					if (t1 != t2 && t1.isBuidlingInRange(t2)) {
