@@ -82,14 +82,16 @@ package entities.towers
 
 				
 			//Als hij nog gelocked is --> schieten op het gelocked target.
-			if (lockedOn == true) {
-				shoot(lockedEnemy.x, lockedEnemy.y, lockedEnemy.speed, lockedEnemy.angle);
-				if (FP.distance(this.x, this.y, lockedEnemy.x, lockedEnemy.y) >= this.towerRange || lockedEnemy.isDead())
-					this.lockedOn = false;
+			if (this.isConnectedToPower) {
+				if (lockedOn == true) {
+					shoot(lockedEnemy.x, lockedEnemy.y, lockedEnemy.speed, lockedEnemy.angle);
+					if (FP.distance(this.x, this.y, lockedEnemy.x, lockedEnemy.y) >= this.towerRange || lockedEnemy.isDead())
+						this.lockedOn = false;
+				}
+				//Anders een nieuwe target zoeken.
+				else
+					searchNewTarget(this.targetMode);
 			}
-			//Anders een nieuwe target zoeken.
-			else
-				searchNewTarget(this.targetMode);
 		}
 		
 		//Upgrade functies barebone
