@@ -46,6 +46,7 @@ package entities.towers
 			super(map, x, y , height);
 			this.placeable = false;
 			this.passable = false;
+			this.layer = References.TOWERLAYER;
 		}
 		
 		override public function added():void {

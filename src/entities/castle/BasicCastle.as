@@ -39,6 +39,7 @@ package entities.castle
 			placeable = false;
 			
 			type = "castle";
+			this.layer = References.TOWERLAYER;
 		}
 		
 		public function contains(x:int, y:int):Boolean {

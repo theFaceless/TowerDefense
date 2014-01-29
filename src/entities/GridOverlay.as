@@ -26,7 +26,7 @@ package entities
 			x = 0;
 			y = 0;
 			image = Image.createRect(Map.map.mapWidth * References.TILESIZE, Map.map.mapHeight * References.TILESIZE, 0xFFFFFF, 0.0);
-			
+			this.layer = References.GRIDLAYER;
 		}
 		
 		public function refresh():void
@@ -42,8 +42,8 @@ package entities
 						t1.y + FP.camera.y + (t1.tileHeight-1) * References.TILESIZE/2,
 						t2.x + FP.camera.x + (t2.tileWidth-1) * References.TILESIZE/2,
 						t2.y + FP.camera.y + (t2.tileHeight-1) * References.TILESIZE/2,
-						(t2.isConnectedToPower ? 0x33FF33 : 0xFF3333), //color, red when not connected, green if connected
-						0.6, 5);
+						(t2.isConnectedToPower ? 0xFFF31A : 0x992222), //color, red when not connected, green if connected
+						0.6, 2.5);
 						//Draw.linePlusCustom(image._bitmap.bitmapData, t1.x, t1.y, t2.x, t2.y, 0, 1.0, 1);
 					}
 				}
