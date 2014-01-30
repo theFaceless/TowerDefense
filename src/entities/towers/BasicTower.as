@@ -2,6 +2,7 @@ package entities.towers
 {
 	import entities.map.Map;
 	import entities.projectiles.BasicBall;
+	import entities.projectiles.FireBeam;
 	import net.flashpunk.graphics.Image;
 	
 	/**
@@ -32,8 +33,8 @@ package entities.towers
 		
 		//Upgrade Functie
 		override public function towerUpgrade():void 
-		{
-			var tempTower: TripleShotTower = new TripleShotTower(this.map, this.gridX, this.gridY, this.groundHeight);
+		{ 
+			var tempTower: FireTower = new FireTower(Map.map, this.gridX, this.gridY, this.groundHeight);
 			Map.map.upgradeTower(this, tempTower);
 		}
 		

@@ -14,10 +14,12 @@ package
 		[Embed(source = "assets/TripleShotTower.png")] public static const TRIPLESHOTTOWER: Class;
 		[Embed(source = "assets/LaserTower20x39px.png")] public static const LASERTOWER: Class;
 		[Embed(source = "assets/TripleLaserTower20x39px.png")] public static const TRIPLELASERTOWER: Class;
+		[Embed(source = "assets/FireTower.png")] public static const FIRETOWER: Class;
 		
 		//PROJECTILE GRAPHICS
 		[Embed(source = "assets/BasicBall.png")] public static const BASICBALL : Class;
 		[Embed(source = "assets/LaserBolt20px.png")] public static const LASERBOLT : Class;
+		[Embed(source = "assets/FireBeam.png")] public static const FIREBEAM : Class;
 		
 		//ENEMEY GRAPHICS
 		[Embed(source = "assets/TestEnemy.png")] public static const TestEnemy : Class;

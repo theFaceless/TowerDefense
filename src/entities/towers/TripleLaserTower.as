@@ -17,6 +17,7 @@ package entities.towers
 			this.placeable = false;
 			this.passable = false;
 			this.towerASPD = 8000;
+			this.targetMode = 1;
 		}
 			
 		override public function added():void 

@@ -17,6 +17,7 @@ package entities.map
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import utils.DialogueManager;
+	import utils.Player;
 	/**
 	 * ...
 	 * @author Olivier de Schaetzen
@@ -40,6 +41,8 @@ package entities.map
 		public var buildingList : Vector.<TowerTemplate> = new Vector.<TowerTemplate>;
 		//the overly that shows the grid
 		public var gridOverlay : GridOverlay;
+		//Player
+		public var player: Player = new Player();
 		
 		//the level that will be loaded
 		private var level : Class;

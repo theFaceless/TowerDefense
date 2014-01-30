@@ -9,7 +9,7 @@ package utils
 		
 		public function Player() 
 		{
-			
+			money = 1000;
 		}
 		
 		//stroompool, addmoney, addpower, 
