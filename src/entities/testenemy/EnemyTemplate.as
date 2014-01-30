@@ -47,6 +47,9 @@ package entities.testenemy
 		protected var money:Number = 20;
 		protected var moving:Boolean = true;
 		
+		protected var pathchanged:Boolean = false;
+		private var newpath:Path;
+		
 		public function EnemyTemplate(sp:int, img:Class, map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int, p:Path) {
 			set_speed(sp);
 			set_image(img);
@@ -75,12 +78,12 @@ package entities.testenemy
 			var status:Boolean = false;
 			
 			var collec:Collection = new Collection();
-			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(this.xmap, this.ymap), map.getGroundTile(x,y), collec);
+			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(path.getNextX(), path.getNextY()), map.getGroundTile(x,y), collec);
 			
 			if (p) {
-				path = p;
+				newpath = p;
 				status = true;
-				usePath();				
+				pathchanged = true;
 			}
 			
 			return status;
@@ -240,6 +243,12 @@ package entities.testenemy
 				 */
 				this.x = References.TILESIZE * xmap + References.TILESIZE / 2;
 				this.y = References.TILESIZE * ymap + References.TILESIZE / 2;
+				
+				if (pathchanged) {
+					path = newpath;
+					pathchanged = false;
+				}
+				
 				/**
 				 * get the next direction to move to
 				 */
