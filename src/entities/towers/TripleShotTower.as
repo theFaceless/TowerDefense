@@ -1,5 +1,6 @@
 package entities.towers 
 {
+	import entities.map.Map;
 	import net.flashpunk.graphics.Image;
 	import entities.projectiles.BasicBall;
 	
@@ -7,12 +8,12 @@ package entities.towers
 	 * ...
 	 * @author Shadowblink
 	 */
-	public class TripleShotTower extends Tower
-		//De schietmodus
-		private var targetMode: int = 0;
+	public class TripleShotTower extends Tower {
+
 		
 		public function TripleShotTower(map:Map, x:int, y:int, height:int) 
 		{
+		
 			super(map, x, y, height);
 			this.placeable = false;
 			this.passable = false;
@@ -27,6 +28,7 @@ package entities.towers
 			this.addGraphic(this.image);
 			//Het centrum zetten al centrum van de image
 			this.image.centerOrigin();
+			this.targetMode = 0;
 		}
 		
 		override protected function towerUpgrade():void 
