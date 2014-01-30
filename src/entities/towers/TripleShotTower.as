@@ -30,11 +30,7 @@ package entities.towers
 			this.image.centerOrigin();
 			this.targetMode = 0;
 		}
-		
-		override protected function towerUpgrade():void 
-		{
-			
-		}
+	
 		
 		override public function shootProjectile():void 
 		{
