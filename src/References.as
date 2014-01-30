@@ -21,6 +21,8 @@ package
 		public static const GUIBORDERSIZE: int = 7;
 		public static const GUIBUTTONAREAHEIGHT: int = 48;
 		
+		public static const SELLPERCENTAGE: Number = 0.75;
+		
 	}
 
 }
