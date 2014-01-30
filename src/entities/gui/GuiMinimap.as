@@ -44,10 +44,7 @@ package entities.gui
 						FP.camera.x = Input.mouseX * 40 / 4 - FP.halfWidth;
 						FP.camera.y = (Input.mouseY - y) * 40 / 4 - FP.halfHeight; 
 						//and clamp the camera so it doesn't go out of bounds
-						if (FP.camera.x < 0) FP.camera.x = 0;
-						if (FP.camera.y < 0) FP.camera.y = 0;
-						if (FP.camera.x > Map.map.mapWidth * References.TILESIZE - FP.width) FP.camera.x = Map.map.mapWidth * References.TILESIZE - FP.width;
-						if (FP.camera.y > Map.map.mapHeight * References.TILESIZE - FP.height) FP.camera.y = Map.map.mapHeight * References.TILESIZE - FP.height;
+						Map.map.clampCamera();
 					}
 				}
 			}

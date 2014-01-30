@@ -44,7 +44,6 @@ package entities
 						t2.y + FP.camera.y + (t2.tileHeight-1) * References.TILESIZE/2,
 						(t2.isConnectedToPower ? 0xFFF31A : 0x992222), //color, red when not connected, green if connected
 						0.6, 2.5);
-						//Draw.linePlusCustom(image._bitmap.bitmapData, t1.x, t1.y, t2.x, t2.y, 0, 1.0, 1);
 					}
 				}
 			}

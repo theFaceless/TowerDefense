@@ -29,12 +29,12 @@ package entities.gui
 		override public function added(): void
 		{
 			//width of the camera
-			screenWidth = FP.width;
-			screenHeight = FP.height;
+			screenWidth = FP.width - 7 - 7; //minus the size of the gui
+			screenHeight = FP.height - 7 - 64;
 			
 			//position off the middle of the camera relative to the world
-			cameraX = FP.camera.x + screenWidth / 2;
-			cameraY = FP.camera.y + screenHeight / 2;
+			cameraX = FP.camera.x+7 + screenWidth / 2;
+			cameraY = FP.camera.y+7 + screenHeight / 2;
 			
 			//width and height of the map (in pixels)
 			mapWidth = Map.map.mapWidth * References.TILESIZE;
@@ -53,8 +53,8 @@ package entities.gui
 		
 		override public function update(): void
 		{
-			cameraX = FP.camera.x + screenWidth / 2;
-			cameraY = FP.camera.y + screenHeight / 2;
+			cameraX = FP.camera.x+7 + screenWidth / 2;
+			cameraY = FP.camera.y+7 + screenHeight / 2;
 			x = cameraX * Map.map.mapWidth * mapScale / mapWidth;
 			y = FP.height - Map.map.mapHeight * mapScale + cameraY * Map.map.mapHeight * mapScale / mapHeight;
 		}

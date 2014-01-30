@@ -165,22 +165,29 @@ package entities.map
 			
 			if (Input.check(Key.RIGHT)) {
 				FP.camera.x += References.SCROLLSPEED * FP.elapsed;
-				if ( FP.camera.x > mapWidth * References.TILESIZE - 800) FP.camera.x = mapWidth * References.TILESIZE - 800;
 			}
 			if (Input.check(Key.LEFT)) {
 				FP.camera.x -= References.SCROLLSPEED * FP.elapsed;
-				if (FP.camera.x < 0) FP.camera.x = 0;
 			}
 			if (Input.check(Key.UP)) {
 				FP.camera.y -= References.SCROLLSPEED * FP.elapsed;
-				if (FP.camera.y < 0) FP.camera.y = 0;
 			}
 			if (Input.check(Key.DOWN)) {
 				FP.camera.y += References.SCROLLSPEED * FP.elapsed;
-				if ( FP.camera.y > mapHeight * References.TILESIZE - 600) FP.camera.y = mapHeight * References.TILESIZE - 600;
 			}
 			
+			clampCamera();
 			updateQueues();
+			
+		}
+		
+		//moves the camera so it is within the allowed boundaries
+		public function clampCamera():void
+		{
+			if ( FP.camera.x > mapWidth * References.TILESIZE - 800 + 7) FP.camera.x = mapWidth * References.TILESIZE - 800 + 7;
+			if (FP.camera.x < -7) FP.camera.x = -7;
+			if (FP.camera.y < -7) FP.camera.y = -7;
+			if ( FP.camera.y > mapHeight * References.TILESIZE - 600 + 64) FP.camera.y = mapHeight * References.TILESIZE - 600 + 64;
 			
 		}
 		
@@ -210,7 +217,7 @@ package entities.map
 					t.updatePowerConnectedRec();
 				}
 			}
-			gridOverlay.refresh();
+			//gridOverlay.refresh();
 		}
 		
 		public function upgradeTower(oldTower : Tower, newTower : Tower):void 
