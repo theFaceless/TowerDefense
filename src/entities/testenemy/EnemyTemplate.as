@@ -128,6 +128,23 @@ package entities.testenemy
 					FP.world.remove(this);
 					(Tower (tile)).isDestroyed = true;
 					tile.passable = true;
+					
+					//change pathfinding
+					var enemy2: EnemyTemplate;
+					for (var i:int = Map.map.enemyList.length - 1; i >= 0; i--) {
+						enemy2 = Map.map.enemyList[i];
+						if (!enemy2.isDead() && enemy2.checkPath(this.xmap, this.ymap)) {
+							Map.map.addEnemyToQueue(enemy2);
+						}
+					}
+
+					var enemy3: BasicSpawner;
+					for (i = Map.map.spawnerList.length - 1; i >= 0; i--) {
+						enemy3 = Map.map.spawnerList[i];
+						if (enemy3.checkPath(this.xmap, this.ymap)) {
+							Map.map.addSpawnerToQueue(enemy3);
+						}
+					}
 				}
 			}
 		}

@@ -42,6 +42,7 @@ package entities.towers
 			this.placeable = false;
 			this.passable = false;
 			this.layer = References.TOWERLAYER;
+			this.isTower = true;
 		}
 		
 		override public function added():void {

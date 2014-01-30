@@ -47,6 +47,9 @@ package entities
 		public var tileWidth : int = 1;
 		public var tileHeight : int = 1;
 		
+		//check if this is a tower:
+		public var isTower:Boolean = false;
+		
 		public function GroundTile(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, tileWidth : int = 1, tileHeight : int = 1)
 		{
 			this.gridX = x;

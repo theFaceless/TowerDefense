@@ -92,11 +92,11 @@ package utils.pathfinding
 			if (node) {
 				var dis:int = Math.abs(node.groundHeight - current.node.groundHeight);
 				var passab:Boolean = (collec.otherPassable ? true : node.passable);
+				var isTower:Boolean = (node.isTower && !node.passable);
 				if (passab) {
 					passab = (collec.elemHeightDo) ? collec.elemHeight[3 + node.groundHeight] : true;
 				}
-				if (dis <= collec.maxHeightDif && passab) {
-					var isTower:Boolean = (node is Tower && !node.passable);
+				if (dis <= collec.maxHeightDif && (passab||isTower)) {
 					var con:Connection = new Connection();
 					con.fromNode = current;
 					con.toNode = node;
