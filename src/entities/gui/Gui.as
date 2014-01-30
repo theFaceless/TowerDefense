@@ -1,6 +1,7 @@
 package entities.gui 
 {
 	import entities.map.Map;
+	import entities.towers.Tower;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import entities.testenemy.EnemyTemplate;
@@ -24,10 +25,16 @@ package entities.gui
 		
 		public static var customCursor: CustomCursor;
 		
+		public static var lastSelectedTileX: int;
+		public static var lastSelectedTileY: int;
+		
 		/**
 		 * Call this method to initiliaze the GUI
 		 */
 		public static function initWithMap(): void {
+			
+			lastSelectedTileX = -1;
+			lastSelectedTileY = -1;
 			
 			FP.console.enable();
 			FP.console.visible = false;
@@ -49,6 +56,10 @@ package entities.gui
 			
 		}
 		
+		public static function doNotSelectNextFrame() {
+			guiTowerSelectedOverlay.doNotSelectNextFrame();
+		}
+		
 		/**
 		 * triggered when a button has been clicked on the small menu
 		 * @param	idString the String-identifier of the clicked button
@@ -68,6 +79,12 @@ package entities.gui
 				
 				Map.map.placeTower(tileX, tileY);
 				
+				doNotSelectNextFrame();
+				
+			}
+			else if (idString == "TowerSelected") {
+				lastSelectedTileX = (Input.mouseX + FP.camera.x) / References.TILESIZE;
+				lastSelectedTileY = (Input.mouseY + FP.camera.y) / References.TILESIZE;
 			}
 			else if (idString == "ToggleDebug") {
 				if (debugEnabled)
@@ -85,6 +102,11 @@ package entities.gui
 			else if (idString == "MinimapAdded") {
 				guiOverlay = new GuiOverlay(eventHandler, guiMinimap.getSizeX(), References.GUIBORDERSIZE, References.GUIBUTTONAREAHEIGHT);
 				FP.world.add(guiOverlay);
+			}
+			else if (idString == "GuiButtonUpgradeTower") {
+				if (lastSelectedTileX >= 0 && lastSelectedTileY >= 0) {
+					(Map.map.getGroundTile(lastSelectedTileX, lastSelectedTileY) as Tower).towerUpgrade();
+				}
 			}
 			
 		}
