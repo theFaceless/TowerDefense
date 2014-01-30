@@ -1,42 +1,44 @@
 package entities.gui 
 {
-	
+	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.masks.Pixelmask;
 	
 	/**
-	 * Button to toggle
+	 * temporary button for Brent
 	 * @author Wout Coenen
 	 */
-	public class GuiButtonToggleDebug extends GuiButton
-	{
+	public class GuiButtonUpgradeTower extends GuiButton {
 		
-		public function GuiButtonToggleDebug(callback: Function, posX: int, posY: int) {
-			super(callback , posX, posY);
+		public function GuiButtonUpgradeTower(eventFunction: Function, posX: int, posY: int) 
+		{
+		
+			super(eventFunction, posX, posY);
+		
 		}
-			
+		
 		/**
 		 * Sets the image and the idString (for event handling)
 		 */
 		override public function added(): void
 		{
 			
-			image = new Image(Assets.GUISMALLBUTTONTOGGLEDEBUG);
+			image = new Image(Assets.GUISMALLBUTTONADDTOWER);
 			graphic = image;
 			sizeX = image.width;
 			sizeY = image.height;
 			image.centerOrigin();
 			image.scrollX = 0;
 			image.scrollY = 0;
-			mask = new Pixelmask(Assets.GUISMALLBUTTONTOGGLEDEBUG, -(sizeX / 2), -(sizeY / 2));
+			mask = new Pixelmask(Assets.GUISMALLBUTTONADDTOWER, -(sizeX / 2), -(sizeY / 2));
 			setHitboxTo(mask);
 			
-			imagePressed = new Image(Assets.GUISMALLBUTTONTOGGLEDEBUG_PRESSED);
+			imagePressed = new Image(Assets.GUISMALLBUTTONADDTOWER_PRESSED);
 			imagePressed.centerOrigin();
 			imagePressed.scrollX = 0;
 			imagePressed.scrollY = 0;
 			
-			idString = "ToggleDebug";
+			idString = "GuiButtonUpgradeTower";
 			
 		}
 		
