@@ -1,5 +1,6 @@
 package entities.towers 
 {
+	import entities.GroundTile;
 	import entities.map.Map;
 	import entities.projectiles.BasicBall;
 	import entities.testenemy.EnemyTemplate;
@@ -35,6 +36,8 @@ package entities.towers
 		public var ballDurability: int = 1;
 		//Toren destroyed
 		public var isDestroyed : Boolean = false;
+		//Health
+		public var towerHealth : Number = 100;
 		
 		//Constructor
 		public function Tower(map : Map, x : int, y : int, height : int ) {
@@ -330,6 +333,18 @@ package entities.towers
 		public function shootProjectile():void 
 		{
 			world.add(new BasicBall((image.scaledWidth / 2), this.x, this.y, image.angle, ballSpeed, this.towerDamage, this.groundHeight + 1, ballDurability));
+		}
+		
+		public function giveDamage(damage : Number):void 
+		{
+			this.towerHealth -= damage;
+			if (this.towerHealth <= 0) {
+				this.isDestroyed = true;
+				var temp: GroundTile = new GroundTile(Map.map, this.gridX, this.gridY, this.groundHeight);
+				FP.world.add(temp);
+				Map.map.setGroundTile(this.gridX, this.gridY, temp);
+				FP.world.remove(this);
+			}
 		}
 		
 	}
