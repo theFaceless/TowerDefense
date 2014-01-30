@@ -40,7 +40,7 @@ package
 		[Embed(source = "assets/CustomCursor.png")] public static const CUSTOMCURSOR : Class;
 		[Embed(source = "assets/addTowerOverlay.png")] public static const GUIADDTOWEROVERLAY : Class;
 		[Embed(source = "assets/guiOverlay.png")] public static const GUIOVERLAY: Class;
-		[Embed(source = "assets/dialogue.png")] public static const DIALOGUE : Class;
+		[Embed(source = "assets/dialogue.png")] public static const GUIDIALOGUE : Class;
 		
 		//GUI BUTTON GRAPHICS
 		[Embed(source = "assets/MenuButtonToggleDebug.png")] public static const GUISMALLBUTTONTOGGLEDEBUG: Class;
