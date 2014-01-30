@@ -47,6 +47,20 @@ package entities.towers
 			this.layer = References.TOWERLAYER;
 			this.isTower = true;
 		}
+		public function  selltower(tower: BasicTower, value: Number):void 
+		{	
+
+			var ground: GroundTile : new GroundTile(tower.gridX, tower.gridY, tower.groundHeight);
+
+			Map.map.setGroundTile(tower.gridX, tower.gridY, ground);
+
+			FP.world.remove(this);
+
+			Player.addMoney(value);
+
+		}
+
+
 		
 		override public function added():void {
 			//De image van de toren inladen
