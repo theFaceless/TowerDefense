@@ -32,7 +32,7 @@ package entities.towers
 			this.targetMode = 1;
 		}
 		
-		override protected function towerUpgrade():void 
+		override public function towerUpgrade():void 
 		{
 			
 		}

@@ -8,6 +8,7 @@ package entities.towers
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import utils.Player;
 	
 	/**
 	 * ...
@@ -50,13 +51,13 @@ package entities.towers
 		public function  selltower(tower: BasicTower, value: Number):void 
 		{	
 
-			var ground: GroundTile : new GroundTile(tower.gridX, tower.gridY, tower.groundHeight);
+			var ground: GroundTile = new GroundTile(Map.map ,this.gridX, this.gridY, this.groundHeight);
 
-			Map.map.setGroundTile(tower.gridX, tower.gridY, ground);
+			Map.map.setGroundTile(this.gridX, this.gridY, ground);
 
 			FP.world.remove(this);
-
-			Player.addMoney(value);
+	
+			Player.addMoney(value * References.SELLPERCENTAGE);
 
 		}
 
@@ -101,7 +102,7 @@ package entities.towers
 		}
 		
 		//Upgrade functies barebone
-		protected function towerUpgrade():void 
+		public function towerUpgrade():void 
 		{
 			
 		}
