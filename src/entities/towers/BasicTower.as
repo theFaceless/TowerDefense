@@ -33,7 +33,7 @@ package entities.towers
 		//Upgrade Functie
 		override protected function towerUpgrade():void 
 		{
-			var tempTower: LaserTower = new LaserTower(this.map, this.gridX, this.gridY, this.groundHeight);
+			var tempTower: TripleShotTower = new TripleShotTower(this.map, this.gridX, this.gridY, this.groundHeight);
 			Map.map.upgradeTower(this, tempTower);
 		}
 		
