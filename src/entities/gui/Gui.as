@@ -56,7 +56,7 @@ package entities.gui
 			
 		}
 		
-		public static function doNotSelectNextFrame() {
+		public static function doNotSelectNextFrame(): void {
 			guiTowerSelectedOverlay.doNotSelectNextFrame();
 		}
 		
