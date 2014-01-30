@@ -52,6 +52,9 @@ package
 		[Embed(source = "assets/map.png")] public static const MAP : Class;
 		[Embed(source = "assets/vlag.png")] public static const VLAG : Class;
 		
+		//DIALOGUE GRAPHICS
+		[Embed(source = "assets/CNN.png")] public static const CNN : Class;
+		
 		//----------the sounds----------
 		
 		//----------the levels----------
@@ -59,6 +62,8 @@ package
 		[Embed(source = "assets/levels/obstacleCourse.oel", mimeType = "application/octet-stream")] public static const LEVEL_OBSTACLECOURSE : Class;
 		[Embed(source = "assets/levels/KingOfTheBigHill.oel", mimeType = "application/octet-stream")] public static const LEVEL_KINGOFTHEBIGHILL : Class;
 		
+		//----------the dialogue--------
+		[Embed(source = "assets/dialogue/CNNDialogue.xml", mimeType = "application/octet-stream")] public static const DIALOGUE_CNNDIALOGUE : Class;
 	}
 
 }

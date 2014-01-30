@@ -1,0 +1,7 @@
+<dialogue>
+	<string	text="We have breaking news! Modern social-economic studies have shown that Axel Faes is indeed very, very gay!" speaker="CNN" mode="0" graphic="cnn"/>
+	<string	text="We will have further details after the intermission...." speaker="CNN" mode="0" graphic = "cnn"/>
+	<string	text="WHAAAA, HANJOO NO KINSHU HAS NO-SAN! That cannot be! I can't be.... I won't be!" speaker="Axel 'faggot' Faes" mode="1" graphic="axel" />
+	<string	text="Oh no! An angry mob is already charging at my gay-parade castle, they want to destroy this gayness. Quick player, HELP ME!" speaker="Axel 'faggot' Faes" mode="0" graphic="axel" />
+	<string	text="Bleep - bl00p - b33b13s - OH-KZZRZR-HELLO THERE PLA-KRZ-YER. THIS IS A -KZZZR- TUTORIAL MESSAGE." speaker="Beep bot 9000" mode="0" graphic="beep bot" />
+</dialogue>

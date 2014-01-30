@@ -3,6 +3,7 @@ package entities.map
 	import entities.castle.BasicCastle;
 	import entities.GridOverlay;
 	import entities.GroundTile;
+	import entities.gui.GuilDialogue;
 	import entities.mapmenu.LevelSelectMap;
 	import entities.spawners.BasicSpawner;
 	import entities.testenemy.EnemyTemplate;
@@ -15,6 +16,7 @@ package entities.map
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import utils.DialogueManager;
 	/**
 	 * ...
 	 * @author Olivier de Schaetzen
@@ -42,6 +44,12 @@ package entities.map
 		//the level that will be loaded
 		private var level : Class;
 		
+		//whether or not we are in a dialogue, if so, don't do frigging anything!
+		public var isInDialogue : Boolean = false;
+		
+		//the dialogueManager, this controls all the gui flow in a game
+		private var dialogueManager : DialogueManager;
+		
 		public function Map(level : Class)
 		{
 			map = this;
@@ -55,6 +63,10 @@ package entities.map
 			gridOverlay = new GridOverlay();
 			world.add(gridOverlay);
 			initializeMap();
+			
+			dialogueManager = new DialogueManager(Assets.DIALOGUE_CNNDIALOGUE);
+			
+			//world.add(new GuilDialogue(null, "We have breaking news! Modern social-economic studies have proven that Axel Faes is indeed, very, very gay.", "CNN", new Image(Assets.CNN), 0));
 			
 			/*
 			//test code for spawner
