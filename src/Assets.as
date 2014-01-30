@@ -13,6 +13,7 @@ package
 		[Embed(source = "assets/BasicTower30px.png")] public static const BASICTOWER : Class;
 		[Embed(source = "assets/TripleShotTower.png")] public static const TRIPLESHOTTOWER: Class;
 		[Embed(source = "assets/LaserTower20x39px.png")] public static const LASERTOWER: Class;
+		[Embed(source = "assets/TripleLaserTower20x39px.png")] public static const TRIPLELASERTOWER: Class;
 		
 		//PROJECTILE GRAPHICS
 		[Embed(source = "assets/BasicBall.png")] public static const BASICBALL : Class;
