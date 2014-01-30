@@ -43,7 +43,7 @@ package entities.testenemy
 		private var endloc:Vector.<int>;
 		private var tileMoved:Number = 0;
 		
-		protected var damage:Number = 20;
+		protected var damage:Number = 50;
 		protected var money:Number = 20;
 		protected var moving:Boolean = true;
 		
@@ -126,8 +126,9 @@ package entities.testenemy
 				if (!(Tower (tile)).isDestroyed) {
 					this.health = -1;			
 					FP.world.remove(this);
-					(Tower (tile)).isDestroyed = true;
-					tile.passable = true;
+					(Tower (tile)).giveDamage(damage);
+					if ((Tower (tile)).isDestroyed) 
+						tile.passable = true;
 					
 					//change pathfinding
 					var enemy2: EnemyTemplate;
