@@ -127,8 +127,10 @@ package entities.testenemy
 					this.health = -1;			
 					FP.world.remove(this);
 					(Tower (tile)).giveDamage(damage);
-					if ((Tower (tile)).isDestroyed) 
+					if ((Tower (tile)).isDestroyed) {
 						tile.passable = true;
+						tile.placeable = true;
+					}
 					
 					//change pathfinding
 					var enemy2: EnemyTemplate;
