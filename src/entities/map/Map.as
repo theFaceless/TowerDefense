@@ -229,7 +229,7 @@ package entities.map
 					t.updatePowerConnectedRec();
 				}
 			}
-			//gridOverlay.refresh();
+			gridOverlay.refresh();
 		}
 		
 		public function upgradeTower(oldTower : Tower, newTower : Tower):void 

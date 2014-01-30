@@ -14,7 +14,7 @@ package
 		
 		public function Main():void 
 		{
-			super(800, 600, 60, false);
+			super(800, 600, 30, false);
 		}
 		
 		override public function init():void 
