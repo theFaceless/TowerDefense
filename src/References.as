@@ -1,5 +1,6 @@
 package  
 {
+	import flash.display.InteractiveObject;
 	/**
 	 * Organizing purposes
 	 * @author Wout Coenen
@@ -21,7 +22,15 @@ package
 		public static const GUIBORDERSIZE: int = 7;
 		public static const GUIBUTTONAREAHEIGHT: int = 48;
 		
+		
+		/******Torens Markt*******/
+		//SELLPRICE = BUYPRICE * SELLPERCENTAGE;
 		public static const SELLPERCENTAGE: Number = 0.75;
+		public static const BASICTOWERPRICE: int = 200;
+		public static const TRIPLESHOTTOWERPRICE: int = 150;
+		public static const LASERTOWER: int = 250;
+		public static const TRIPLELASERTOWER: int = 350;
+		/*******End Markt********/
 		
 	}
 

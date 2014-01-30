@@ -94,14 +94,14 @@ package entities.projectiles
     
 
     //Een functie die de projectile laat verdwijnen
-    private function die(): void {
+    public function die(): void {
       FP.world.remove(this);
     }
 	
 	
 	
     //Een functie die wordt uitgevoerd bij een enemy hit
-    private function hit(enemy:EnemyTemplate): void {
+    public function hit(enemy:EnemyTemplate): void {
       enemy.takeDamage(this.projectileDamage);
       this.projectileDurability--;
       if (this.projectileDurability == 0)
