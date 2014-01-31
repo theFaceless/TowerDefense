@@ -224,15 +224,15 @@ package entities.map
 		public function refreshPowerGrid():void
 		{
 			world.getClass(TowerTemplate, buildingList);
+			gridOverlay.clearImage();
 			for each (var t : TowerTemplate in buildingList) {
 				t.isConnectedToPower = false;
 			}
 			for each(t in buildingList) {
 				if (t.isPowerSource) {
-					t.updatePowerConnectedRec();
+					t.updatePowerConnectedRec(null, true);
 				}
 			}
-			gridOverlay.refresh();
 		}
 		
 		public function upgradeTower(oldTower : Tower, newTower : Tower):void 

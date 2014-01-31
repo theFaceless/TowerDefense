@@ -30,14 +30,18 @@ package entities.towers
 		/**
 		 * refreshes this towers power status
 		 */
-		public function updatePowerConnectedRec():void
+		public function updatePowerConnectedRec(source : TowerTemplate = null, power : Boolean = true):void
 		{
-			if (isConnectedToPower == true) return;
-			isConnectedToPower = true;
+			if (isConnectedToPower == power) return;
+			isConnectedToPower = power;
+			
+			if (source) {
+				map.gridOverlay.drawLine(this, source);
+			}
 			
 			for each (var t : TowerTemplate in map.buildingList) {
 				if (isBuidlingInRange(t)) {
-					t.updatePowerConnectedRec();
+					t.updatePowerConnectedRec(this, power);
 				}
 			}
 		}
