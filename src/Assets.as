@@ -67,6 +67,7 @@ package
 		
 		//----------the dialogue--------
 		[Embed(source = "assets/dialogue/CNNDialogue.xml", mimeType = "application/octet-stream")] public static const DIALOGUE_CNNDIALOGUE : Class;
+		[Embed(source = "assets/dialogue/Level1-intro.xml", mimeType = "application/octet-stream")] public static const DIALOGUE_LEVEL1_INTRO : Class;
 	}
 
 }

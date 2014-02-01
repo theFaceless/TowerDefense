@@ -53,11 +53,14 @@ package entities.map
 		//the dialogueManager, this controls all the gui flow in a game
 		private var dialogueManager : DialogueManager;
 		
-		public function Map(level : Class)
+		//the dialogue of the current map
+		public var dialogue : Class;
+		
+		public function Map(level : Class, dialogue : Class)
 		{
 			map = this;
 			this.level = level;
-			
+			this.dialogue = dialogue;			
 		}
 		
 		override public function added():void 
@@ -67,7 +70,7 @@ package entities.map
 			world.add(gridOverlay);
 			initializeMap();
 			
-			dialogueManager = new DialogueManager(Assets.DIALOGUE_CNNDIALOGUE);
+			dialogueManager = new DialogueManager(dialogue);
 			
 			//world.add(new GuilDialogue(null, "We have breaking news! Modern social-economic studies have proven that Axel Faes is indeed, very, very gay.", "CNN", new Image(Assets.CNN), 0));
 			

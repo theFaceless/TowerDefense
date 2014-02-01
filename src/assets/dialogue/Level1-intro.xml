@@ -1,0 +1,6 @@
+<dialogue>
+	<string	text="Welcome commander, congratulations with your promotion!" speaker="Mr. President" mode="0" graphic="president"/>
+	<string	text="You are currently inside our newest commander module, allowing you to view the battlefront from a birds eye perspective, whilst stil being able to easily command the battle." speaker="Mr. President" mode="0" graphic = "president"/>
+	<string	text="On the bottom of the terminal you can find information about your current wealth, the state of the powergrid and the amount of waves you will need to endure." speaker="Mr. President" mode="0" graphic = "president"/>
+	<string	text="Now lets try commanding, click the button on the bottom right of your screen to start placing towers. Then click somewhere on the map to create it. Note that your money will drop. The turret will need to be in range of existing turrets or your base in order to power it." speaker="Mr. President" mode="0" graphic = "president"/>
+</dialogue>

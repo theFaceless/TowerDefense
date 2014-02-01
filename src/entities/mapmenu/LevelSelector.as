@@ -19,12 +19,13 @@ package entities.mapmenu
 		
 		public var level : Class;
 		public var image : Spritemap;
+		public var dialogue : Class;
 		
-		
-		public function LevelSelector(x:Number, y:Number, level : Class) 
+		public function LevelSelector(x:Number, y:Number, level : Class, dialogue : Class) 
 		{
 			super(x, y);
 			this.level = level;
+			this.dialogue = dialogue;
 			setHitbox(30, 30);
 		}
 		
@@ -44,7 +45,7 @@ package entities.mapmenu
 			if (collidePoint(x, y, Input.mouseX + FP.camera.x, Input.mouseY + FP.camera.y )) {
 				image.play("wapperselected", false, image.frame);
 				if (Input.mouseReleased) {
-					FP.world = new TestWorld(level);
+					FP.world = new TestWorld(level, dialogue);
 				}
 			} else {
 				image.play("wapperunselected", false, image.frame);

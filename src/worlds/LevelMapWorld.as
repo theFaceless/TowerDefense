@@ -32,8 +32,8 @@ package worlds
 			
 			//adding level buttons
 			//OBSTACLE COURSE TESTLEVEL
-			add(new LevelSelector(192, 521, Assets.LEVEL_OBSTACLECOURSE));
-			add(new LevelSelector(345, 572, Assets.LEVEL_KINGOFTHEBIGHILL));
+			add(new LevelSelector(192, 521, Assets.LEVEL_OBSTACLECOURSE, Assets.DIALOGUE_LEVEL1_INTRO ));
+			add(new LevelSelector(345, 572, Assets.LEVEL_KINGOFTHEBIGHILL, Assets.DIALOGUE_CNNDIALOGUE ));
 			
 		}
 		

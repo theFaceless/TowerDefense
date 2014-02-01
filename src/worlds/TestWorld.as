@@ -21,20 +21,21 @@ package worlds
 		public var map:Map;
 		public var testenemy: BasicSpawner;
 		public var testcastly: BasicCastle;
-		
+		public var dialogue : Class;
 		private var level : Class;
 		
 		public var done:Boolean = false;
-		public function TestWorld(level : Class) 
+		public function TestWorld(level : Class, dialogue : Class) 
 		{
 			this.level = level;
+			this.dialogue = dialogue;
 			FP.camera.x = 0;
 			FP.camera.y = 0;
 		}
 		
 		override public function begin():void 
 		{
-			map = new Map(level);
+			map = new Map(level, dialogue);
 			add(map);		
 
 			Gui.initWithMap();
