@@ -758,4 +758,12 @@
     <Rubble id="18" x="560" y="480" />
     <Rubble id="19" x="560" y="520" />
   </Objects>
+  <Wave>
+	<Enemy type="goblin" level="0" amount="5" wave="0" spawner="0" />
+	<Enemy type="goblin" level="0" amount="10" wave="1" spawner="0" />
+	<Enemy type="goblin" level="1" amount="10" wave="2" spawner="0" />
+	<Enemy type="goblin" level="2" amount="5" wave="2" spawner="0" />
+	<Enemy type="bomber" level="1" amount="3" wave="2" spawner="0" />
+	<Enemy type="goblin" level="2" amount="5" wave="2" spawner="0" />
+  </Wave>
 </level>

@@ -115,6 +115,9 @@ package entities.map
 			this.mapWidth = parseInt(xml.@width) / 40;
 			this.mapHeight = parseInt(xml.@height) / 40;
 			
+			//we make the spawnerlist, we need this one now to make the enemies
+			spawnerList = new Vector.<BasicSpawner>;
+			
 			//we initialize the mapdata
 			mapData = new Vector.<GroundTile>(mapWidth * mapHeight);		
 			
@@ -146,6 +149,7 @@ package entities.map
 				tiley = parseInt(spawner.@y) / 40;
 				oldtile = getGroundTile(tilex, tiley);
 				var spawnertile : BasicSpawner = new BasicSpawner(this, tilex, tiley, oldtile.groundHeight, parseInt(spawner.@Interval));
+				spawnerList.push(spawnertile);
 				replaceGroundTile(tilex, tiley, spawnertile);
 			}
 			
@@ -156,6 +160,11 @@ package entities.map
 				oldtile = getGroundTile(tilex, tiley);
 				var castleTile : BasicCastle = new BasicCastle(this, tilex, tiley, oldtile.groundHeight, parseInt(castle.@Health));
 				replaceGroundTile(tilex, tiley, castleTile);
+			}
+			
+			for each (var enemy : XML in xml.Wave.Enemy) {
+				spawnertile = spawnerList[parseInt(enemy.@spawner)];
+				spawnertile.addEnemies(enemy.@type, parseInt(enemy.@amount), parseInt(enemy.@level), parseInt(enemy.@wave));
 			}
 			
 			//now we add all maps to the world

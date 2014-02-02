@@ -1237,4 +1237,13 @@
     <Spawner id="7" x="1360" y="0" Interval="2" GoalX="23" GoalY="11" />
     <Spawner id="8" x="0" y="0" Interval="2" GoalX="11" GoalY="11" />
   </Objects>
+  <Wave>
+	<Enemy type="goblin" level="0" amount="5" wave="0" spawner="0" />
+	<Enemy type="goblin" level="0" amount="10" wave="1" spawner="1" />
+	<Enemy type="goblin" level="1" amount="10" wave="2" spawner="1" />
+	<Enemy type="goblin" level="2" amount="5" wave="2" spawner="2" />
+	<Enemy type="bomber" level="1" amount="3" wave="2" spawner="2" />
+	<Enemy type="goblin" level="2" amount="5" wave="2" spawner="2" />
+	<Enemy type="goblin" level="3" amount="20" wave="3" spawner="3" />
+  </Wave>
 </level>

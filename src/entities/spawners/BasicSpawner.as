@@ -89,6 +89,18 @@ package entities.spawners
 			}
 		}
 		
+		/**
+		 * prototype of a function that adds enemies to the map.
+		 * Enemies need to spawn in the order they are added with this function (apart from the wave difference)
+		 * @param	type	the type of the enemy
+		 * @param	amount	the amount of enemies
+		 * @param	level	the level of the enemy
+		 * @param	wave	the wave it will spawn in
+		 */
+		public function addEnemies(type : String, amount : int, level : int, wave : int) {
+			//TODO: WRITE THIS SHIT
+		}
+		
 		public function changeTarget():void {
 			var enemyList : Array = new Array();
 			// Then, we populate the array with all existing Enemy objects!
