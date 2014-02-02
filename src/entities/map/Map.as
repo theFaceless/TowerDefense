@@ -300,7 +300,6 @@ package entities.map
 				for (j = i + 1; j < enemyQueue.length; j++){
 					if (enemyQueue[i] === enemyQueue[j]){
 						enemyQueue.splice(j, 1);
-						trace("removing");
 					}
 				}
 			}

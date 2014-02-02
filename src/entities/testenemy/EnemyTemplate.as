@@ -27,28 +27,60 @@ package entities.testenemy
 	 */
 	public class EnemyTemplate extends Entity
 	{
+		/**the graphic of the enemy*/
 		public var image : Image;
+		/**the speed of the enemy*/
 		public var speed : int;
+		/**the health of the enemy*/
 		public var health : Number = 100;
+		/**
+		 * the direction the enemy is facing*/
+		/* 0 = right
+		 * 1 = up (on map)
+		 * 2 = left
+		 * 3 = down (on map)
+		 * 5 = stopped moving
+		 * 6 = idle
+		 */
 		private var facing : int = 6;
+		/**the angle the enemy is facing*/
 		public var angle : Number = 180 * FP.RAD;
 		
+		/**a reference to the global map*/
 		private var map:Map;
 		
+		/**the x and y position of the enemy in the grid*/
 		private var xmap : int;
 		private var ymap : int;
 		
+		/**the current path the enemy is following*/
 		private var path:Path;
 		
+		/**
+		 * holds the endposition of the enemy
+		 */
 		private var endloc:Vector.<int>;
+		/**
+		 * checks how many pixels the enemy has moved*/
 		private var tileMoved:Number = 0;
 		
+		/**the damage factor
+		 * the amount of money the player gets from this enemy
+		 * checks whether enemy is moving or not
+		 * */
 		protected var damage:Number = 50;
 		protected var money:Number = 20;
 		protected var moving:Boolean = true;
 		
+		/**checks whether the path needs to be changed*/
 		protected var pathchanged:Boolean = false;
 		private var newpath:Path;
+		
+		/**the level of this enemy*/
+		public var level:int = 1;
+		
+		/**collection of attributes used for pathfinding*/
+		public var collec:Collection = new Collection();
 		
 		public function EnemyTemplate(sp:int, img:Class, map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int, p:Path) {
 			set_speed(sp);
@@ -76,8 +108,7 @@ package entities.testenemy
 		 */
 		public function calcPath(x:int, y:int):Boolean {
 			var status:Boolean = false;
-			
-			var collec:Collection = new Collection();
+		
 			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(path.getNextX(), path.getNextY()), map.getGroundTile(x,y), collec);
 			
 			if (p) {
@@ -123,38 +154,53 @@ package entities.testenemy
 			inTileRange();
 		}
 		
+		/**
+		 * calculates the damage todo
+		 */
+		public function getDamage():Number {
+			return damage * (level+1);
+		}
+		
+		/**
+		 * check whether the enemy needs to attack the players towers
+		 * if it is: do damage and if 
+		 */
 		public function checkAttackTower():void {
 			var tile:GroundTile = map.getGroundTile(this.xmap, this.ymap);
 			if (tile is Tower) {
 				if (!(Tower (tile)).isDestroyed) {
 					this.health = -1;			
 					FP.world.remove(this);
-					(Tower (tile)).giveDamage(damage);
+					(Tower (tile)).giveDamage(getDamage());
 					if ((Tower (tile)).isDestroyed) {
 						tile.passable = true;
 						tile.placeable = true;
-					}
 					
-					//change pathfinding
-					var enemy2: EnemyTemplate;
-					for (var i:int = Map.map.enemyList.length - 1; i >= 0; i--) {
-						enemy2 = Map.map.enemyList[i];
-						if (!enemy2.isDead() && enemy2.checkPath(this.xmap, this.ymap)) {
-							Map.map.addEnemyToQueue(enemy2);
+					
+						//change pathfinding
+						var enemy2: EnemyTemplate;
+						for (var i:int = Map.map.enemyList.length - 1; i >= 0; i--) {
+							enemy2 = Map.map.enemyList[i];
+							if (!enemy2.isDead() && enemy2.checkPath(this.xmap, this.ymap)) {
+								Map.map.addEnemyToQueue(enemy2);
+							}
 						}
-					}
 
-					var enemy3: BasicSpawner;
-					for (i = Map.map.spawnerList.length - 1; i >= 0; i--) {
-						enemy3 = Map.map.spawnerList[i];
-						if (enemy3.checkPath(this.xmap, this.ymap)) {
-							Map.map.addSpawnerToQueue(enemy3);
+						var enemy3: BasicSpawner;
+						for (i = Map.map.spawnerList.length - 1; i >= 0; i--) {
+							enemy3 = Map.map.spawnerList[i];
+							if (enemy3.checkPath(this.xmap, this.ymap)) {
+								Map.map.addSpawnerToQueue(enemy3);
+							}
 						}
 					}
 				}
 			}
 		}
 		
+		/**
+		 * change the target location of this enemy to the closest castle
+		 */
 		public function changeTarget():void {
 			var closest:BasicCastle;
 			var changed:Boolean = false;
@@ -181,6 +227,11 @@ package entities.testenemy
 			}
 		}
 		
+		/**
+		 * attack the player castle
+		 * and if it is, update all the paths of enemies and spawners that have a
+		 * path to this castle
+		 */
 		private function attack():void {
 			var enemy: BasicCastle;
 			for (var i:int = Map.map.castleList.length - 1; i >= 0; i--) {
@@ -226,7 +277,8 @@ package entities.testenemy
 		
 		/**
 		 * 
-		 * Get the real x and y location of the grid
+		 * check if the pathlocation needs to be updated
+		 * 
 		 */
 		private function inTileRange():void {
 			if (Math.abs(tileMoved) >= References.TILESIZE) {
@@ -269,6 +321,10 @@ package entities.testenemy
 			}
 		}
 		
+		/**
+		 * check if the enemy is dead
+		 * @return boolean that checks whether enemy is dead
+		 */
 		public function isDead(): Boolean {			
 			if (this.health <= 0)
 				return true;
@@ -392,6 +448,9 @@ package entities.testenemy
 			this.image.scaledHeight = nb * height;
 		}
 		
+		/**
+		 * stops the enemy from moving
+		 */
 		public function stopEnemy():void {
 			moving = false;
 		}

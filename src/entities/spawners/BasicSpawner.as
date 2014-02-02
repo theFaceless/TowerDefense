@@ -27,6 +27,8 @@ package entities.spawners
 	public class BasicSpawner extends GroundTile
 	{
 		private var interval:Number;
+		private var intervalEnemies:Number;
+		private var intervalWave:Number;
 		private var intervalCounter:Number = 0;
 		
 		private var xEnd:int, yEnd:int;
@@ -38,11 +40,16 @@ package entities.spawners
 		
 		private var started:Boolean = false;
 		
+		private var waveQueue: Vector.<Vector.<spawnBluePrint>> = new Vector.<Vector.<spawnBluePrint>>;
+		private var currentWave:int = 0;
+		
 		public function BasicSpawner(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, interval:Number = 1) 
 		{
 			super(map, x, y, groundHeight);
 			
 			this.interval = interval;
+			this.intervalEnemies = interval;
+			this.intervalWave = 3 * interval;
 			passable = false;
 			placeable = false;
 		}
@@ -77,15 +84,39 @@ package entities.spawners
 			}
 		}
 		
+		/**
+		 * spawns an enemy
+		 */
 		public function spawn():void {
 			this.intervalCounter = 0;
-
-			if (isPath) {
-				var p:Path = new Path();
-				p.path = path.path;
-				
-				var enemy:EnemyTemplate = new FirstEnemy(map, p, gridX , gridY,xEnd, yEnd);
-				FP.world.add(enemy);
+			
+			spawnWave();
+		}
+		
+		/**
+		 * spawns an enemy from the queue
+		 */
+		public function spawnWave():void {
+			if (waveQueue.length > currentWave) {
+				if (waveQueue[currentWave].length > 0) {
+					
+					
+					var blueprint: spawnBluePrint = waveQueue[currentWave].pop();
+					if (isPath) {
+						var p:Path = new Path();
+						p.path = path.path;
+						
+						var enemy:EnemyTemplate = getEnemyType(blueprint.type, p);
+						enemy.level = blueprint.level;
+						FP.world.add(enemy);
+					}
+					
+					this.interval = this.intervalEnemies;
+				}
+				else {
+					currentWave ++;
+					this.interval = this.intervalWave;
+				}
 			}
 		}
 		
@@ -97,10 +128,30 @@ package entities.spawners
 		 * @param	level	the level of the enemy
 		 * @param	wave	the wave it will spawn in
 		 */
-		public function addEnemies(type : String, amount : int, level : int, wave : int) {
-			//TODO: WRITE THIS SHIT
+		public function addEnemies(type : String, amount : int, level : int, wave : int): void {
+			if (waveQueue.length <= wave) {
+				waveQueue.push(new Vector.<spawnBluePrint>());
+			}
+			
+			for (var i:int = 0; i < amount; i++) {
+				var blueprint: spawnBluePrint = new spawnBluePrint(type, level);
+				(waveQueue[wave]).push(blueprint);
+			}
 		}
 		
+		/**
+		 * return an enemy of the specified type
+		 * @param	type, the type of the enemy
+		 * @param	p, the path he has to follow
+		 * @return the enemy
+		 */
+		public function getEnemyType(type:String, p:Path) : EnemyTemplate {
+			return (new FirstEnemy(map, p, gridX , gridY, xEnd, yEnd));
+		}
+		
+		/**
+		 * changes the target of this specific spawner
+		 */
 		public function changeTarget():void {
 			var enemyList : Array = new Array();
 			// Then, we populate the array with all existing Enemy objects!
