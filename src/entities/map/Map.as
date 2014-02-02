@@ -293,9 +293,30 @@ package entities.map
 		public function addEnemyToQueue(enemy: EnemyTemplate): void {
 			enemy.stopEnemy();
 			enemyQueue.push(enemy);
+			//we remove doubles in the queue
+			var i:int;
+			var j: int;
+			for (i = 0; i < enemyQueue.length - 1; i++){
+				for (j = i + 1; j < enemyQueue.length; j++){
+					if (enemyQueue[i] === enemyQueue[j]){
+						enemyQueue.splice(j, 1);
+						trace("removing");
+					}
+				}
+			}
 		}
 		public function addSpawnerToQueue(spawner: BasicSpawner): void {
 			spawnerQueue.push(spawner);
+			//we remove doubles in the queue
+			var i:int;
+			var j: int;
+			for (i = 0; i < spawnerQueue.length - 1; i++){
+				for (j = i + 1; j < spawnerQueue.length; j++){
+					if (spawnerQueue[i] === spawnerQueue[j]){
+						spawnerQueue.splice(j, 1);
+					}
+				}
+			}
 		}
 		
 		public function updateQueues(): void {
