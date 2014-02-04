@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<upgrades>
+	
+	<upgrade name="BasicTower" graphic="BasicTower" type="1" id="0"/>
+	
+	<upgrade name="TrippleShot" graphic="TrippleShot" type="1" id="1">
+		<requirement id="0"></requirement>
+	</upgrade>
+	
+	<upgrade name="FlameThrower" graphic="FlameThrower" type="1" id="2">
+		<requirement id="0"></requirement>
+	</upgrade>
+	
+	<upgrade name="LaserTower" graphic="LaserTower" type="1" id="3">
+		<requirement id="0"></requirement>
+			
+	</upgrade>
+	
+	<upgrade name="TrippleLaser" graphic="TrippleLaser" type="1" id="4">
+		<requirement id="1"></requirement>
+		<requirement id="3"></requirement>
+	</upgrade>
+</upgrades>
