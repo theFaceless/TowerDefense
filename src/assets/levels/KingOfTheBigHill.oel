@@ -1232,10 +1232,10 @@
     <Castle id="2" x="920" y="920" Health="2000" />
     <Castle id="3" x="440" y="920" Health="2000" />
     <Castle id="4" x="680" y="680" Health="2000" />
-    <Spawner id="5" x="0" y="1360" Interval="2" GoalX="11" GoalY="23" />
-    <Spawner id="6" x="1360" y="1360" Interval="2" GoalX="23" GoalY="23" />
-    <Spawner id="7" x="1360" y="0" Interval="2" GoalX="23" GoalY="11" />
-    <Spawner id="8" x="0" y="0" Interval="2" GoalX="11" GoalY="11" />
+    <Spawner id="5" x="0" y="1360" Interval="2" maxinterval="5" maxwave="1" GoalX="11" GoalY="23" />
+    <Spawner id="6" x="1360" y="1360" Interval="2" maxinterval="5" maxwave="3" GoalX="23" GoalY="23" />
+    <Spawner id="7" x="1360" y="0" Interval="2" maxinterval="5" maxwave="3" GoalX="23" GoalY="11" />
+    <Spawner id="8" x="0" y="0" Interval="2" maxinterval="5" maxwave="4" GoalX="11" GoalY="11" />
   </Objects>
   <Wave>
 	<Enemy type="goblin" level="0" amount="5" wave="0" spawner="0" />

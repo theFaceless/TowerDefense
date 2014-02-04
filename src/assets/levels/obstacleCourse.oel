@@ -737,8 +737,8 @@
     <tile x="34" y="20" id="6" />
   </MapData>
   <Objects>
-    <Spawner id="0" x="0" y="280" Interval="1" GoalX="32" GoalY="9" />
-    <Spawner id="1" x="0" y="520" Interval="3" GoalX="32" GoalY="10" />
+    <Spawner id="0" x="0" y="280" Interval="1" maxinterval="5" maxwave="3" GoalX="32" GoalY="9" />
+    <Spawner id="1" x="0" y="520" Interval="3" maxinterval="5" maxwave="3" GoalX="32" GoalY="10" />
     <Castle id="2" x="1280" y="360" Health="2000" />
     <Rubble id="3" x="440" y="640" />
     <Rubble id="4" x="440" y="560" />

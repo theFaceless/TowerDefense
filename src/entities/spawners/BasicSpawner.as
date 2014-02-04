@@ -43,13 +43,18 @@ package entities.spawners
 		private var waveQueue: Vector.<Vector.<spawnBluePrint>> = new Vector.<Vector.<spawnBluePrint>>;
 		private var currentWave:int = 0;
 		
-		public function BasicSpawner(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, interval:Number = 1) 
+		public function BasicSpawner(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, interval:Number = 1, maxinterval:Number = 3,  maxwave:int = 0) 
 		{
 			super(map, x, y, groundHeight);
 			
 			this.interval = interval;
 			this.intervalEnemies = interval;
-			this.intervalWave = 3 * interval;
+			this.intervalWave = maxinterval;
+			
+			for (var i:int = 0; i < maxwave; i++) {
+				waveQueue.push(new Vector.<spawnBluePrint>());
+			}
+			
 			passable = false;
 			placeable = false;
 		}
@@ -129,10 +134,6 @@ package entities.spawners
 		 * @param	wave	the wave it will spawn in
 		 */
 		public function addEnemies(type : String, amount : int, level : int, wave : int): void {
-			if (waveQueue.length <= wave) {
-				waveQueue.push(new Vector.<spawnBluePrint>());
-			}
-			
 			for (var i:int = 0; i < amount; i++) {
 				var blueprint: spawnBluePrint = new spawnBluePrint(type, level);
 				(waveQueue[wave]).push(blueprint);

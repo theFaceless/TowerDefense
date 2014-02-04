@@ -148,7 +148,7 @@ package entities.map
 				tilex = parseInt(spawner.@x) / 40;
 				tiley = parseInt(spawner.@y) / 40;
 				oldtile = getGroundTile(tilex, tiley);
-				var spawnertile : BasicSpawner = new BasicSpawner(this, tilex, tiley, oldtile.groundHeight, parseInt(spawner.@Interval));
+				var spawnertile : BasicSpawner = new BasicSpawner(this, tilex, tiley, oldtile.groundHeight, parseInt(spawner.@Interval), parseInt(spawner.@maxinterval), parseInt(spawner.@maxwave));
 				spawnerList.push(spawnertile);
 				replaceGroundTile(tilex, tiley, spawnertile);
 			}
