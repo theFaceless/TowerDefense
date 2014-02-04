@@ -1,7 +1,9 @@
 package entities.spawners 
 {
+	import entities.testenemy.Bomber;
 	import entities.testenemy.EnemyTemplate;
 	import entities.testenemy.FirstEnemy;
+	import entities.testenemy.Goblin;
 	import net.flashpunk.Entity;
 	import entities.map.Map;
 	import net.flashpunk.graphics.Image;
@@ -27,9 +29,10 @@ package entities.spawners
 	public class BasicSpawner extends GroundTile
 	{
 		private var interval:Number;
-		private var intervalEnemies:Number;
-		private var intervalWave:Number;
+		private var intervalW:Number = 0;
 		private var intervalCounter:Number = 0;
+		private var intervalWave:Number;
+		
 		
 		private var xEnd:int, yEnd:int;
 		
@@ -42,23 +45,24 @@ package entities.spawners
 		
 		private var waveQueue: Vector.<Vector.<spawnBluePrint>> = new Vector.<Vector.<spawnBluePrint>>;
 		private var currentWave:int = 0;
+		private var maxWave:int = 0;
 		
 		public function BasicSpawner(map : Map, x : int = 0, y : int = 0, groundHeight : int = 0, interval:Number = 1, maxinterval:Number = 3,  maxwave:int = 0) 
 		{
 			super(map, x, y, groundHeight);
 			
 			this.interval = interval;
-			this.intervalEnemies = interval;
 			this.intervalWave = maxinterval;
 			
 			for (var i:int = 0; i < maxwave; i++) {
 				waveQueue.push(new Vector.<spawnBluePrint>());
 			}
 			
+			maxWave = maxwave;
+			
 			passable = false;
 			placeable = false;
 		}
-		
 		
 		/**
 		 * checks if endposition is the given x and y
@@ -78,14 +82,23 @@ package entities.spawners
 		override public function update():void {
 			if (!started) {
 				changeTarget();
-				isPath = updatePath();
+				//isPath = updatePath();
 				started = true;
 			}
-			
+
+
+			intervalW += FP.elapsed;
 			this.intervalCounter += FP.elapsed;
 			
 			if (this.intervalCounter >= this.interval) {
 				spawn();
+			}
+			
+			if (this.intervalW >= this.intervalWave) {
+				if (waveQueue[currentWave].length == 0 && currentWave < maxWave) {
+					this.intervalW = 0;
+					currentWave ++;
+				}
 			}
 		}
 		
@@ -104,23 +117,12 @@ package entities.spawners
 		public function spawnWave():void {
 			if (waveQueue.length > currentWave) {
 				if (waveQueue[currentWave].length > 0) {
-					
-					
 					var blueprint: spawnBluePrint = waveQueue[currentWave].pop();
-					if (isPath) {
-						var p:Path = new Path();
-						p.path = path.path;
-						
-						var enemy:EnemyTemplate = getEnemyType(blueprint.type, p);
+					var enemy:EnemyTemplate = getEnemyType(blueprint.type);
+					if (enemy) {
 						enemy.level = blueprint.level;
 						FP.world.add(enemy);
 					}
-					
-					this.interval = this.intervalEnemies;
-				}
-				else {
-					currentWave ++;
-					this.interval = this.intervalWave;
 				}
 			}
 		}
@@ -146,8 +148,16 @@ package entities.spawners
 		 * @param	p, the path he has to follow
 		 * @return the enemy
 		 */
-		public function getEnemyType(type:String, p:Path) : EnemyTemplate {
-			return (new FirstEnemy(map, p, gridX , gridY, xEnd, yEnd));
+		public function getEnemyType(type:String) : EnemyTemplate {
+			var enemy:EnemyTemplate;
+			switch (type) {
+				case "goblin":
+					enemy = new Goblin(map, gridX , gridY, xEnd, yEnd);
+					break;
+				case "bomber":
+					enemy = new Bomber(map, gridX, gridY, xEnd, yEnd);
+			}
+			return enemy;
 		}
 		
 		/**
@@ -181,33 +191,7 @@ package entities.spawners
 				xEnd = closest.gridX;
 				yEnd = closest.gridY;
 			}
-		}
-		
-		/**
-		 * check if a object is over the path
-		 * @param	x
-		 * @param	y
-		 * @return
-		 */
-		public function checkPath(x:int, y:int):Boolean {
-			return path.containsPoint(x, y);
-		}
-		
-		public function updatePath():Boolean {
-			var status:Boolean = false;
-			
-			var collec:Collection = new Collection();
-			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(this.gridX, this.gridY), map.getGroundTile(xEnd,yEnd), collec);
-			
-			if (p) {
-				path = p;
-				status = true;
-			}
-			
-			isPath = status;
-			return status;
-		}
-		
+		}		
 	}
 
 }

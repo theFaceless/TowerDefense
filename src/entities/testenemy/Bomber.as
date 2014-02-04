@@ -25,13 +25,14 @@ package entities.testenemy
 	 * ...
 	 * @author Axel Faes
 	 */
-	public class Goblin extends EnemyTemplate
+	public class Bomber extends EnemyTemplate
 	{
 		
-		public function Goblin(map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int) 
+		public function Bomber(map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int) 
 		{
 			var collec:Collection = new Collection();
-			collec.random = 100;
+			collec.random = 20;
+			collec.towerTile = 50
 			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(xBegin, yBegin), map.getGroundTile(xEnd,yEnd), collec);
 			super(50, Assets.TestEnemy, map, xBegin, yBegin, xEnd, yEnd, p);
 			

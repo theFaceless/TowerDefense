@@ -288,7 +288,7 @@ package entities.map
 		/***********************************************************************************/
 		
 		private var enemyQueue: Vector.<EnemyTemplate> = new Vector.<EnemyTemplate>;
-		private var spawnerQueue: Vector.<BasicSpawner> = new Vector.<BasicSpawner>;
+		//private var spawnerQueue: Vector.<BasicSpawner> = new Vector.<BasicSpawner>;
 		
 		public function addEnemyToQueue(enemy: EnemyTemplate): void {
 			enemy.stopEnemy();
@@ -304,6 +304,7 @@ package entities.map
 				}
 			}
 		}
+		/*
 		public function addSpawnerToQueue(spawner: BasicSpawner): void {
 			spawnerQueue.push(spawner);
 			//we remove doubles in the queue
@@ -317,16 +318,19 @@ package entities.map
 				}
 			}
 		}
+		*/
 		
 		public function updateQueues(): void {
 			
 			//do {
-				
+				/*
 				if (spawnerQueue.length > 0) {
 					spawnerQueue[spawnerQueue.length - 1].updatePath();
 					spawnerQueue.pop();
 				}
-				else if (enemyQueue.length > 0) {
+				else */
+				
+				if (enemyQueue.length > 0) {
 					enemyQueue[enemyQueue.length - 1].updatePath();
 					enemyQueue.pop();
 				
@@ -343,10 +347,12 @@ package entities.map
 					if (enemy.checkPath(tileX, tileY))
 						addEnemyToQueue(enemy);
 				}
+				/*
 				for each (var spawner: BasicSpawner in spawnerList) {
 					if (spawner.checkPath(tileX, tileY))
 						addSpawnerToQueue(spawner);
 				}
+				*/
 			}
 		}
 		

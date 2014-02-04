@@ -185,7 +185,7 @@ package entities.testenemy
 								Map.map.addEnemyToQueue(enemy2);
 							}
 						}
-
+						/*
 						var enemy3: BasicSpawner;
 						for (i = Map.map.spawnerList.length - 1; i >= 0; i--) {
 							enemy3 = Map.map.spawnerList[i];
@@ -193,6 +193,7 @@ package entities.testenemy
 								Map.map.addSpawnerToQueue(enemy3);
 							}
 						}
+						*/
 					}
 				}
 			}
@@ -254,7 +255,7 @@ package entities.testenemy
 						Map.map.addEnemyToQueue(enemy2);
 					}
 				}
-
+				/*
 				var enemy3: BasicSpawner;
 				for (i = Map.map.spawnerList.length - 1; i >= 0; i--) {
 					enemy3 = Map.map.spawnerList[i];
@@ -263,6 +264,7 @@ package entities.testenemy
 						Map.map.addSpawnerToQueue(enemy3);
 					}
 				}
+				*/
 			}
 			
 			FP.world.remove(this);
