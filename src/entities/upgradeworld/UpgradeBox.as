@@ -40,7 +40,7 @@ package entities.upgradeworld
 			}
 			super.render();
 		}
-		
+		//axel is gay
 		override public function added():void 
 		{
 			switch (upgradeType) {
@@ -57,7 +57,7 @@ package entities.upgradeworld
 			i.y = 15;
 			addGraphic(i);
 			
-			var t : Text = new Text(upgradeName, 0, 0);
+			var t : Text = new Text(upgradeName, c0, 0);
 			t.y = 40;
 			t.x = 15;
 			t.centerOrigin();
