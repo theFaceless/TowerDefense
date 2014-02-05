@@ -8,6 +8,7 @@ package entities.gui
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	import entities.map.Map;
+	import net.flashpunk.utils.Key;
 	
 	/**
 	 * overlay when a tower is selected
@@ -21,12 +22,14 @@ package entities.gui
 		private var tileX: int;
 		private var tileY: int;
 		private var clicked: Boolean;
+		private var clickedBackup: Boolean;
 		private var rangeCircle: Image;
 		private var wasVisible: Boolean;
 		
 		public function GuiTowerSelectedOverlay() {
 			super();
 			clicked = false;
+			clickedBackup = false;
 		}
 		
 		override public function added() : void {
@@ -53,8 +56,10 @@ package entities.gui
 				tileX = (Input.mouseX + FP.camera.x) / References.TILESIZE;
 				tileY = (Input.mouseY + FP.camera.y) / References.TILESIZE;
 				
-				if (Input.mousePressed)
+				if (Input.mousePressed){
 					clicked = true;
+					clickedBackup = true;
+				}
 				
 				image.visible = Map.map.getGroundTile(tileX, tileY) is Tower;
 				if (image.visible) {
@@ -78,6 +83,9 @@ package entities.gui
 					wasVisible = false;
 					(this.graphic as Graphiclist).remove(rangeCircle);
 				}
+				if (!image.visible && ((Input.mouseReleased && clickedBackup) || (Input.check(Key.ESCAPE)))) {
+					Gui.eventHandler("TowerDeselected");
+				}
 			}
 			else if (wasVisible) {
 				wasVisible = false;
@@ -88,6 +96,8 @@ package entities.gui
     
 		public function doNotSelectNextFrame(): void {
 			clicked = false;
+			clickedBackup = false;
+			Gui.eventHandler("TowerDeselected");
 		}
 	}
 }

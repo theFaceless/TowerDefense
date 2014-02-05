@@ -22,6 +22,7 @@ package entities.gui
 		public static var guiTowerSelectedOverlay:GuiTowerSelectedOverlay;
 		public static var guiMinimap: GuiMinimap;
 		public static var guiOverlay: GuiOverlay;
+		public static var guiOverlayTowerOptions: GuiOverlayTowerOptions;
 		
 		public static var customCursor: CustomCursor;
 		
@@ -46,6 +47,8 @@ package entities.gui
 			guiMinimap = new GuiMinimap();
 			FP.world.add(guiMinimap);
 			
+			guiOverlayTowerOptions = new GuiOverlayTowerOptions();
+			FP.world.add(guiOverlayTowerOptions);
 			
 			//initialize the cursor
 			if (useCustomCursor)
@@ -85,6 +88,12 @@ package entities.gui
 			else if (idString == "TowerSelected") {
 				lastSelectedTileX = (Input.mouseX + FP.camera.x) / References.TILESIZE;
 				lastSelectedTileY = (Input.mouseY + FP.camera.y) / References.TILESIZE;
+				guiOverlayTowerOptions.show();
+			}
+			else if (idString == "TowerDeselected") {
+				lastSelectedTileX = -1;
+				lastSelectedTileY = -1;
+				guiOverlayTowerOptions.hide();
 			}
 			else if (idString == "ToggleDebug") {
 				if (debugEnabled)
@@ -114,11 +123,13 @@ package entities.gui
 		public static function mapCanGetInput(): Boolean {
 			if (Input.mouseX < References.GUIBORDERSIZE)
 				return false;
-			else if (Input.mouseX > FP.width - References.GUIBORDERSIZE)
+			else if (lastSelectedTileX < 0 && Input.mouseX > FP.width - References.GUIBORDERSIZE)
+				return false;
+			else if (lastSelectedTileX >= 0 && Input.mouseX > FP.width - guiOverlayTowerOptions.width)
 				return false;
 			else if (Input.mouseY < References.GUIBORDERSIZE)
 				return false;
-			else if (Input.mouseY > FP.height - 2 * References.GUIBORDERSIZE - References.GUIBUTTONAREAHEIGHT)
+			else if (lastSelectedTileY < 0 && Input.mouseY > FP.height - 2 * References.GUIBORDERSIZE - References.GUIBUTTONAREAHEIGHT)
 				return false;
 			else if (Input.mouseX < guiMinimap.getSizeX() && Input.mouseY > FP.height - guiMinimap.getSizeY())
 				return false;
