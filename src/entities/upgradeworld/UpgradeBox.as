@@ -40,7 +40,7 @@ package entities.upgradeworld
 			}
 			super.render();
 		}
-		//axel is gay
+		
 		override public function added():void 
 		{
 			switch (upgradeType) {
