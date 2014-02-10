@@ -74,8 +74,8 @@ package entities
 					//put some shadows on it
 					makeShadow(ngraphic, i, k);
 					//correct the offset
-					ngraphic.originX += i * -40;
-					ngraphic.originY += k * -40;
+					ngraphic.originX += i * -References.TILESIZE;
+					ngraphic.originY += k * -References.TILESIZE;
 					//and it it to our graphicslist
 					addGraphic(ngraphic);
 				}
@@ -87,25 +87,25 @@ package entities
 			var ngraphic : Spritemap;
 			switch (groundHeight) {
 				case 0:
-					ngraphic = new Spritemap(Assets.ABYSS, 40, 40);
+					ngraphic = new Spritemap(Assets.ABYSS, References.TILESIZE, References.TILESIZE);
 					break
 				case 1:
-					ngraphic = new Spritemap(Assets.MUD, 40, 40);
+					ngraphic = new Spritemap(Assets.MUD, References.TILESIZE, References.TILESIZE);
 					break
 				case 2:
-					ngraphic = new Spritemap(Assets.MUDGRASS, 40, 40);
+					ngraphic = new Spritemap(Assets.MUDGRASS, References.TILESIZE, References.TILESIZE);
 					break
 				case 3:
-					ngraphic = new Spritemap(Assets.GRASS, 40, 40);
+					ngraphic = new Spritemap(Assets.GRASS, References.TILESIZE, References.TILESIZE);
 					break;
 				case 4:
-					ngraphic = new Spritemap(Assets.ROCKGRASS, 40, 40);
+					ngraphic = new Spritemap(Assets.ROCKGRASS, References.TILESIZE, References.TILESIZE);
 					break;
 				case 5:
-					ngraphic = new Spritemap(Assets.ROCK, 40, 40);
+					ngraphic = new Spritemap(Assets.ROCK, References.TILESIZE, References.TILESIZE);
 					break;
 				case 6:
-					ngraphic = new Spritemap(Assets.SNOW, 40, 40);
+					ngraphic = new Spritemap(Assets.SNOW, References.TILESIZE, References.TILESIZE);
 					break;
 			}
 			ngraphic.centerOrigin();

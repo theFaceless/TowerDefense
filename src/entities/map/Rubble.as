@@ -20,11 +20,10 @@ package entities.map
 		{
 			super.added();
 			var rock : Image = new Image(Assets.RUBBLE);
+			makeShadow(rock, 0, 0);
 			addGraphic(rock);
 			rock.centerOrigin();
-			rock.color = 0x1f1f1f * (groundHeight + 2);
-			trace(groundHeight + 3);
-			rock.angle = Math.random() * 360;
+			//rock.color = 0x1f1f1f * (groundHeight + 2);
 			this.passable = false;
 			this.placeable = false;
 		}

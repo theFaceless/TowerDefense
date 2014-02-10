@@ -32,8 +32,8 @@ package entities.gui
 			sizeY = image.width;
 			image.alpha = 0.4;
 			image.centerOrigin();
-			x = (Input.mouseX + FP.camera.x) % References.TILESIZE + 20;
-			y = (Input.mouseY + FP.camera.y) % References.TILESIZE + 20;
+			x = (Input.mouseX + FP.camera.x) % References.TILESIZE + References.TILESIZE / 2;
+			y = (Input.mouseY + FP.camera.y) % References.TILESIZE + References.TILESIZE / 2;
 			layer = References.GUILAYER + 1;
 			setHitbox( -(References.TILESIZE / 2), -(References.TILESIZE / 2), References.TILESIZE, References.TILESIZE);
 			
@@ -49,9 +49,9 @@ package entities.gui
 			if (Gui.mapCanGetInput()) {
 				image.visible = true;
 				rangeIndicator.visible = true;
-				x = (Input.mouseX + FP.camera.x) - ((Input.mouseX + FP.camera.x) % References.TILESIZE) + 20;
-				y = (Input.mouseY + FP.camera.y) - ((Input.mouseY + FP.camera.y) % References.TILESIZE) + 20;
-				var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;
+				x = (Input.mouseX + FP.camera.x) - ((Input.mouseX + FP.camera.x) % References.TILESIZE) + References.TILESIZE / 2;
+				y = (Input.mouseY + FP.camera.y) - ((Input.mouseY + FP.camera.y) % References.TILESIZE) + References.TILESIZE / 2;
+				var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;0
 				var tileY: int = (Input.mouseY + FP.camera.y) / References.TILESIZE;
 				var isPlaceable: Boolean = Map.map.getGroundTile(tileX, tileY).placeable;
 				

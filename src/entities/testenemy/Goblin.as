@@ -33,8 +33,7 @@ package entities.testenemy
 			var collec:Collection = new Collection();
 			collec.random = 100;
 			var p:Path = Pathfinding.pathDijkstra(map.getGroundTile(xBegin, yBegin), map.getGroundTile(xEnd,yEnd), collec);
-			super(50, Assets.TestEnemy, map, xBegin, yBegin, xEnd, yEnd, p);
-			
+			super(50, Assets.MONSTER_GOBLIN, map, xBegin, yBegin, xEnd, yEnd, p);
 			this.collec = collec;
 		}
 		

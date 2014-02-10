@@ -82,6 +82,9 @@ package entities.testenemy
 		/**collection of attributes used for pathfinding*/
 		public var collec:Collection = new Collection();
 		
+		/**the age of this enemy*/
+		public var age:Number = 0;
+		
 		public function EnemyTemplate(sp:int, img:Class, map:Map,xBegin:int, yBegin:int, xEnd:int, yEnd:int, p:Path) {
 			set_speed(sp);
 			set_image(img);
@@ -125,6 +128,15 @@ package entities.testenemy
 		 */
 		override public function update():void {
 			move();
+			updateAnimation();
+		}
+		
+		/**
+		 * updates the animation
+		 */
+		public function updateAnimation():void {
+			age += FP.elapsed;
+			image.angle = Math.sin(age*9)*7.5;
 		}
 		
 		/**
@@ -411,6 +423,7 @@ package entities.testenemy
 		public function set_image(img:Class):void {
 			this.image = new Image(img);
 			resetImg();
+			this.image.smooth = true;
 			this.graphic = image;
 		}
 		

@@ -59,6 +59,9 @@ package
 		//DIALOGUE GRAPHICS
 		[Embed(source = "assets/CNN.png")] public static const CNN : Class;
 		
+		//MONSTER GRAPHICS
+		[Embed(source = "assets/monsters/goblin.png")] public static const MONSTER_GOBLIN : Class;
+		
 		//----------the sounds----------
 		
 		//----------the levels----------
