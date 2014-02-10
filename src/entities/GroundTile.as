@@ -115,9 +115,9 @@ package entities
 		
 		public function makeShadow(ground : Image, i : int, k : int) : void
 		{
-			var shadow : Spritemap = new Spritemap(Assets.SHADOW, 40, 40);
+			var shadow : Spritemap = new Spritemap(Assets.SHADOW, References.TILESIZE, References.TILESIZE);
 			
-			var source : Rectangle = new Rectangle(0, 0, 40, 40);
+			var source : Rectangle = new Rectangle(0, 0, References.TILESIZE, References.TILESIZE);
 			var p : Point = new Point(0, 0);
 			var sp : Point = new Point(0, 0);
 			
