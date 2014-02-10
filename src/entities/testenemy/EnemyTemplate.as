@@ -181,9 +181,14 @@ package entities.testenemy
 			var tile:GroundTile = map.getGroundTile(this.xmap, this.ymap);
 			if (tile is Tower) {
 				if (!(Tower (tile)).isDestroyed) {
-					this.health = -1;			
-					FP.world.remove(this);
-					(Tower (tile)).giveDamage(getDamage());
+					
+					(Tower (tile)).giveDamage((Tower (tile)).towerHealth);
+					
+					this.health -= getDamage();	
+					if (isDead()) {
+						FP.world.remove(this);
+					}
+					
 					if ((Tower (tile)).isDestroyed) {
 						tile.passable = true;
 						tile.placeable = true;
@@ -197,15 +202,6 @@ package entities.testenemy
 								Map.map.addEnemyToQueue(enemy2);
 							}
 						}
-						/*
-						var enemy3: BasicSpawner;
-						for (i = Map.map.spawnerList.length - 1; i >= 0; i--) {
-							enemy3 = Map.map.spawnerList[i];
-							if (enemy3.checkPath(this.xmap, this.ymap)) {
-								Map.map.addSpawnerToQueue(enemy3);
-							}
-						}
-						*/
 					}
 				}
 			}
