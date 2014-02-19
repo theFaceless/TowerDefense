@@ -4,6 +4,7 @@ package entities.towers
 	import entities.map.Map;
 	import entities.projectiles.BasicBall;
 	import entities.testenemy.EnemyTemplate;
+	import entities.upgrades.Upgrade;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
@@ -39,6 +40,10 @@ package entities.towers
 		public var isDestroyed : Boolean = false;
 		//Health
 		public var towerHealth : Number = 100;
+		//
+		public var powerAura: int = 200;
+		//
+		public var upgradeList: Array;
 		
 		//Constructor
 		public function Tower(map : Map, x : int, y : int, height : int ) {
@@ -71,15 +76,6 @@ package entities.towers
 		override public function update():void {
 			//Vars
 			
-			//End vars
-			
-			
-			//Test Purposes
-			if (Input.pressed(Key.U)) {
-				towerUpgrade();
-			}
-			//End test purposes
-			
 			
 			
 			//De cooldown van de toren verlagen als hij hoger dan 0 is
@@ -102,9 +98,37 @@ package entities.towers
 		}
 		
 		//Upgrade functies barebone
-		public function towerUpgrade():void 
+		public function towerUpgrade(upgrade: Upgrade):void 
 		{
-			
+			var tempTower: Tower;
+			if (upgrade.name == "Basic Tower") {
+				tempTower = new BasicTower(Map.map, this.gridX, this.gridY, this.groundHeight);
+				Map.map.upgradeTower(this, tempTower);
+			}
+			else if (upgrade.name == "Fire Tower") {
+				tempTower = new FireTower(Map.map, this.gridX, this.gridY, this.groundHeight);
+				Map.map.upgradeTower(this, tempTower);
+			}
+			else if (upgrade.name == "Laser Tower") {
+				tempTower = new LaserTower(Map.map, this.gridX, this.gridY, this.groundHeight);
+				Map.map.upgradeTower(this, tempTower);
+			}
+			else if (upgrade.name == "Power Tower") {
+				tempTower = new PowerTower(Map.map, this.gridX, this.gridY, this.groundHeight);
+				Map.map.upgradeTower(this, tempTower);
+			}
+			else if (upgrade.name == "Triple Laser Tower") {
+				tempTower = new TripleLaserTower(Map.map, this.gridX, this.gridY, this.groundHeight);
+				Map.map.upgradeTower(this, tempTower);
+			}
+			else if (upgrade.name == "Triple Shot Tower") {
+				tempTower = new TripleShotTower(Map.map, this.gridX, this.gridY, this.groundHeight);
+				Map.map.upgradeTower(this, tempTower);
+			}
+		}
+		
+		public function getUpgrades(): Array {
+			return upgradeList;
 		}
 		
 		

@@ -2,6 +2,7 @@ package entities.gui
 {
 	import entities.map.Map;
 	import entities.towers.Tower;
+	import entities.upgrades.Upgrade;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import entities.testenemy.EnemyTemplate;
@@ -114,7 +115,7 @@ package entities.gui
 			}
 			else if (idString == "GuiButtonUpgradeTower") {
 				if (lastSelectedTileX >= 0 && lastSelectedTileY >= 0) {
-					(Map.map.getGroundTile(lastSelectedTileX, lastSelectedTileY) as Tower).towerUpgrade();
+					(Map.map.getGroundTile(lastSelectedTileX, lastSelectedTileY) as Tower).towerUpgrade(null);
 				}
 			}
 			

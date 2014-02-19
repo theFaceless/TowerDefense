@@ -7,12 +7,17 @@ package entities.towers
 	 * ...
 	 * @author Olivier de Schaetzen
 	 */
-	public class PowerTower extends GroundTile 
+	public class PowerTower extends Tower
 	{
 		
 		public function PowerTower(map : Map, x : int, y : int, height : int )
 		{
-			super(map, x, y, height, 1 , 1);
+			super(Map.map, x, y, height);
+		}
+		
+		
+		override public function getUpgrades(): Array {
+			return upgradeList;
 		}
 		
 	}

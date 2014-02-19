@@ -32,9 +32,8 @@ package entities.towers
 			this.targetMode = 0;
 		}
 		
-		override public function towerUpgrade():void 
-		{
-
+		override public function getUpgrades(): Array {
+			return upgradeList;
 		}
 		
 		override public function shootProjectile():void 

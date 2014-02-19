@@ -30,11 +30,9 @@ package entities.towers
 			this.image.centerOrigin();
 			this.targetMode = 0;
 		}
-	
-		override public function towerUpgrade():void 
-		{
-			var tempTower: TripleLaserTower = new TripleLaserTower(this.map, this.gridX, this.gridY, this.groundHeight);
-			Map.map.upgradeTower(this, tempTower);
+		
+		override public function getUpgrades(): Array {
+			return upgradeList;
 		}
 		
 		override public function shootProjectile():void 

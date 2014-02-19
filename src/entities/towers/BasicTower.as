@@ -3,6 +3,7 @@ package entities.towers
 	import entities.map.Map;
 	import entities.projectiles.BasicBall;
 	import entities.projectiles.FireBeam;
+	import entities.upgrades.Upgrade;
 	import net.flashpunk.graphics.Image;
 	
 	/**
@@ -23,6 +24,7 @@ package entities.towers
 			super.added();
 			image = new Image(Assets.BASICTOWER);
 			image.color = 0x1f1f1f * (groundHeight + 2);
+
 			//De image koppellen
 			addGraphic(image);
 			//Het centrum zetten al centrum van de image
@@ -31,11 +33,16 @@ package entities.towers
 
 		}
 		
-		//Upgrade Functie
-		override public function towerUpgrade():void 
-		{ 
-			var tempTower: FireTower = new FireTower(Map.map, this.gridX, this.gridY, this.groundHeight);
-			Map.map.upgradeTower(this, tempTower);
+		
+		override public function getUpgrades(): Array {
+			upgradeList = new Array;
+			var tempUpgrade: Upgrade = new Upgrade("Fire Tower", 400,  "The Fire Tower is basicly a giant flamethrower.", new Image(Assets.FIRETOWER), 150, 5, 3000, 100);
+			upgradeList.push(tempUpgrade);
+			tempUpgrade = new Upgrade("Laser Tower", 150, "The Laser Tower is a tower which shoots powerfull lasers.", new Image(Assets.LASERTOWER), this.towerRange, 5, 60, 100);
+			upgradeList.push(tempUpgrade);
+			tempUpgrade = new Upgrade("Triple Shot Tower", 250, "The Triple Shot Tower is an upgraded Basic Tower with 3 barrels.", new Image(Assets.TRIPLESHOTTOWER), this.towerRange, this.towerDamage * 3, this.towerASPD, 100);
+			upgradeList.push(tempUpgrade);
+			return upgradeList;
 		}
 		
 		//Override -> Custom bullet
