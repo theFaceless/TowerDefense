@@ -36,13 +36,15 @@ package entities.gui
 			image = new Image(Assets.GUIADDTOWEROVERLAY);
 			addGraphic(image);
 			layer = References.GUILAYER + 1;
-			sizeX = image.height;
-			sizeY = image.width;
+			image.scaledHeight = References.TILESIZE;
+			image.scaledWidth = References.TILESIZE;
+			sizeX = image.scaledHeight;
+			sizeY = image.scaledWidth;
 			image.alpha = 0.4;
 			image.color = 0xDDDDDD;
 			image.centerOrigin();
-			x = (Input.mouseX + FP.camera.x) - (Input.mouseX + FP.camera.x) % References.TILESIZE + 20;
-			y = (Input.mouseY + FP.camera.y) - (Input.mouseY + FP.camera.y) % References.TILESIZE + 20;
+			x = (Input.mouseX + FP.camera.x) - (Input.mouseX + FP.camera.x) % References.TILESIZE + References.TILESIZE / 2;
+			y = (Input.mouseY + FP.camera.y) - (Input.mouseY + FP.camera.y) % References.TILESIZE + References.TILESIZE / 2;
 			image.visible = false;
 			
 			tileX = (Input.mouseX + FP.camera.x) / References.TILESIZE;
@@ -70,8 +72,8 @@ package entities.gui
 						addGraphic(rangeCircle);
 					}
 				
-					x = (Input.mouseX + FP.camera.x) - (Input.mouseX + FP.camera.x) % References.TILESIZE + 20;
-					y = (Input.mouseY + FP.camera.y) - (Input.mouseY + FP.camera.y) % References.TILESIZE + 20;
+					x = (Input.mouseX + FP.camera.x) - (Input.mouseX + FP.camera.x) % References.TILESIZE + References.TILESIZE / 2;
+					y = (Input.mouseY + FP.camera.y) - (Input.mouseY + FP.camera.y) % References.TILESIZE + References.TILESIZE / 2;
 					if (clicked && Input.mouseReleased) {
 						clicked == false;
 						Gui.eventHandler("TowerSelected");

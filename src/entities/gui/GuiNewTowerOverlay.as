@@ -28,8 +28,10 @@ package entities.gui
 		override public function added() : void {
       
 			image = new Image(Assets.GUIADDTOWEROVERLAY);
-			sizeX = image.height;
-			sizeY = image.width;
+			image.scaledHeight = References.TILESIZE;
+			image.scaledWidth = References.TILESIZE;
+			sizeX = image.scaledHeight;
+			sizeY = image.scaledWidth;
 			image.alpha = 0.4;
 			image.centerOrigin();
 			x = (Input.mouseX + FP.camera.x) % References.TILESIZE + References.TILESIZE / 2;
