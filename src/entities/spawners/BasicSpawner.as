@@ -92,7 +92,6 @@ package entities.spawners
 			this.intervalCounter += FP.elapsed;
 			
 			if (this.intervalCounter >= this.interval) {
-				FP.world = new GameEnded(FP.world, true);
 				spawn();
 			}
 			
