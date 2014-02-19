@@ -49,6 +49,7 @@ package entities.gui
 			if (Input.mouseReleased && collidePoint(x, y, Input.mouseX, Input.mouseY))
 			{
 				callback(idString);
+				onClicked();
 			}
 			else if (!isSelected && collidePoint(x, y, Input.mouseX, Input.mouseY))
 			{
@@ -76,6 +77,10 @@ package entities.gui
 		 */
 		public function onDeselect(): void
 		{
+			return;
+		}
+		
+		public function onClicked(): void {
 			return;
 		}
 		
