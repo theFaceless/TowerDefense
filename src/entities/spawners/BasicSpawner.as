@@ -14,6 +14,7 @@ package entities.spawners
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
 	import utils.pathfinding.Collection;
+	import worlds.GameEnded;
 	
 	import utils.pathfinding.Path;
 	import utils.pathfinding.Pathfinding;
@@ -91,6 +92,7 @@ package entities.spawners
 			this.intervalCounter += FP.elapsed;
 			
 			if (this.intervalCounter >= this.interval) {
+				FP.world = new GameEnded(FP.world, true);
 				spawn();
 			}
 			
