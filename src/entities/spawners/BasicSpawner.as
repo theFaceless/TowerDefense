@@ -95,7 +95,7 @@ package entities.spawners
 			}
 			
 			if (this.intervalW >= this.intervalWave) {
-				if (waveQueue.length >= currentWave) {
+				if (waveQueue.length > currentWave) {
 					if (waveQueue[currentWave].length == 0 && currentWave < maxWave) {
 						this.intervalW = 0;
 						currentWave ++;

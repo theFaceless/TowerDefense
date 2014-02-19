@@ -119,6 +119,9 @@ package entities.testenemy
 				status = true;
 				pathchanged = true;
 			}
+			else {
+				facing = 6;
+			}
 			
 			return status;
 		}
