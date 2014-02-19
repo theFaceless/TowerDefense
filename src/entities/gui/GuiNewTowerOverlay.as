@@ -53,7 +53,7 @@ package entities.gui
 				rangeIndicator.visible = true;
 				x = (Input.mouseX + FP.camera.x) - ((Input.mouseX + FP.camera.x) % References.TILESIZE) + References.TILESIZE / 2;
 				y = (Input.mouseY + FP.camera.y) - ((Input.mouseY + FP.camera.y) % References.TILESIZE) + References.TILESIZE / 2;
-				var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;0
+				var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;
 				var tileY: int = (Input.mouseY + FP.camera.y) / References.TILESIZE;
 				var isPlaceable: Boolean = Map.map.getGroundTile(tileX, tileY).placeable;
 				

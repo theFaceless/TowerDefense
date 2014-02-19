@@ -128,6 +128,7 @@ package entities.towers
 		}
 		
 		public function getUpgrades(): Array {
+			upgradeList = new Array();
 			return upgradeList;
 		}
 		

@@ -17,6 +17,7 @@ package entities.towers
 		
 		
 		override public function getUpgrades(): Array {
+			upgradeList = new Array();
 			return upgradeList;
 		}
 		

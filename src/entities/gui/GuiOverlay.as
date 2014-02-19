@@ -45,13 +45,11 @@ package entities.gui
 			setHitboxTo(new Pixelmask(Assets.GUIOVERLAY));
 			
 			//add buttons here
-			buttonCount = 3;
+			buttonCount = 2;
 			var i: int = 1;
 			FP.world.add(new GuiButtonAddTower(callback, minimapSizeX + (sizeX - (minimapSizeX + borderSize)) / (buttonCount + 1) * i++,
 												sizeY - borderSize - buttonAreaHeight / 2));
 			FP.world.add(new GuiButtonToggleDebug(callback, minimapSizeX + (sizeX - minimapSizeX - borderSize) / (buttonCount + 1) * i++,
-													sizeY - borderSize - buttonAreaHeight / 2));
-			FP.world.add(new GuiButtonUpgradeTower(callback, minimapSizeX + (sizeX - minimapSizeX - borderSize) / (buttonCount + 1) * i++,
 													sizeY - borderSize - buttonAreaHeight / 2));
 			
 		}

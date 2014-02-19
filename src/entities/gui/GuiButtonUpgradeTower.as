@@ -1,20 +1,30 @@
 package entities.gui 
 {
+	import entities.upgrades.Upgrade;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.masks.Pixelmask;
 	
 	/**
-	 * temporary button for Brent
+	 * ...
 	 * @author Wout Coenen
 	 */
 	public class GuiButtonUpgradeTower extends GuiButton {
 		
-		public function GuiButtonUpgradeTower(eventFunction: Function, posX: int, posY: int) 
+		private var upgradeFunction: Function;
+		private var upgrade: Upgrade;
+		
+		public function GuiButtonUpgradeTower(eventFunction: Function, posX: int, posY: int, idString: String, image: Image, imageHover: Image, upgradeFunction: Function, upgrade: Upgrade) 
 		{
 		
 			super(eventFunction, posX, posY);
-		
+			
+			this.idString = idString;
+			this.image = image;
+			this.imagePressed = imageHover;
+			this.upgradeFunction = upgradeFunction;
+			this.upgrade = upgrade;
+			
 		}
 		
 		/**
@@ -22,23 +32,17 @@ package entities.gui
 		 */
 		override public function added(): void
 		{
-			
-			image = new Image(Assets.GUISMALLBUTTONADDTOWER);
 			graphic = image;
-			sizeX = image.width;
-			sizeY = image.height;
+			sizeX = Gui.guiOverlayTowerOptions.image.width - 2 * References.GUIBORDERSIZE;
+			sizeY = References.GUIUPGRADEBUTTONHEIGHT;
 			image.centerOrigin();
 			image.scrollX = 0;
 			image.scrollY = 0;
-			mask = new Pixelmask(Assets.GUISMALLBUTTONADDTOWER, -(sizeX / 2), -(sizeY / 2));
-			setHitboxTo(mask);
+			setHitbox(sizeX, sizeY, sizeX/2, sizeY/2);
 			
-			imagePressed = new Image(Assets.GUISMALLBUTTONADDTOWER_PRESSED);
 			imagePressed.centerOrigin();
 			imagePressed.scrollX = 0;
 			imagePressed.scrollY = 0;
-			
-			idString = "GuiButtonUpgradeTower";
 			
 		}
 		
@@ -58,6 +62,11 @@ package entities.gui
 		{
 			graphic = image;
 			image.centerOrigin();
+		}
+		
+		override public function onClicked(): void {
+			upgradeFunction(upgrade);
+			Gui.guiOverlayTowerOptions.show();
 		}
 		
 	}

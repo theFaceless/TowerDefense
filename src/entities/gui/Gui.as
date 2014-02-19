@@ -113,11 +113,6 @@ package entities.gui
 				guiOverlay = new GuiOverlay(eventHandler, guiMinimap.getSizeX(), References.GUIBORDERSIZE, References.GUIBUTTONAREAHEIGHT);
 				FP.world.add(guiOverlay);
 			}
-			else if (idString == "GuiButtonUpgradeTower") {
-				if (lastSelectedTileX >= 0 && lastSelectedTileY >= 0) {
-					(Map.map.getGroundTile(lastSelectedTileX, lastSelectedTileY) as Tower).towerUpgrade(null);
-				}
-			}
 			
 		}
 		

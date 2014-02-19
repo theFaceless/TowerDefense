@@ -35,13 +35,10 @@ package entities.towers
 		
 		
 		override public function getUpgrades(): Array {
-			upgradeList = new Array;
-			var tempUpgrade: Upgrade = new Upgrade("Fire Tower", 400,  "The Fire Tower is basicly a giant flamethrower.", new Image(Assets.FIRETOWER), 150, 5, 3000, 100);
-			upgradeList.push(tempUpgrade);
-			tempUpgrade = new Upgrade("Laser Tower", 150, "The Laser Tower is a tower which shoots powerfull lasers.", new Image(Assets.LASERTOWER), this.towerRange, 5, 60, 100);
-			upgradeList.push(tempUpgrade);
-			tempUpgrade = new Upgrade("Triple Shot Tower", 250, "The Triple Shot Tower is an upgraded Basic Tower with 3 barrels.", new Image(Assets.TRIPLESHOTTOWER), this.towerRange, this.towerDamage * 3, this.towerASPD, 100);
-			upgradeList.push(tempUpgrade);
+			upgradeList = new Array();
+			upgradeList.push(new Upgrade("Fire Tower", 400,  "The Fire Tower is basicly a giant flamethrower.", new Image(Assets.FIRETOWER), 150, 5, 3000, 100));
+			upgradeList.push(new Upgrade("Laser Tower", 150, "The Laser Tower is a tower which shoots powerfull lasers.", new Image(Assets.LASERTOWER), this.towerRange, 5, 60, 100));
+			upgradeList.push(new Upgrade("Triple Shot Tower", 250, "The Triple Shot Tower is an upgraded Basic Tower with 3 barrels.", new Image(Assets.TRIPLESHOTTOWER), this.towerRange, this.towerDamage * 3, this.towerASPD, 100));
 			return upgradeList;
 		}
 		
