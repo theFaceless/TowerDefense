@@ -1,6 +1,7 @@
 package entities.towers 
 {
 	import entities.map.Map;
+	import entities.upgrades.Upgrade;
 	import net.flashpunk.graphics.Image;
 	import entities.projectiles.BasicBall;
 	
@@ -33,6 +34,7 @@ package entities.towers
 		
 		override public function getUpgrades(): Array {
 			upgradeList = new Array();
+			upgradeList.push(new Upgrade("Triple Laser Tower", 100, "An upgraded version of the Laser Tower which shoots 3 projectiles instead of 1.", new Image(Assets.TRIPLELASERTOWER), this.towerRange, this.towerDamage, this.towerASPD, this.towerHealth)); 
 			return upgradeList;
 		}
 		

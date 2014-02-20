@@ -27,7 +27,7 @@ package
 		/******Torens Markt*******/
 		//SELLPRICE = BUYPRICE * SELLPERCENTAGE;
 		public static const SELLPERCENTAGE: Number = 0.75;
-		public static const BASICTOWERPRICE: int = 200;
+		public static const BASICTOWERPRICE: int = 50;
 		public static const TRIPLESHOTTOWERPRICE: int = 150;
 		public static const LASERTOWER: int = 250;
 		public static const TRIPLELASERTOWER: int = 350;
