@@ -17,6 +17,7 @@ package entities.towers
 			super(map, x, y , height);
 			this.placeable = false;
 			this.passable = false;
+			this.towerDamage = 100;
 		}
 		
 		override public function added():void {

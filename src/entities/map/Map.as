@@ -14,6 +14,7 @@ package entities.map
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import utils.DialogueManager;
@@ -42,7 +43,7 @@ package entities.map
 		//the overly that shows the grid
 		public var gridOverlay : GridOverlay;
 		//Player
-		public var player: Player = new Player();
+		public var currentPlayer: Player;
 		
 		//the level that will be loaded
 		private var level : Class;
@@ -55,6 +56,9 @@ package entities.map
 		
 		//the dialogue of the current map
 		public var dialogue : Class;
+		
+		private var playerMoney: Text;
+		private var moneyEntitiy: Entity;
 		
 		public function Map(level : Class, dialogue : Class)
 		{
@@ -107,7 +111,7 @@ package entities.map
 		
 		public function parseMap(map : Class):void
 		{
-			
+			currentPlayer = new Player();
 			//the xml file that is being parsed
 			var xml : XML = FP.getXML(map);
 			
@@ -172,6 +176,10 @@ package entities.map
 				FP.world.add(mapData[i] as Entity);
 			}
 			
+			this.playerMoney = new Text("$" + currentPlayer.money);
+			this.moneyEntitiy = new Entity(10, 10, this.playerMoney);
+			FP.world.add(this.moneyEntitiy);
+			
 		}
 		
 		override public function update():void 
@@ -203,6 +211,13 @@ package entities.map
 				FP.camera.y += References.SCROLLSPEED * FP.elapsed;
 			}
 			
+			if (Input.check(Key.A)) {
+				
+			}
+			
+			this.moneyEntitiy.x = FP.camera.x + 10;
+			this.moneyEntitiy.y = FP.camera.y + 10;
+			
 			clampCamera();
 			updateQueues();
 			
@@ -218,6 +233,11 @@ package entities.map
 			
 		}
 		
+		public function updateMoney():void 
+		{
+			this.playerMoney.text = "$" + currentPlayer.money;
+		}
+		
 		public function addTower(x : int, y : int):void
 		{
 				var tile : GroundTile = getGroundTile(x, y);
@@ -225,10 +245,16 @@ package entities.map
 				var tempTower  : BasicTower = new BasicTower(this, x, y, tile.groundHeight);	
 				
 				//FP.world.remove(tile);
+				if(currentPlayer.useMoney(References.BASICTOWERPRICE)) {
+					FP.world.add(tempTower);
+					updateMoney();
+					replaceGroundTile(x, y, tempTower);
+				}
+				else {
+					
+				}
 				
-				FP.world.add(tempTower);
 				
-				replaceGroundTile(x, y, tempTower);
 		}
 		/**
 		 * refreshes the powergrid of the map and all the towers

@@ -5,26 +5,26 @@ package utils
 	 * @author Crushski
 	 */
 	public class Player  {
-		public static var money: int;
+		public var money: int;
 		
 		public function Player() 
 		{
-			money = 1000;
+			this.money = 1000;
 		}
 		
 		//stroompool, addmoney, addpower, 
 		
-		public static function addMoney(amount:int= 0):void 
+		public function addMoney(amount:int):void 
 		{
-			money += amount;
+			this.money += amount;
 		}
 		
-		public static function useMoney(amount:int = 0):Boolean 
+		public function useMoney(amount: int):Boolean 
 		{
-			if ( amount > money )
+			if ( amount > this.money )
 				return false;
 			else{
-				money -= amount;
+				this.money -= amount;
 				return true;
 			}
 		}

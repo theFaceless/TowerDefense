@@ -329,7 +329,8 @@ package entities.testenemy
 			this.health -= dam;
 			
 			if (this.health <= 0) {
-				Player.addMoney(this.money);
+				Map.map.currentPlayer.addMoney(this.money);
+				Map.map.updateMoney();
 				FP.world.remove(this);
 			}
 		}

@@ -62,7 +62,7 @@ package entities.towers
 
 			FP.world.remove(this);
 	
-			Player.addMoney(value * References.SELLPERCENTAGE);
+			Map.map.currentPlayer.addMoney(value * References.SELLPERCENTAGE);
 
 		}
 
@@ -101,6 +101,13 @@ package entities.towers
 		public function towerUpgrade(upgrade: Upgrade):void 
 		{
 			var tempTower: Tower;
+			if (!Map.map.currentPlayer.useMoney(upgrade.cost)) {
+				return;
+			}
+			
+			Map.map.updateMoney();
+			
+			
 			if (upgrade.name == "Basic Tower") {
 				tempTower = new BasicTower(Map.map, this.gridX, this.gridY, this.groundHeight);
 				Map.map.upgradeTower(this, tempTower);
