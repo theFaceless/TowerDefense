@@ -178,6 +178,8 @@ package entities.map
 			
 			this.playerMoney = new Text("$" + currentPlayer.money);
 			this.moneyEntitiy = new Entity(10, 10, this.playerMoney);
+			this.moneyEntitiy.graphic.scrollX = 0;
+			this.moneyEntitiy.graphic.scrollY = 0;
 			FP.world.add(this.moneyEntitiy);
 			
 		}
@@ -215,8 +217,6 @@ package entities.map
 				
 			}
 			
-			this.moneyEntitiy.x = FP.camera.x + 10;
-			this.moneyEntitiy.y = FP.camera.y + 10;
 			
 			clampCamera();
 			updateQueues();
