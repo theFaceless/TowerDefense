@@ -56,6 +56,8 @@ package entities.gui
 				var tileX: int = (Input.mouseX + FP.camera.x) / References.TILESIZE;
 				var tileY: int = (Input.mouseY + FP.camera.y) / References.TILESIZE;
 				var isPlaceable: Boolean = Map.map.getGroundTile(tileX, tileY).placeable;
+				if (Map.map.currentPlayer.money < References.BASICTOWERPRICE)
+					isPlaceable = false;
 				
 				//change overlay color
 				if (isPlaceable)
@@ -65,8 +67,8 @@ package entities.gui
 				
 				if (Input.mouseReleased) {
 					eventFunction("AddTower");
-				if (!isPlaceable)
-					FP.world.remove(this);
+					if (!isPlaceable)
+						FP.world.remove(this);
 				}
 			}
 			else {
