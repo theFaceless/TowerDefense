@@ -47,8 +47,8 @@ package entities.gui
 			//add buttons here
 			buttonCount = 2;
 			var i: int = 1;
-			FP.world.add(new GuiButtonAddTower(callback, minimapSizeX + (sizeX - (minimapSizeX + borderSize)) / (buttonCount + 1) * i++,
-												sizeY - borderSize - buttonAreaHeight / 2));
+			FP.world.add(new GuiButtonAddTower(callback, minimapSizeX + (sizeX - (minimapSizeX + borderSize)) / (buttonCount + 1) * i++,(
+												sizeY - borderSize - buttonAreaHeight / 2) -1));
 			FP.world.add(new GuiButtonToggleDebug(callback, minimapSizeX + (sizeX - minimapSizeX - borderSize) / (buttonCount + 1) * i++,
 													sizeY - borderSize - buttonAreaHeight / 2));
 			
