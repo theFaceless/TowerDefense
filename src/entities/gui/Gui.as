@@ -89,6 +89,7 @@ package entities.gui
 			else if (idString == "TowerSelected") {
 				lastSelectedTileX = (Input.mouseX + FP.camera.x) / References.TILESIZE;
 				lastSelectedTileY = (Input.mouseY + FP.camera.y) / References.TILESIZE;
+				guiOverlayTowerOptions.hide();
 				guiOverlayTowerOptions.show();
 			}
 			else if (idString == "TowerDeselected") {

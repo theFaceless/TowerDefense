@@ -35,9 +35,16 @@ package entities.gui
 		}
 		
 		public function show(): void {
+			
 			image.visible = true;
 			
 			var i: int;
+			
+			//clear the upgradeButtons
+			for (i = 0; i < upgradeButtons.length; i++) {
+				FP.world.remove(upgradeButtons[i]);
+			}
+			upgradeButtons = new Vector.<GuiButtonUpgradeTower>();
 			
 			var tileX: int = Gui.lastSelectedTileX
 			var tileY: int = Gui.lastSelectedTileY;
@@ -74,7 +81,7 @@ package entities.gui
 		public function hide(): void {
 			image.visible = false;
 			var i: int;
-			for (i = 0; i < upgradeButtons.length; i++) {
+			for (i = upgradeButtons.length - 1; i >= 0; i--) {
 				FP.world.remove(upgradeButtons[i]);
 			}
 		}
