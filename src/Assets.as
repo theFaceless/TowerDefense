@@ -45,7 +45,8 @@ package
 		[Embed(source = "assets/guiOverlay.png")] public static const GUIOVERLAY: Class;
 		[Embed(source = "assets/dialogue.png")] public static const GUIDIALOGUE : Class;
 		[Embed(source = "assets/selectionoverlay.png")] public static const GUISELECTIONOVERLAY: Class;
-		
+		[Embed(source = "assets/MenuSelection.png")] public static const MENUSELECTION : Class;
+		[Embed(source = "assets/menuselectionoverlay.png")] public static const MENUSELECTIONOVERLAY : Class;
 		[Embed(source = "assets/guiendGame.png")] public static const GUIENDGAME : Class;
 		
 		//GUI BUTTON GRAPHICS
